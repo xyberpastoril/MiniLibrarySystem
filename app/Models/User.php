@@ -44,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /** Functions **/
+
+    /**
+     * Select one from User ID.
+     */
+    public static function selectOne($id)
+    {
+        return self::where('id', $id)->firstOrFail();
+    }
 }
