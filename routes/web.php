@@ -32,4 +32,6 @@ Route::group([], function(){
 
     });
 
+    Route::resource('/books', App\Http\Controllers\BookController::class);
+
 });

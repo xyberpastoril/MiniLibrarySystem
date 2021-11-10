@@ -42,7 +42,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                 <!-- Books -->
                 <div class="menu-item">
-                    <a class="menu-link" href="#"> <!-- books-page.html route('admin.books') -->
+                    <a class="menu-link" href="{{ route('books.index') }}">
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/files/fil012.svg-->
                             <span class="svg-icon svg-icon-5">
