@@ -58,7 +58,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                 <!-- Users -->
                 <div class="menu-item">
-                    <a class="menu-link" href="#"> <!-- users-page.html route('admin.users') -->
+                    <a class="menu-link" href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr001.svg-->
                             <span class="svg-icon svg-icon-5">
@@ -92,7 +92,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="#"> <!-- transactions-waiting.html route('admin.transactions.waiting') -->
+                            <a class="menu-link" href="{{ route('admin.transactions.waiting_for_approval') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -100,7 +100,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="#"> <!-- transactions-in-progress.html route('admin.transactions.inprogress') -->
+                            <a class="menu-link" href="{{ route('admin.transactions.in_progress') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -108,7 +108,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="#"> <!-- transactions-history.html route('admin.transactions.history') -->
+                            <a class="menu-link" href="{{ route('admin.transactions.history') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -136,7 +136,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="#"> <!-- account-overview.html route('account.overview') -->
+                            <a class="menu-link" href="{{ route('account.overview') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -144,7 +144,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="#"> <!-- notifications-page.html route('account.notifications') -->
+                            <a class="menu-link" href="{{ route('account.notifications') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -152,7 +152,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="#"> <!-- account-settings.html route('account.settings') -->
+                            <a class="menu-link" href="{{ route('account.settings') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -252,7 +252,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <!--begin::Info-->
                         <div class="me-2">
                             <!--begin::Username-->
-                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">Aljon Lerios</a>
+                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0"></a>
                             <!--end::Username-->
                             <!--begin::Description-->
                             <span class="text-gray-400 fw-bold d-block fs-8">Librarian</span>
