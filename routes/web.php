@@ -33,5 +33,6 @@ Route::group([], function(){
     });
 
     Route::resource('/books', App\Http\Controllers\BookController::class);
+    Route::resource('/users', App\Http\Controllers\UserController::class);
 
 });
