@@ -117,6 +117,11 @@ class CreatePermissionTables extends Migration
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
             ->forget(config('permission.cache.key'));
+
+        $obj = new \Database\Seeders\DatabaseSeeder;
+        $obj->call([
+            \Database\Seeders\RoleSeeder::class
+        ]);
     }
 
     /**
