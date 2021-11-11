@@ -23,15 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    /**
-     * 
-     */
-    public function admin()
-    {
-        return view('admin.dashboard', [
+        if(\App\Models\User::selectAuthenticatedUser()['role'] == "Librarian")
+        {
+            return view('admin.dashboard', [
+                'auth' => \App\Models\User::selectAuthenticatedUser()
+            ]);
+        }
+        return view('home', [
             'auth' => \App\Models\User::selectAuthenticatedUser()
         ]);
     }

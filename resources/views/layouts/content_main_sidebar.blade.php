@@ -24,7 +24,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 
                 <!-- Dashboard -->
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route('admin.dashboard') }}">
+                    <a class="menu-link" href="{{ route('home') }}">
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/general/gen008.svg-->
                             <span class="svg-icon svg-icon-5">

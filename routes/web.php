@@ -19,16 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route group that requires authentication
-Route::group([], function(){
+Route::middleware(['auth'])->group(function(){
+    
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // Route group for Admin Pages
     Route::group([], function(){
-
-        // Dashboard
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'admin'])->name("admin.dashboard");
 
     });
 
