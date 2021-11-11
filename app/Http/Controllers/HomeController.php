@@ -29,7 +29,7 @@ class HomeController extends Controller
                 'auth' => \App\Models\User::selectAuthenticatedUser()
             ]);
         }
-        return view('home', [
+        return view('member.home', [
             'auth' => \App\Models\User::selectAuthenticatedUser()
         ]);
     }
