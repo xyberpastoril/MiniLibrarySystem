@@ -223,7 +223,9 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                         <!-- Menu item -->
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">Sign Out</a> <!-- ../authentication/sign-in.html route("sign_in") -->
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();" class="menu-link px-5">Sign Out</a> <!-- ../authentication/sign-in.html route("sign_in") -->
                         </div>
 
                         <!-- Menu separator -->
@@ -261,7 +263,8 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <!--end::Info-->
 
                         <!--begin::Sign-out-->
-                        <a href="#" class="btn btn-icon btn-active-color-primary me-n4" data-bs-toggle="tooltip" title="End session and singout"> <!-- ../authentication/sign-in.html route("sign_in") -->
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" class="btn btn-icon btn-active-color-primary me-n4" data-bs-toggle="tooltip" title="End session and singout"> <!-- ../authentication/sign-in.html route("sign_in") -->
                             <span class="svg-icon svg-icon-2 svg-icon-gray-400">
 
                                 <!-- Svg Icon | path: ../assests/media/icons/duotune/arrows/arr076.svg -->
@@ -284,6 +287,10 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
         </div>
     </div>
     <!--end::Aside Footer-->
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
 
 </div>
 
