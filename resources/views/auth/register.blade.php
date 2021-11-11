@@ -1,6 +1,6 @@
 @extends("layouts.core")
 
-<!-- Login -->
+<!-- Register -->
 
 @section("title")
     Register
