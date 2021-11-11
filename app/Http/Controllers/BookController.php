@@ -17,7 +17,9 @@ class BookController extends Controller
     public function index()
     {
         // TODO: Link page for Member
-        return view("admin.books");
+        return view("admin.books", [
+            'auth' => \App\Models\User::selectAuthenticatedUser()
+        ]);
     }
 
     /**

@@ -47,6 +47,14 @@ class User extends Authenticatable
 
     /** Functions **/
 
+    public static function selectAuthenticatedUser()
+    {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $user['role'] = $user->getRoleNames()[0];
+
+        return $user;
+    }
+
     /**
      * Select one from User ID.
      */
