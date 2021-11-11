@@ -17,12 +17,14 @@ class UserSeeder extends Seeder
             [
                 'first_name' => 'Test',
                 'last_name' => 'Librarian',
+                'username' => 'librarian',
                 'email' => 'librarian@example.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('librarian123'),
             ],
             [
                 'first_name' => 'Test',
                 'last_name' => 'Member',
+                'username' => 'member',
                 'email' => 'member@example.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('member123'),
             ]
