@@ -18,4 +18,9 @@ class Book extends Model
     {
         return $this->hasMany(Book_Authors::class);
     }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
 }
