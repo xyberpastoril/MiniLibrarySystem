@@ -2,6 +2,31 @@
 
 <!-- Admin > Users -->
 
+@section('title')
+    Users
+@endsection
+
+<!-- -->
+
+@section('breadcrumb')
+
+    <!-- Item -->
+    {{-- <li class="breadcrumb-item text-muted">
+        <a href="#" class="text-muted text-hover-primary">Home</a>
+    </li> --}}
+
+    <!-- Dash -->
+    {{-- <li class="breadcrumb-item">
+        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+    </li> --}}
+
+    <!-- Item -->
+    <li class="breadcrumb-item text-dark">Users</li>
+
+@endsection
+
+<!-- -->
+
 @section("content")
 
 <!--begin::User Table Card-->
