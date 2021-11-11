@@ -45,6 +45,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /** Relationships */
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public function penalty()
+    {
+        return $this->belongsTo(Penalty::class);
+    }
+
+    public function penalty_payments()
+    {
+        return $this->hasMany(Penalty_Payments::class);
+    }
+
     /** Functions **/
 
     public static function selectAuthenticatedUser()
