@@ -1,4 +1,90 @@
-@extends('layouts.app')
+@extends("layouts.core")
+
+<!-- Login -->
+
+@section("title")
+    Sign In
+@endsection
+
+@section("content")
+<div class="d-flex flex-center flex-column flex-column-fluid">
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+
+        <!-- Form -->
+        <!-- TODO | established form action -->
+        <form id="kt_sign_in_form" class="form w-100" method="post" action="{{ route('login') }}">
+            @csrf
+            <div class="text-center mb-10">
+                <h1 class="text-dark mb-3">
+                    Sign In
+                </h1>
+                <div class="text-gray-400 fw-bold fs-4">
+                    New Here?
+                    <a class="link-primary fw-bolder" href="sign-up.html">
+                        Create an Account
+                    </a>
+                </div>
+            </div>
+            <div class="fv-row mb-10">
+                <label class="form-label fs-6 fw-bolder text-dark">
+                    Email
+                </label>
+                <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" autocomplete="email" name="email" type="text" value="{{ old('email') }}" required autofocus/>
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="fv-row mb-10">
+                <div class="d-flex flex-stack mb-2">
+                    <label class="form-label fw-bolder text-dark fs-6 mb-0">
+                        Password
+                    </label>
+                    @if (Route::has('password.request'))
+                        <a class="link-primary fs-6 fw-bolder" href="{{ route('password.request') }}">
+                            Forgot Password ?
+                        </a>
+                    @endif
+                </div>
+                <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" autocomplete="current-password" name="password" type="password" required/>
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="fv-row mb-10">
+                <div class="d-flex flex-stack mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                        <label class="form-label fw-bolder text-dark fs-6 mb-0" for="remember">
+                            {{ __('Remember Me') }}
+                        </label>
+                    </div>
+
+                    <button id="kt_sign_in_submit" class="btn btn-lg btn-primary fw-bolder me-3 my-2" type="submit">
+                        <span class="indicator-label">
+                            Sign In
+                        </span>
+                        <span class="indicator-progress">
+                            Please wait...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- Form -->
+        
+    </div>
+</div>
+@endsection
+
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -70,4 +156,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

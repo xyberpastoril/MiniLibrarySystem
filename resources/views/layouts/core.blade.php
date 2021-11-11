@@ -10,6 +10,9 @@
 <body id="kt_body" class="aside-enabled">
 
     <!-- Main -->
+    @guest
+        @include('layouts.content_auth')
+    @endguest
     @auth
         @include('layouts.content_main')
     @endauth
