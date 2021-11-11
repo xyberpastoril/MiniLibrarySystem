@@ -15,13 +15,13 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create(['name' => 'librarian']);
+        $role = Role::create(['name' => 'Librarian']);
 
         
         $user = \App\Models\User::where('id', '=', 1)->first();
         $user->assignRole([$role->id]);
 
-        $role = Role::create(['name' => 'member']);
+        $role = Role::create(['name' => 'Member']);
 
         $user = \App\Models\User::where('id', '=', 2)->first();
         $user->assignRole([$role->id]);
