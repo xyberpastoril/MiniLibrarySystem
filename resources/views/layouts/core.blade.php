@@ -4,7 +4,7 @@
 
     @include("layouts.head_global")
 
-    <title>Settings | README</title>
+    <title>@yield("title") | README</title>
 
 </head>
 <body id="kt_body" class="aside-enabled">
