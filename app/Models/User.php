@@ -57,6 +57,11 @@ class User extends Authenticatable
         return $this->belongsTo(Penalty::class);
     }
 
+    public function penalty_payments()
+    {
+        return $this->hasMany(Penalty_Payments::class);
+    }
+
     /** Functions **/
 
     public static function selectAuthenticatedUser()
