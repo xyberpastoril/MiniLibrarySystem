@@ -6,6 +6,8 @@
     Sign In
 @endsection
 
+<!-- -->
+
 @section("content")
 <div class="d-flex flex-center flex-column flex-column-fluid">
     <div class="w-lg-500px p-10 p-lg-15 mx-auto">
@@ -20,7 +22,7 @@
                 </h1>
                 <div class="text-gray-400 fw-bold fs-4">
                     New Here?
-                    <a class="link-primary fw-bolder" href="sign-up.html">
+                    <a class="link-primary fw-bolder" href="{{ route('register')}} ">
                         Create an Account
                     </a>
                 </div>
