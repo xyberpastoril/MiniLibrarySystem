@@ -31,6 +31,8 @@ class HomeController extends Controller
      */
     public function admin()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard', [
+            'auth' => \App\Models\User::selectAuthenticatedUser()
+        ]);
     }
 }
