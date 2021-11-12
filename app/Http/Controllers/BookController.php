@@ -16,8 +16,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        // TODO: Link page for Member
-        return view("admin.books");
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return view("admin.books");
+        return view('member.books');
     }
 
     /**
