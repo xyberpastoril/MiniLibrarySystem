@@ -1,6 +1,6 @@
 @extends("layouts.core")
 
-<!-- Admin > Dashboard -->
+<!-- Member > Home -->
 
 @section('title')
     Home
