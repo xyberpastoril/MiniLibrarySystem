@@ -50,7 +50,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,10 +65,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'username' => RegisterController::generateUsername($data['first_name'], $data['last_name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->assignRole([2]);
+        return $user;
+    }
+
+    private static function generateUsername($firstName, $lastName)
+    {
+        // Expression to get first name initials
+        $expr = '/(?<=\s|^)[a-z]/i';
+
+        // Initialize username variable
+        $username = "";
+
+        // Get first name initials
+        preg_match_all($expr, $firstName, $matches);
+
+        // Concatenate first name initials
+        $username .= strtolower( implode('', $matches[0]) ) . ".";
+
+        // Concatenate last name without spaces
+        foreach( explode(' ', trim( strtolower($lastName) )) as $value)
+            $username .= $value . "";
+
+        // Generate random number to minimize potential duplicates
+        $username .= rand(100,999);
+        
+        return $username;
     }
 }
