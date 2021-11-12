@@ -206,9 +206,9 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                                 <!-- Username -->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5">{{ $auth['first_name'] . " " . $auth['last_name'] }}
-                                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ $auth['role'] }}</span></div>
-                                    <p class="fw-bold text-muted text-hover-primary fs-7">{{ $auth['email'] }}</p>
+                                    <div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->first_name . " " . Auth::user()->last_name }}
+                                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ Auth::user()->getRoleNames()[0] }}</span></div>
+                                    <p class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</p>
                                 </div>
 
                             </div>
@@ -264,10 +264,10 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <!--begin::Info-->
                         <div class="me-2">
                             <!--begin::Username-->
-                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">{{ $auth['first_name'] . " " . $auth['last_name'] }}</a>
+                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">{{ Auth::user()->first_name . " " . Auth::user()->last_name }}</a>
                             <!--end::Username-->
                             <!--begin::Description-->
-                            <span class="text-gray-400 fw-bold d-block fs-8">{{ $auth['role'] }}</span>
+                            <span class="text-gray-400 fw-bold d-block fs-8">{{ Auth::user()->getRoleNames()[0] }}</span>
                             <!--end::Description-->
                         </div>
                         <!--end::Info-->
