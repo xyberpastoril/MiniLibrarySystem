@@ -65,17 +65,6 @@
                     </span>
                 @enderror
             </div>
-            <div class="fv-row mb-7">
-                <label class="form-label fw-bolder text-dark fs-6 required">
-                    Contact Number
-                </label>
-                <input id="contact_number" class="form-control form-control-lg form-control-solid @error('contact_number') is-invalid @enderror" autocomplete="contact_number" name="contact_number" type="text" placeholder="09XXXXXXXXX" value="{{ old('contact_number') }}" required/>
-                @error('contact_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
             <div class="mb-10 fv-row" data-kt-password-meter="true">
                 <div class="mb-1">
                     <label class="form-label fw-bolder text-dark fs-6 required">
