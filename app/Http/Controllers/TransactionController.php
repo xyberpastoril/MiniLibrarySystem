@@ -11,9 +11,7 @@ class TransactionController extends Controller
      */
     public function waiting_for_approval()
     {
-        return view("admin.transactions.waiting_for_approval", [
-            'auth' => \App\Models\User::selectAuthenticatedUser()
-        ]);
+        return view("admin.transactions.waiting_for_approval");
     }
 
     /**
@@ -21,9 +19,7 @@ class TransactionController extends Controller
      */
     public function in_progress()
     {
-        return view("admin.transactions.in_progress", [
-            'auth' => \App\Models\User::selectAuthenticatedUser()
-        ]);
+        return view("admin.transactions.in_progress");
     }
 
     /**
@@ -31,8 +27,6 @@ class TransactionController extends Controller
      */
     public function history()
     {
-        return view("admin.transactions.history", [
-            'auth' => \App\Models\User::selectAuthenticatedUser()
-        ]);
+        return view("admin.transactions.history");
     }
 }

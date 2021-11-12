@@ -25,9 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("admin.users", [
-            'auth' => \App\Models\User::selectAuthenticatedUser()
-        ]);
+        return view("admin.users");
     }
 
     /**
