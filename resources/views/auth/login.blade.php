@@ -22,7 +22,7 @@
                 </h1>
                 <div class="text-gray-400 fw-bold fs-4">
                     New Here?
-                    <a class="link-primary fw-bolder" href="{{ route('register')}} ">
+                    <a class="link-primary fw-bolder" href="{{ route('register')}} " tabindex="6">
                         Create an Account
                     </a>
                 </div>
@@ -31,7 +31,7 @@
                 <label class="form-label fs-6 fw-bolder text-dark">
                     Email
                 </label>
-                <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" autocomplete="email" name="email" type="text" value="{{ old('email') }}" required autofocus/>
+                <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" autocomplete="email" name="email" type="text" value="{{ old('email') }}" required autofocus tabindex="1"/>
 
                 @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -45,12 +45,12 @@
                         Password
                     </label>
                     @if (Route::has('password.request'))
-                        <a class="link-primary fs-6 fw-bolder" href="{{ route('password.request') }}">
+                        <a class="link-primary fs-6 fw-bolder" href="{{ route('password.request') }}" tabindex="5">
                             Forgot Password ?
                         </a>
                     @endif
                 </div>
-                <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" autocomplete="current-password" name="password" type="password" required/>
+                <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" autocomplete="current-password" name="password" type="password" required tabindex="2"/>
 
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -62,14 +62,14 @@
             <div class="fv-row mb-10">
                 <div class="d-flex flex-stack mb-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} tabindex="3">
 
                         <label class="form-label fw-bolder text-dark fs-6 mb-0" for="remember">
                             {{ __('Remember Me') }}
                         </label>
                     </div>
 
-                    <button id="kt_sign_in_submit" class="btn btn-lg btn-primary fw-bolder me-3 my-2" type="submit">
+                    <button id="kt_sign_in_submit" class="btn btn-lg btn-primary fw-bolder me-3 my-2" type="submit" tabindex="4">
                         <span class="indicator-label">
                             Sign In
                         </span>
