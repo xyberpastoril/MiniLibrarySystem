@@ -11,6 +11,6 @@ class Author extends Model
 
     public function book_authors()
     {
-        return $this>belongsTo(Book_Authors::class);
+        return $this>belongsTo(Book::class);
     }
 }
