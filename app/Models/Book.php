@@ -26,6 +26,10 @@ class Book extends Model
 
     /** FUNCTIONS */
     
+    public static function getNewArrivals()
+    {
+        return self::limit(5)->latest()->get();
+    }
 
     public static function selectSearch($search)
     {
