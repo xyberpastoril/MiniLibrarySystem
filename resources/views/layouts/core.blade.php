@@ -4,6 +4,8 @@
 
     @include("layouts.global_head")
 
+    @yield("custom-css")
+
     <title>@yield("title") | README</title>
 
 </head>

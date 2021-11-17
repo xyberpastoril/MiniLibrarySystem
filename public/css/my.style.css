@@ -1,0 +1,6 @@
+  .my-card {
+    transition: transform 0.2s ease;
+  }
+  .my-card:hover {
+    transform: scale(1.05);
+  }
