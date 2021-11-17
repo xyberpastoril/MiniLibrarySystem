@@ -25,11 +25,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
-        $obj = new \Database\Seeders\DatabaseSeeder;
-        $obj->call([
-            \Database\Seeders\UserSeeder::class
-        ]);
     }
 
     /**

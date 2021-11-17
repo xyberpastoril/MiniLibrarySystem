@@ -13,21 +13,24 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::table('users')->insert([
-            [
-                'first_name' => 'Test',
-                'last_name' => 'Librarian',
-                'username' => 'librarian',
-                'email' => 'librarian@example.com',
-                'password' => \Illuminate\Support\Facades\Hash::make('librarian123'),
-            ],
-            [
-                'first_name' => 'Test',
-                'last_name' => 'Member',
-                'username' => 'member',
-                'email' => 'member@example.com',
-                'password' => \Illuminate\Support\Facades\Hash::make('member123'),
-            ]
+        // Create Librarian Account
+        $user = \App\Models\User::create([
+            'first_name' => 'Test',
+            'last_name' => 'Librarian',
+            'username' => 'librarian',
+            'email' => 'librarian@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('librarian123'),
         ]);
+        $user->assignRole([1]);
+
+        // Create Test Member Account
+        $user = \App\Models\User::create([
+            'first_name' => 'Test',
+            'last_name' => 'Member',
+            'username' => 'member',
+            'email' => 'member@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('member123'),
+        ]);
+        $user->assignRole([2]);
     }
 }
