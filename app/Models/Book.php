@@ -23,4 +23,13 @@ class Book extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    /** FUNCTIONS */
+    
+
+    public static function selectSearch($search)
+    {
+        return self::where('title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
+            ->paginate(10);
+    }
 }

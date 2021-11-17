@@ -95,4 +95,11 @@ class BookController extends Controller
     {
         //
     }
+
+    /** JSON RESPONSES */
+
+    public function selectSearch($search)
+    {
+        return \App\Models\Book::selectSearch($search);
+    }
 }

@@ -31,6 +31,9 @@ Route::middleware(['auth'])->group(function(){
     });
 
     Route::resource('/books', App\Http\Controllers\BookController::class);
+    Route::get('/result/books/search/{search}', [App\Http\Controllers\BookController::class, 'selectSearch']);
+
+
     Route::resource('/users', App\Http\Controllers\UserController::class);
 
     Route::get('/transactions/waiting_for_approval',[App\Http\Controllers\TransactionController::class,'waiting_for_approval'])->name('admin.transactions.waiting_for_approval');
