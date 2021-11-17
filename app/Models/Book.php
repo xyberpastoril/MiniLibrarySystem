@@ -9,14 +9,14 @@ class Book extends Model
 {
     use HasFactory;
 
-    public function book_genres()
+    public function genre()
     {
-        return $this->hasMany(Book_Genres::class);
+        return $this->hasMany(Genre::class);
     }
 
-    public function book_authors()
+    public function authors()
     {
-        return $this->hasMany(Book_Authors::class);
+        return $this->hasMany(Author::class);
     }
 
     public function transaction()
