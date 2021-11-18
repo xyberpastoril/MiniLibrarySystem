@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function(){
     });
 
     Route::resource('/books', App\Http\Controllers\BookController::class);
-    Route::get('/result/books/search/{search}', [App\Http\Controllers\BookController::class, 'selectSearch']);
+    Route::get('/result/books/search/', [App\Http\Controllers\BookController::class, 'search']);
 
 
     Route::resource('/users', App\Http\Controllers\UserController::class);
