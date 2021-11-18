@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->enum('status', [
                 'pending', // Waiting for Approval 
                 'unclaimed', // Approved, but book yet to be claimed
-                'borrowed', // Approved, and book claimed
+                'claimed', // Approved, and book claimed
                 'returned', // Book Returned
                 'cancelled', // Transaction Cancelled
             ]);
