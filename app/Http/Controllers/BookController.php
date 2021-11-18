@@ -98,8 +98,10 @@ class BookController extends Controller
 
     /** JSON RESPONSES */
 
-    public function selectSearch($search)
+    public function search(Request $request)
     {
-        return \App\Models\Book::selectSearch($search);
+        return Book::search(
+            $request->get('title'), 
+            explode(',', $request->get('genre')));
     }
 }

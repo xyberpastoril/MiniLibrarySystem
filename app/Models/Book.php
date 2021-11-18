@@ -53,9 +53,33 @@ class Book extends Model
         return $hotBooks;
     }
 
-    public static function selectSearch($search)
+    public static function search($title, $genre)
     {
-        return self::where('title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
-            ->paginate(10);
+        // SELECT DISTINCT books.title 
+        // FROM books 
+        // LEFT JOIN genres on books.id = genres.book_id 
+        // WHERE books.title LIKE "%antiques%" 
+        //  AND genres.name LIKE "%fiction%" 
+        //  OR genres.name LIKE "%general%"
+
+        $obj = self::distinct()
+            ->where('books.title', 'LIKE', '%' . ($title ? $title : NULL) . '%' );
+
+        if(count($genre))
+        {
+            $obj->leftJoin('genres', 'books.id', '=', 'genres.book_id');
+
+            for($i = 0; $i < count($genre); $i++)
+            {
+                if($i == 0) $obj->where('genres.name', 'LIKE', '%'. $genre[$i] .'%');
+                else $obj->orWhere('genres.name', 'LIKE', '%'. $genre[$i] .'%');
+            }
+        }
+        $obj = $obj->paginate(10);
+
+        for($i = 0; $i < count($obj); $i++)
+            $obj[$i]['authors'] = $obj[$i]->authors()->get();
+        
+        return $obj;
     }
 }
