@@ -25,6 +25,8 @@ class HomeController extends Controller
     {
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
             return view('admin.dashboard');
-        return view('member.home');
+        return view('member.home', [
+            "newArrivals" => \App\Models\Book::getNewArrivals()
+        ]);
     }
 }

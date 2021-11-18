@@ -28,7 +28,12 @@ class Book extends Model
     
     public static function getNewArrivals()
     {
-        return self::limit(5)->latest()->get();
+        $newArrivals = self::limit(5)->latest()->get();
+        for($i = 0; $i < 5; $i++)
+            $newArrivals[$i]['authors'] = $newArrivals[$i]->authors()->get();
+
+        // exit( dd($newArrivals[0]['authors'][0]->name) );
+        return $newArrivals;
     }
 
     public static function selectSearch($search)
