@@ -32,7 +32,6 @@ class Book extends Model
         for($i = 0; $i < 5; $i++)
             $newArrivals[$i]['authors'] = $newArrivals[$i]->authors()->get();
 
-        // exit( dd($newArrivals[0]['authors'][0]->name) );
         return $newArrivals;
     }
 
