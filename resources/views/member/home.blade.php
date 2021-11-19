@@ -36,7 +36,7 @@
 @section("content")
 
 <!--begin::Form-->
-<form action="search-results.html">
+<form action="#">
     <!--begin::Card-->
     <div class="card mb-7">
         <!--begin::Card body-->
@@ -53,12 +53,12 @@
                         </svg>
                     </span>
                     <!--end::Svg Icon-->
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books">
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" id='_search_textBox'>
                 </div>
                 <!--end::Input group-->
                 <!--begin:Action-->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary me-5">Search</button>
+                    <button type="submit" class="btn btn-primary me-5" id=_search_btn>Search</button>
                     <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>
                 </div>
                 <!--end:Action-->
@@ -289,5 +289,5 @@
 <!-- -->
 
 @section("custom_js")
-
+<script src="{{ asset('js/search_results.js') }}"></script>
 @endsection
