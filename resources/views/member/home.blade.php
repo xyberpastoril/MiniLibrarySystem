@@ -114,11 +114,9 @@
         <!--end::Title-->
     </div>
 
-    
-
-    <div class="d-flex flex-row flex-nowrap overflow-auto py-8">
-        @foreach ($newArrivals as $book)
-            <div class="card card-block me-11 min-w-175px my-card">
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
+        @foreach ($hotBooks as $book)
+            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
                 <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
                     style="width: 100%; height: 225px; object-fit: cover;">
                 <div class="card-body p-2">
@@ -135,61 +133,6 @@
                 </div>
             </div>
         @endforeach
-        {{-- <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>    
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>   
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>           --}}
     </div>
 
     <div class="d-flex flex-wrap flex-stack pt-5 pb-2">
@@ -200,9 +143,9 @@
         <!--end::Title-->
     </div>
 
-    <div class="d-flex flex-row flex-nowrap overflow-auto py-8">
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
         @foreach ($hotBooks as $book)
-            <div class="card card-block me-11 min-w-175px my-card">
+            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
                 <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
                     style="width: 100%; height: 225px; object-fit: cover;">
                 <div class="card-body p-2">
@@ -219,61 +162,6 @@
                 </div>
             </div>
         @endforeach
-        {{-- <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>    
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>   
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>           --}}
     </div>
 
 </div>
