@@ -63,12 +63,12 @@ class Book extends Model
         //  OR genres.name LIKE "%general%"
 
         $obj = self::distinct()
-            ->where('books.title', 'LIKE', '%' . ($title ? $title : NULL) . '%' );
+            ->selectRaw('books.title, books.id')
+            ->where('books.title', 'LIKE', '%' . ($title ? $title : NULL) . '%' )
+            ->leftJoin('genres', 'books.id', '=', 'genres.book_id');
 
-        if(count($genre))
+        if($genre)
         {
-            $obj->leftJoin('genres', 'books.id', '=', 'genres.book_id');
-
             for($i = 0; $i < count($genre); $i++)
             {
                 if($i == 0) $obj->where('genres.name', 'LIKE', '%'. $genre[$i] .'%');
