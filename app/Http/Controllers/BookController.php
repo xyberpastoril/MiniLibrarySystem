@@ -99,11 +99,15 @@ class BookController extends Controller
     /** JSON RESPONSES */
 
     public function search(Request $request)
-    {
+    {  
         $genre = explode(',', $request->get('genre'));
 
         return Book::search(
-            $request->get('title'), 
-            count($genre) == 1 && $genre[0] != '' ? $genre : null);
+            $request->get('search'), 
+            (count($genre) == 1 && $genre[0] != '') || count($genre) > 1 
+                ? $genre
+                : null,
+            $request->get('available')
+            );
     }
 }

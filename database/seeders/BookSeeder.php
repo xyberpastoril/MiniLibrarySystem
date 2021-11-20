@@ -25,7 +25,7 @@ class BookSeeder extends Seeder
             'page_count' => 192,
             'isbn' => '9780000000000',
             'published_date' => '2014-07-31',
-            'copies_owned' => 1,
+            'copies_owned' => 2,
         ]);
         $book->authors()->createMany([
             ['name' => "Hajime Isayama"],
@@ -72,7 +72,7 @@ class BookSeeder extends Seeder
             'page_count' => 368,
             'isbn' => '9780000000000',
             'published_date' => '2019-11-05',
-            'copies_owned' => 1,
+            'copies_owned' => 2,
         ]);
         $book->authors()->createMany([
             ['name' => "Nintendo"],

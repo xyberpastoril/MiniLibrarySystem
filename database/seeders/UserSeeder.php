@@ -32,5 +32,25 @@ class UserSeeder extends Seeder
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
+
+        // Create Test Member Account
+        $user = \App\Models\User::create([
+            'first_name' => 'Test',
+            'last_name' => 'Member 2',
+            'username' => 'member2',
+            'email' => 'member2@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('member123'),
+        ]);
+        $user->assignRole([2]);
+
+        // Create Test Member Account
+        $user = \App\Models\User::create([
+            'first_name' => 'Test',
+            'last_name' => 'Member 3',
+            'username' => 'member3',
+            'email' => 'member3@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('member123'),
+        ]);
+        $user->assignRole([2]);
     }
 }
