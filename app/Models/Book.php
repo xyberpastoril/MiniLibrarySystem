@@ -63,7 +63,7 @@ class Book extends Model
         //  OR genres.name LIKE "%general%"
 
         $obj = self::distinct()
-            ->selectRaw('books.title, books.id')
+            ->selectRaw('books.title, books.id, books.published_date, books.copies_owned, books.isbn')
             ->where('books.title', 'LIKE', '%' . ($title ? $title : NULL) . '%' )
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id');
 
