@@ -65,8 +65,10 @@ class Book extends Model
         $obj = self::distinct()
             ->selectRaw('books.title, books.id, books.published_date, books.copies_owned, books.isbn')
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
+            ->leftJoin('authors', 'books.id', '=', 'authors.book_id')
             ->where(function ($query) use ($title) {
                 $query->where('books.title', 'LIKE', '%' . ($title ? $title : NULL) . '%' )
+                    ->orWhere('authors.name', 'LIKE', '%' . ($title ? $title : NULL) . '%' );
             });
 
         if($genre)
