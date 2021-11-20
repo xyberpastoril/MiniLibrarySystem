@@ -82,4 +82,36 @@ class User extends Authenticatable
             ->orWhere ( 'contact_number', 'LIKE', '%' . ($search ? $search : NULL)  . '%' )
             ->orWhere ( 'email', 'LIKE', '%' . ($search ? $search : NULL)  . '%' )->paginate(10);
     }
+
+    /**
+     * Generate unique username for User
+     */
+    public function generateUsername($firstName, $lastName)
+    {
+        // Expression to get first name initials
+        $expr = '/(?<=\s|^)[a-z]/i';
+
+        // Initialize username variable
+        $this->username = "";
+
+        // Get first name initials
+        preg_match_all($expr, $firstName, $matches);
+
+        // Concatenate first name initials
+        $this->username .= strtolower( implode('', $matches[0]) ) . ".";
+
+        // Concatenate last name without spaces
+        foreach( explode(' ', trim( strtolower($lastName) )) as $value)
+            $this->username .= $value . "";
+
+        do
+        {
+            // Generate random number to minimize potential duplicates
+            $username = $this->username . rand(100,999);
+        } 
+        while($this::where('username', '=', $username)->count());
+
+        $this->username = $username;
+        $this->save();
+    }
 }
