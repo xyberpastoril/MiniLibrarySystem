@@ -15,4 +15,11 @@ class Author extends Model
     {
         return $this->belongsTo(Book::class);
     }
+
+    /** FUNCTIONS **/
+
+    public function getBookAuthors($id)
+    {
+        return self::where('book_id', '=', $id)->orderBy('name', 'asc')->get();
+    }
 }

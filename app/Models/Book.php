@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Book extends Model
 {
@@ -53,23 +54,40 @@ class Book extends Model
         return $hotBooks;
     }
 
-    public static function search($search, $genre)
+    public static function search($search, $genre, $available)
     {
-        // SELECT DISTINCT books.title 
-        // FROM books 
-        // LEFT JOIN genres on books.id = genres.book_id 
-        // WHERE books.title LIKE "%antiques%" 
-        //  AND genres.name LIKE "%fiction%" 
-        //  OR genres.name LIKE "%general%"
+        // select distinct books.title, books.copies_owned, sub.copies_used, books.copies_owned - sub.copies_used as copies_left
+        // from (
+        //     select books.id, books.title, count(transactions.id) as copies_used
+        //     from transactions
+        //     join books on transactions.book_id = books.id
+        //     where transactions.status = 'unclaimed' or transactions.status = 'claimed' or transactions.status = 'pending'
+        //     group by books.title
+        // ) sub
+        // right join books on sub.id = books.id
+        // left join genres on books.id = genres.book_id
+        // left join authors on books.id = authors.book_id
 
-        $obj = self::distinct()
-            ->selectRaw('books.title, books.id, books.published_date, books.copies_owned, books.isbn')
+        // where (books.title LIKE "%%" or authors.name LIKE "%%") and genres.name LIKE "%%"
+        //      and (copies_used != copies_owned or copies_used IS NULL)
+
+        $sub = Transaction::bookSearchSub();
+        
+        $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
+            ->distinct()
+            ->select('books.id' , 'books.title', 'books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
+            ->mergeBindings( $sub->getQuery() )
+            ->rightJoin('books', 'sub.id', '=', 'books.id')
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
-            ->leftJoin('authors', 'books.id', '=', 'authors.book_id')
-            ->where(function ($query) use ($search) {
+            ->leftJoin('authors', 'books.id', '=', 'authors.book_id');
+        
+        if($search)
+        {
+            $obj->where(function ($query) use ($search) {
                 $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
                     ->orWhere('authors.name', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
             });
+        }
 
         if($genre)
         {
@@ -80,11 +98,28 @@ class Book extends Model
             }
         }
 
+        // Search only books that are available for transaction (borrow)
+        if($available)
+        {
+            $obj->where(function ($query) {
+                $query->whereRaw('copies_used != copies_owned')
+                    ->orWhereRaw('copies_used IS NULL');
+            });
+        }
+        
         $obj = $obj->paginate(10);
 
+        // Add authors to json & set NULL cells to 0
         for($i = 0; $i < count($obj); $i++)
-            $obj[$i]['authors'] = $obj[$i]->authors()->get();
-        
+        {
+            $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
+            if($obj[$i]->copies_used == NULL)
+            {
+                $obj[$i]->copies_used = 0;
+                $obj[$i]->copies_left = $obj[$i]->copies_owned;
+            }
+        }
+            
         return $obj;
     }
 }
