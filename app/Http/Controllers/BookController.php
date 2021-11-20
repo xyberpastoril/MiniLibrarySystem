@@ -102,9 +102,8 @@ class BookController extends Controller
     {
         $genre = explode(',', $request->get('genre'));
         
-
         return Book::search(
-            $request->get('title'), 
+            $request->get('search'), 
             (count($genre) == 1 && $genre[0] != '') || count($genre) > 1 ? $genre : null);
     }
 }

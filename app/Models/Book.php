@@ -53,7 +53,7 @@ class Book extends Model
         return $hotBooks;
     }
 
-    public static function search($title, $genre)
+    public static function search($search, $genre)
     {
         // SELECT DISTINCT books.title 
         // FROM books 
@@ -66,9 +66,9 @@ class Book extends Model
             ->selectRaw('books.title, books.id, books.published_date, books.copies_owned, books.isbn')
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
             ->leftJoin('authors', 'books.id', '=', 'authors.book_id')
-            ->where(function ($query) use ($title) {
-                $query->where('books.title', 'LIKE', '%' . ($title ? $title : NULL) . '%' )
-                    ->orWhere('authors.name', 'LIKE', '%' . ($title ? $title : NULL) . '%' );
+            ->where(function ($query) use ($search) {
+                $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
+                    ->orWhere('authors.name', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
             });
 
         if($genre)
