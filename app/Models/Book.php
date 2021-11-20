@@ -54,7 +54,7 @@ class Book extends Model
         return $hotBooks;
     }
 
-    public static function search($search, $genre, $available)
+    public static function search($search, $genre, $status)
     {
         // select distinct books.title, books.copies_owned, sub.copies_used, books.copies_owned - sub.copies_used as copies_left
         // from (
@@ -99,7 +99,7 @@ class Book extends Model
         }
 
         // Search only books that are available for transaction (borrow)
-        if($available)
+        if($status)
         {
             $obj->where(function ($query) {
                 $query->whereRaw('copies_used != copies_owned')

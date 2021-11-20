@@ -107,7 +107,7 @@ class BookController extends Controller
             (count($genre) == 1 && $genre[0] != '') || count($genre) > 1 
                 ? $genre
                 : null,
-            $request->get('available')
+            $request->get('status')
             );
     }
 }
