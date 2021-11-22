@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
            
         }catch(e){
             //please change it to notif or span-error later on
-            console.log(`Something is wrong Woof! Error: ${e}`)
+            console.log(`Something is wrong Woof! Error: ${e} Woof~!`)
         }
        
     })
