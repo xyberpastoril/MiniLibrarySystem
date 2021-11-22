@@ -93,4 +93,16 @@ class UserController extends Controller
     {
         //
     }
+
+    /** JSON */
+
+    public function search(Request $request)
+    {
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return \App\models\User::search(
+                $request->get('search'),
+                $request->get('role')
+            );
+        return redirect()->route('home');
+    }
 }
