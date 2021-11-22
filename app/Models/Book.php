@@ -89,7 +89,7 @@ class Book extends Model
             });
         }
 
-        return [$genre];
+        // return [$genre];
 
         if($genre)
         {
@@ -109,7 +109,7 @@ class Book extends Model
             });
         }
 
-        return [$obj->toSql()];
+        // return [$obj->toSql()];
         
         $obj = $obj->paginate(10);
 
