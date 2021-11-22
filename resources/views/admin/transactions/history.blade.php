@@ -8,6 +8,12 @@
 
 <!-- -->
 
+@section('custom_css')
+    
+@endsection
+
+<!-- -->
+
 @section('breadcrumb')
 
     <!-- Item -->

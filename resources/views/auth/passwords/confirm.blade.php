@@ -8,6 +8,13 @@
 
 <!-- -->
 
+@section('custom_css')
+    
+@endsection
+
+<!-- -->
+
+
 @section("content")
     <!-- Content | Confirm Password -->
     <div class="d-flex flex-center flex-column flex-column-fluid">

@@ -13,4 +13,11 @@ class Genre extends Model
     {
         return $this>belongsTo(Book::class);
     }
+
+    /** FUNCTIONS */
+
+    public function getBookGenres($id)
+    {
+        return self::where('book_id', '=', $id)->orderBy('name', 'asc')->get();
+    }
 }

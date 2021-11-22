@@ -8,6 +8,12 @@
 
 <!-- -->
 
+@section('custom_css')
+    
+@endsection
+
+<!-- -->
+
 @section('breadcrumb')
 
     <!-- Item -->
@@ -29,6 +35,7 @@
 
 @section("custom-css")
     <link href="{{ asset("css/my.style.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset("css/toggles.css") }}" rel="stylesheet" type="text/css">
 @endsection
 
 <!-- -->
@@ -36,7 +43,7 @@
 @section("content")
 
 <!--begin::Form-->
-<form action="search-results.html">
+<!--form tag has been temporarily been removed-->
     <!--begin::Card-->
     <div class="card mb-7">
         <!--begin::Card body-->
@@ -53,13 +60,13 @@
                         </svg>
                     </span>
                     <!--end::Svg Icon-->
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books">
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" id='_search_textBox'>
                 </div>
                 <!--end::Input group-->
                 <!--begin:Action-->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary me-5">Search</button>
-                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>
+                    <button type="submit" class="btn btn-primary me-5" id=_search_btn>Search</button>
+                    <a id="_advanced_search" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form" clicked='0' >Advanced Search</a>
                 </div>
                 <!--end:Action-->
             </div>
@@ -74,7 +81,7 @@
                     <!--begin::Col-->
                     <div class="col-xxl-7">
                         <label class="fs-6 form-label fw-bolder text-dark">Genres</label>
-                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, supernatural, scifi)">
+                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, supernatural, scifi)" id='_genre_textBox'>
                     </div>
                     <!--end::Col-->
                     <!--begin::Col-->
@@ -85,7 +92,7 @@
                             <div class="col-lg-6">
                                 <label class="fs-6 form-label fw-bolder text-dark">Status</label>
                                 <div class="form-check form-switch form-check-custom form-check-solid mt-1">
-                                    <input name="status" class="form-check-input" type="checkbox" value id="flexSwitchChecked" checked="checked">
+                                    <input name="status" class="form-check-input" type="checkbox" id="_checkBox" checked="checked">
                                     <label class="form-check-label" for="flexSwitchChecked">Available</label>
                                 </div>
                             </div>
@@ -101,75 +108,37 @@
         <!--end::Card body-->
     </div>
     <!--end::Card-->
-</form>
+
 <!--end::Form-->
 
-<div class="tab-content">
-    
+<div class="tab-content d-block" id='_tab_main'>
     <div class="d-flex flex-wrap flex-stack pb-2">
         <!--begin::Title-->
         <div class="d-flex flex-wrap align-items-center my-1">
-            <h3 class="fw-bold me-5 my-1">New Books Release</h3>
+            <h3 class="fw-bold me-5 my-1">New Arrivals</h3>
         </div>
         <!--end::Title-->
     </div>
 
-    <div class="d-flex flex-row flex-nowrap overflow-auto py-8">
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
+        @foreach ($hotBooks as $book)
+            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
+                <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
+                    style="width: 100%; height: 225px; object-fit: cover;">
+                <div class="card-body p-2">
+                    <p class="card-text text-truncate">
+                        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $book->title }}</a>
+                        <br />
+                        <small class="text-muted">
+                            {{ $book['authors'][0]->name }}
+                            @if(count($book['authors']) > 1)
+                                and {{ (count($book['authors']) - 1) }} others.
+                            @endif
+                        </small>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>    
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>   
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>          
+        @endforeach
     </div>
 
     <div class="d-flex flex-wrap flex-stack pt-5 pb-2">
@@ -180,64 +149,29 @@
         <!--end::Title-->
     </div>
 
-    <div class="d-flex flex-row flex-nowrap overflow-auto py-8">
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
+        @foreach ($hotBooks as $book)
+            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
+                <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
+                    style="width: 100%; height: 225px; object-fit: cover;">
+                <div class="card-body p-2">
+                    <p class="card-text text-truncate">
+                        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $book->title }}</a>
+                        <br />
+                        <small class="text-muted">
+                            {{ $book['authors'][0]->name }}
+                            @if(count($book['authors']) > 1)
+                                and {{ (count($book['authors']) - 1) }} others.
+                            @endif
+                        </small>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>    
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>   
-        <div class="card card-block me-11 min-w-175px my-card">
-            <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
-                style="width: 100%; height: 225px; object-fit: cover;">
-            <div class="card-body p-2">
-                <p class="card-text text-truncate">
-                    <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack On Titan Volume 13</a>
-                    <br />
-                    <small class="text-muted">Hajime Isayama</small>
-                </p>
-            </div>
-        </div>          
+        @endforeach
     </div>
 
+</div>
+<div class="tab-content d-none" id="_tab_search_res">
 </div>
 
 @endsection
@@ -251,5 +185,5 @@
 <!-- -->
 
 @section("custom_js")
-
+<script src="{{ asset('js/search_results.js') }}"></script>
 @endsection
