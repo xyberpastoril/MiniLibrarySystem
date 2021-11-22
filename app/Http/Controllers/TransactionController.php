@@ -29,4 +29,14 @@ class TransactionController extends Controller
     {
         return view("admin.transactions.history");
     }
+
+    /** JSON */
+    public function search(Request $request)
+    {
+        return \App\Models\Transaction::search(
+            $request->get('search'),
+            $request->get('status'),
+            \Illuminate\Support\Facades\Auth::user()
+        );
+    }
 }

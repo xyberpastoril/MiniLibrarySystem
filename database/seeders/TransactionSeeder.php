@@ -44,6 +44,16 @@ class TransactionSeeder extends Seeder
             'date_to' => '2021-11-26',
             'status' => 'claimed',
         ]);
+        \App\Models\Transaction::create([
+            'book_id' => 2,
+            'user_id' => 2,
+            'status' => 'pending',
+        ]);
+        \App\Models\Transaction::create([
+            'book_id' => 7,
+            'user_id' => 2,
+            'status' => 'returned',
+        ]);
         //
     }
 }

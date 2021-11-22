@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/transactions/waiting_for_approval',[App\Http\Controllers\TransactionController::class,'waiting_for_approval'])->name('transactions.waiting_for_approval');
     Route::get('/transactions/in_progress',[App\Http\Controllers\TransactionController::class,'in_progress'])->name('transactions.in_progress');
     Route::get('/transactions/history',[App\Http\Controllers\TransactionController::class,'history'])->name('transactions.history');
+    Route::get('/result/transactions/search/', [App\Http\Controllers\TransactionController::class, 'search']);
     
     Route::get('/account/overview',[App\Http\Controllers\AccountController::class,'overview'])->name('account.overview');
     Route::get('/account/notifications',[App\Http\Controllers\AccountController::class,'notifications'])->name('account.notifications');
