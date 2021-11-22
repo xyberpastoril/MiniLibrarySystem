@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let _advanced_search = document.getElementById('_advanced_search')
     let _genre_textBox = document.getElementById('_genre_textBox')
     let _checkBox = document.getElementById('_checkBox')
+    let _tab_main = document.getElementById('_tab_main')
+    let _tab_search_res = document.getElementById('_tab_search_res')
+
     _search_btn.addEventListener('click', async()=>{
         try{
             let res;
@@ -14,11 +17,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
             else{
                 res = await fetch(`/result/books/search/?search=${_search_textBox.value}&genres=${_genre_textBox.value}&status=${_checkBox.checked? '1' : '0'}`)
             }
-            data = await res.json()
-            console.log(data.data)
+
+            if (_search_textBox.value==''){
+                _tab_search_res.classList.replace('d-block', 'd-none')
+                _tab_main.classList.replace('d-none', 'd-block')
+                _tab_search_res.innerHTML = ''
+                 
+            }
+            else{
+                _tab_search_res.classList.replace('d-none', 'd-block')
+                 _tab_main.classList.replace('d-block', 'd-none')
+
+                data = await res.json()
+                _tab_search_res.innerHTML = generate_book_cards(data.data)
+            }
+           
         }catch(e){
             //please change it to notif or span-error later on
-            console.log(`Something is wrong! Error: ${e}`)
+            console.log(`Something is wrong Woof! Error: ${e}`)
         }
        
     })
@@ -31,3 +47,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     })
 })
+generate_book_cards = (data) =>{
+    if (data.length==0){
+        return `Such Emptiness~`
+    }
+    let inner = ''
+    for(d of data){
+        inner+= `<div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
+        <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
+            style="width: 100%; height: 225px; object-fit: cover;">
+        <div class="card-body p-2">
+            <p class="card-text text-truncate">
+                <a href="#" class="text-gray-800 text-hover-primary mb-1">${d.title}</a>
+                <br />
+                <small class="text-muted">
+                    ${d.authors.length>1? `${d.authors[0].name} and ${d.authors.length-1} others` : d.authors[0].name}
+                </small>
+            </p>
+        </div>
+    </div>`
+    }
+    return inner
+}

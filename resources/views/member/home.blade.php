@@ -29,6 +29,7 @@
 
 @section("custom-css")
     <link href="{{ asset("css/my.style.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset("css/toggles.css") }}" rel="stylesheet" type="text/css">
 @endsection
 
 <!-- -->
@@ -104,8 +105,7 @@
 
 <!--end::Form-->
 
-<div class="tab-content">
-    
+<div class="tab-content d-block" id='_tab_main'>
     <div class="d-flex flex-wrap flex-stack pb-2">
         <!--begin::Title-->
         <div class="d-flex flex-wrap align-items-center my-1">
@@ -164,6 +164,8 @@
         @endforeach
     </div>
 
+</div>
+<div class="tab-content d-none" id="_tab_search_res">
 </div>
 
 @endsection
