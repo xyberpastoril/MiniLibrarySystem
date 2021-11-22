@@ -14,8 +14,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
             else{
                 res = await fetch(`/result/books/search/?search=${_search_textBox.value}&genres=${_genre_textBox.value}&status=${_checkBox.checked? '1' : '0'}`)
             }
-            data = await res.json()
-            console.log(data.data)
+            // data = await res.json()
+
+            data = await res.json();
+            console.log(data);
+            // console.log(data.data)
         }catch(e){
             //please change it to notif or span-error later on
             console.log(`Something is wrong! Error: ${e}`)
