@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\member;
 use Illuminate\Http\Request;
+use Spatie\Permission\Contracts\Role;
 
 class TransactionController extends Controller
 {
@@ -11,7 +13,10 @@ class TransactionController extends Controller
      */
     public function waiting_for_approval()
     {
-        return view("admin.transactions.waiting_for_approval");
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return view("admin.transactions.waiting_for_approval");
+        return view("member.transactions.waiting_for_approval");
+
     }
 
     /**
@@ -19,7 +24,9 @@ class TransactionController extends Controller
      */
     public function in_progress()
     {
-        return view("admin.transactions.in_progress");
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return view("admin.transactions.in_progress");
+        return view("member.transactions.in_progress");
     }
 
     /**
@@ -27,7 +34,9 @@ class TransactionController extends Controller
      */
     public function history()
     {
-        return view("admin.transactions.history");
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return view("admin.transactions.history");
+        return view("member.transactions.history");
     }
 
     /** JSON */
