@@ -118,7 +118,7 @@ var KTBooksList = function() {
 					targets: 0
 				}, {
 					orderable: !1,
-					targets: 6
+					targets: 8
 				}]
 			})).on("draw", (function() {
 				l(), c(), a()

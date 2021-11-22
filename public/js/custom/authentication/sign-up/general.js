@@ -46,7 +46,7 @@ var KTSignupGeneral = (function() {
 								message: "The password is required",
 							},
 							callback: {
-								message: "Please enter valid password",
+								message: "Please enter strong password",
 								callback: function(e) {
 									if (e.value.length > 0) return r(); // calls the r function
 								},

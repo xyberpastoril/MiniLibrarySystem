@@ -43,7 +43,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/result/transactions/search/', [App\Http\Controllers\TransactionController::class, 'search']);
     
     Route::get('/account/overview',[App\Http\Controllers\AccountController::class,'overview'])->name('account.overview');
-    Route::get('/account/notifications',[App\Http\Controllers\AccountController::class,'notifications'])->name('account.notifications');
     Route::get('/account/settings',[App\Http\Controllers\AccountController::class,'settings'])->name('account.settings');
 
 });
