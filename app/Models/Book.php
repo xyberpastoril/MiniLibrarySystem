@@ -113,6 +113,7 @@ class Book extends Model
         for($i = 0; $i < count($obj); $i++)
         {
             $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
+            $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id);
             if($obj[$i]->copies_used == NULL)
             {
                 $obj[$i]->copies_used = 0;
