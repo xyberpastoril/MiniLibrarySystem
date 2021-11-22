@@ -4,16 +4,21 @@ var KTTransactionsList = (function () {
     t,
     n,
     r,
-    o = document.getElementById("kt_table_transactions"),
-    l = () => {
+    o = document.getElementById("kt_table_transactions");
+
+  var l = () => {
       const c = o.querySelectorAll('[type="checkbox"]');
-      (t = document.querySelector('[data-kt-transaction-table-toolbar="base"]')),
-        (n = document.querySelector('[data-kt-transaction-table-toolbar="selected"]')),
+      (t = document.querySelector(
+        '[data-kt-transaction-table-toolbar="base"]'
+      )),
+        (n = document.querySelector(
+          '[data-kt-transaction-table-toolbar="selected"]'
+        )),
         (r = document.querySelector(
           '[data-kt-transaction-table-select="selected_count"]'
         ));
       const s = document.querySelector(
-        '[data-kt-transaction-table-select="return_selected"]'
+        '[data-kt-transaction-table-select="cancel_selected"]'
       );
       c.forEach((e) => {
         e.addEventListener("click", function () {
@@ -24,21 +29,21 @@ var KTTransactionsList = (function () {
       }),
         s.addEventListener("click", function () {
           Swal.fire({
-            text: "Are you sure you want to mark selected transactions as returned?",
+            text: "Are you sure you want to cancel selected transactions?",
             icon: "warning",
             showCancelButton: !0,
             buttonsStyling: !1,
-            confirmButtonText: "Yes, mark!",
+            confirmButtonText: "Yes, decline!",
             cancelButtonText: "No, cancel",
             customClass: {
-              confirmButton: "btn fw-bold btn-success",
+              confirmButton: "btn fw-bold btn-danger",
               cancelButton: "btn fw-bold btn-active-light-primary",
             },
           }).then(function (t) {
             t.value
               ? Swal.fire({
-                  text: "You have marked all selected transactions as returned!.",
-                  icon: "success",
+                  text: "You have cancelled all selected transactions!.",
+                  icon: "danger",
                   buttonsStyling: !1,
                   confirmButtonText: "Ok, got it!",
                   customClass: {
@@ -60,7 +65,7 @@ var KTTransactionsList = (function () {
                   })
               : "cancel" === t.dismiss &&
                 Swal.fire({
-                  text: "Selected transactions was not marked as returned.",
+                  text: "Selected transactions was not cancelled.",
                   icon: "error",
                   buttonsStyling: !1,
                   confirmButtonText: "Ok, got it!",
@@ -71,12 +76,13 @@ var KTTransactionsList = (function () {
           });
         });
     };
+  
   const a = () => {
     const e = o.querySelectorAll('tbody [type="checkbox"]');
     let c = !1,
-      l = 0;
+      l = 0, m = 0;
     e.forEach((e) => {
-      e.checked && ((c = !0), l++);
+      e.checked && ((c = !0), l++, m++);
     }),
       c
         ? ((r.innerHTML = l),
@@ -102,13 +108,13 @@ var KTTransactionsList = (function () {
             },
             {
               orderable: !1,
-              targets: 9,
+              targets: 7,
             },
           ],
         })).on("draw", function () {
-          l(), c(), a();
+          l(), m(), c(), a();
         }),
-        l(),
+        l(), m(),
         c());
     },
   };

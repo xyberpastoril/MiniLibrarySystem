@@ -66,6 +66,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <span class="menu-title">Books</span>
                     </a>
                 </div>
+                @endrole
 
                 <!-- Users -->
                 @role('Librarian')
@@ -87,13 +88,13 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                                     </svg>
                                 </span>
                             </span>
-                            <span class="menu-title">Users</span>
-                        </a>
-                    </div>
+                        </span>
+                        <span class="menu-title">Users</span>
+                    </a>
+                </div>
                 @endrole
 
                 <!-- Transactions -->
-                @role('Librarian')
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -142,7 +143,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         </div>
                     </div>
                 </div>
-                @endrole
 
                 <!-- Account -->
                 <div data-kt-menu-trigger="click" class="menu-item here menu-accordion
@@ -241,7 +241,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         
                         <!-- Menu item -->
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">My Profile</a>
+                            <a href="{{ route('account.overview') }}" class="menu-link px-5">My Profile</a>
                         </div>
 
                         <!-- Menu separator -->
@@ -250,7 +250,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                         <!-- Menu item -->
                         <div class="menu-item px-5 my-1">
-                            <a href="#" class="menu-link px-5">Account Settings</a>
+                            <a href="{{ route('account.settings') }}" class="menu-link px-5">Account Settings</a>
                         </div>
 
                         <!-- Menu item -->
