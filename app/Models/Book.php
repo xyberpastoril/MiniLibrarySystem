@@ -89,8 +89,6 @@ class Book extends Model
             });
         }
 
-        // return [$genre];
-
         if($genre)
         {
             for($i = 0; $i < count($genre); $i++)
@@ -108,8 +106,6 @@ class Book extends Model
                     ->orWhereRaw('copies_used IS NULL');
             });
         }
-
-        // return [$obj->toSql()];
         
         $obj = $obj->paginate(10);
 

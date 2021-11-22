@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 res = await fetch(`/result/books/search/?search=${_search_textBox.value}`)
             }
             else{
-                res = await fetch(`/result/books/search/?search=${_search_textBox.value}&genres=${_genre_textBox.value}&status=${_checkBox.checked? '1' : '0'}`)
+                res = await fetch(`/result/books/search/?search=${_search_textBox.value}&genre=${_genre_textBox.value}&status=${_checkBox.checked? '1' : '0'}`)
             }
 
             if (_search_textBox.value==''){
