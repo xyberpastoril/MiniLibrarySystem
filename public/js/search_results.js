@@ -51,9 +51,9 @@ generate_book_cards = (data) =>{
     if (data.length==0){
         return `Such Emptiness~`
     }
-    let inner = ''
+    let inner = '<div class="py-8 d-flex flex-row flex-wrap align-items-center justify-content-center w-100 position-relative h-auto">'
     for(d of data){
-        inner+= `<div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
+        inner+= `<div class="card card-block me-11 my-card mb-4" style="width: 14rem;flex: 0 0 auto;">
         <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
             style="width: 100%; height: 225px; object-fit: cover;">
         <div class="card-body p-2">
@@ -67,5 +67,6 @@ generate_book_cards = (data) =>{
         </div>
     </div>`
     }
+    inner += '</div>'
     return inner
 }
