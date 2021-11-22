@@ -104,9 +104,9 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <div class="menu-item">
                             <a class="menu-link" href="
                             @role('Member')
-                                {{ route('member.transactions.waiting_for_approval') }}
+                                {{ route('transactions.waiting_for_approval') }}
                             @else
-                                {{ route('admin.transactions.waiting_for_approval') }}
+                                {{ route('transactions.waiting_for_approval') }}
                             @endrole
                             ">
                                 <span class="menu-bullet">
@@ -118,9 +118,9 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <div class="menu-item">
                             <a class="menu-link" href="
                             @role('Member')
-                                {{ route('member.transactions.in_progress') }}
+                                {{ route('transactions.in_progress') }}
                             @else
-                                {{ route('admin.transactions.in_progress') }}
+                                {{ route('transactions.in_progress') }}
                             @endrole
                             ">
                                 <span class="menu-bullet">
@@ -132,9 +132,9 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <div class="menu-item">
                             <a class="menu-link" href="
                             @role('Member')
-                                {{ route('member.transactions.history') }}
+                                {{ route('transactions.history') }}
                             @else
-                                {{ route('admin.transactions.history') }}
+                                {{ route('transactions.history') }}
                             @endrole
                             ">
                                 <span class="menu-bullet">
