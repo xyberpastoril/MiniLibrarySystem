@@ -62,7 +62,9 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <span class="menu-title">Books</span>
                     </a>
                 </div>
+                @endrole
 
+                 @role('Librarian')
                 <!-- Users -->
                 <div data-kt-menu-trigger="click" class="menu-item">
                     <a class="menu-link" href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
