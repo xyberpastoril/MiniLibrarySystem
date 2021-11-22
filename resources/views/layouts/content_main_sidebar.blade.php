@@ -46,6 +46,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                     </a>
                 </div>
 
+                @role('Librarian')
                 <!-- Books -->
                 <div class="menu-item">
                     <a class="menu-link 
@@ -147,7 +148,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <!-- Account -->
                 <div data-kt-menu-trigger="click" class="menu-item here menu-accordion
                 @if(Route::currentRouteName() == "account.overview" ||
-                    Route::currentRouteName() == "account.notifications" ||
                     Route::currentRouteName() == "account.settings")
                     show
                 @endif
@@ -173,14 +173,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Overview</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link @if(Route::currentRouteName() == "account.notifications") active @endif" href="{{ route('account.notifications') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Notifications</span>
                             </a>
                         </div>
                         <div class="menu-item">
