@@ -107,6 +107,7 @@ class Book extends Model
             });
         }
         
+        $count = $obj->count('books.title');
         $obj = $obj->paginate(10);
 
         // Add authors to json & set NULL cells to 0
@@ -121,6 +122,9 @@ class Book extends Model
             }
         }
             
-        return $obj;
+        return [
+            'results' => $obj, 
+            'count' => $count
+        ];
     }
 }

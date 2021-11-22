@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                  _tab_main.classList.replace('d-block', 'd-none')
 
                 data = await res.json()
-                _tab_search_res.innerHTML = generate_book_cards(data.data)
+                _tab_search_res.innerHTML = generate_book_cards(data.results.data, data.count)
             }
            
         }catch(e){
@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     })
 })
-generate_book_cards = (data) =>{
+generate_book_cards = (data, count) =>{
     let inner = '';
-    if (data.length==0){
+    if (count==0){
         inner += `<h3 class="fw-bold me-5 my-1">No results found.</h3>`
     }
     else {
-        inner += `<h3 class="fw-bold me-5 my-1">${data.length} results found.</h3>`
+        inner += `<h3 class="fw-bold me-5 my-1">${count} results found.</h3>`
         inner += '<div class="py-8 d-flex flex-row flex-wrap align-items-center justify-content-center justify-content-lg-start w-100 position-relative h-auto">'
         for(d of data){
             inner+= `<div class="card card-block me-11 my-card mb-4" style="width: 14rem;flex: 0 0 auto;">
