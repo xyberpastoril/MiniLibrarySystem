@@ -24,7 +24,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 
                 <!-- Dashboard -->
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route('home') }}">
+                    <a class="menu-link active" href="{{ route('home') }}">
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/general/gen008.svg-->
                             <span class="svg-icon svg-icon-5">
@@ -47,7 +47,8 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 </div>
 
                 <!-- Books -->
-                <div class="menu-item">
+                @role('Librarian')
+                <div data-kt-menu-trigger="click" class="menu-item">
                     <a class="menu-link" href="{{ route('books.index') }}">
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/files/fil012.svg-->
@@ -63,27 +64,25 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 </div>
 
                 <!-- Users -->
-                @role('Librarian')
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
-                            <span class="menu-icon">
-                                <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr001.svg-->
-                                <span class="svg-icon svg-icon-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="black"/>
-                                        <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="black"/>
-                                        <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="black"/>
-                                        <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="black"/>
-                                    </svg>
-                                </span>
+                <div data-kt-menu-trigger="click" class="menu-item">
+                    <a class="menu-link" href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
+                        <span class="menu-icon">
+                            <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr001.svg-->
+                            <span class="svg-icon svg-icon-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="black"/>
+                                    <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="black"/>
+                                    <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="black"/>
+                                    <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="black"/>
+                                </svg>
                             </span>
-                            <span class="menu-title">Users</span>
-                        </a>
-                    </div>
+                        </span>
+                        <span class="menu-title">Users</span>
+                    </a>
+                </div>
                 @endrole
 
                 <!-- Transactions -->
-                @role('Librarian')
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -101,7 +100,13 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.transactions.waiting_for_approval') }}">
+                            <a class="menu-link" href="
+                            @role('Member')
+                                {{ route('member.transactions.waiting_for_approval') }}
+                            @else
+                                {{ route('admin.transactions.waiting_for_approval') }}
+                            @endrole
+                            ">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -109,7 +114,13 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.transactions.in_progress') }}">
+                            <a class="menu-link" href="
+                            @role('Member')
+                                {{ route('member.transactions.in_progress') }}
+                            @else
+                                {{ route('admin.transactions.in_progress') }}
+                            @endrole
+                            ">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -117,7 +128,13 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.transactions.history') }}">
+                            <a class="menu-link" href="
+                            @role('Member')
+                                {{ route('member.transactions.history') }}
+                            @else
+                                {{ route('admin.transactions.history') }}
+                            @endrole
+                            ">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -126,7 +143,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         </div>
                     </div>
                 </div>
-                @endrole
 
                 <!-- Account -->
                 <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
@@ -151,14 +167,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Overview</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('account.notifications') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Notifications</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -219,7 +227,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         
                         <!-- Menu item -->
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">My Profile</a>
+                            <a href="{{ route('account.overview') }}" class="menu-link px-5">My Profile</a>
                         </div>
 
                         <!-- Menu separator -->
@@ -228,7 +236,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                         <!-- Menu item -->
                         <div class="menu-item px-5 my-1">
-                            <a href="#" class="menu-link px-5">Account Settings</a>
+                            <a href="{{ route('account.settings') }}" class="menu-link px-5">Account Settings</a>
                         </div>
 
                         <!-- Menu item -->

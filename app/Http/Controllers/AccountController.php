@@ -11,11 +11,6 @@ class AccountController extends Controller
         return view('account.overview');
     }
 
-    public function notifications()
-    {
-        return view('account.notifications');
-    }
-
     public function settings()
     {
         return view('account.settings');
