@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::resource('/users', App\Http\Controllers\UserController::class);
+    Route::get('/results/users/search/', [App\Http\Controllers\UserController::class, 'search']);
 
     Route::get('/transactions/waiting_for_approval',[App\Http\Controllers\TransactionController::class,'waiting_for_approval'])->name('transactions.waiting_for_approval');
     Route::get('/transactions/in_progress',[App\Http\Controllers\TransactionController::class,'in_progress'])->name('transactions.in_progress');

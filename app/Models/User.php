@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -75,12 +76,42 @@ class User extends Authenticatable
     /**
      * Select paginated from Users
      */
-    public static function selectPaginate($search)
+    public static function search($search, $role)
     {
-        return self::where('first_name', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
-            ->orWhere ( 'last_name', 'LIKE', '%' . ($search ? $search : NULL)  . '%' )
-            ->orWhere ( 'contact_number', 'LIKE', '%' . ($search ? $search : NULL)  . '%' )
-            ->orWhere ( 'email', 'LIKE', '%' . ($search ? $search : NULL)  . '%' )->paginate(10);
+        $obj = self::select(
+                'users.id',
+                'users.first_name',
+                'users.last_name',
+                'users.email',
+                'users.created_at',
+                'model_has_roles.role_id',
+                'roles.name',   
+            )
+            ->join('model_has_roles', 'users.id', '=' ,'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->orderBy('users.last_name', 'ASC')
+            ->orderBy('users.first_name', 'ASC');
+        
+        if($search) 
+        {
+            $obj->where(function ($query) use ($search) {
+                $query->where('first_name', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
+                    ->orWhere ( 'last_name', 'LIKE', '%' . ($search ? $search : NULL)  . '%' )
+                    ->orWhere ( 'email', 'LIKE', '%' . ($search ? $search : NULL)  . '%' );
+            });
+        }
+
+        switch($role)
+        {
+            case 'librarian':
+                $obj->where('roles.name', '=', 'Librarian');
+                break;
+            case 'member':
+                $obj->where('roles.name', '=', 'Member');
+                break;
+        }
+
+        return $obj->paginate(10);
     }
 
     /**
