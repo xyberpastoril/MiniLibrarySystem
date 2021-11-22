@@ -74,7 +74,7 @@ class Book extends Model
         $sub = Transaction::bookSearchSub();
         
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
-            ->distinct()
+            ->distinct('books.title')
             ->select('books.id' , 'books.title', 'books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
             ->rightJoin('books', 'sub.id', '=', 'books.id')
@@ -106,8 +106,7 @@ class Book extends Model
                     ->orWhereRaw('copies_used IS NULL');
             });
         }
-        
-        $count = $obj->count('books.title');
+
         $obj = $obj->paginate(10);
 
         // Add authors to json & set NULL cells to 0
@@ -122,9 +121,6 @@ class Book extends Model
             }
         }
             
-        return [
-            'results' => $obj, 
-            'count' => $count
-        ];
+        return $obj;
     }
 }

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                  _tab_main.classList.replace('d-block', 'd-none')
 
                 data = await res.json()
-                _tab_search_res.innerHTML = generate_book_cards(data.results.data, data.count)
+                _tab_search_res.innerHTML = generate_book_cards(data.data, data.total)
             }
            
         }catch(e){
