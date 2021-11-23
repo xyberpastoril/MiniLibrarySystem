@@ -53,7 +53,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view("member.books_view");
     }
 
     /**
