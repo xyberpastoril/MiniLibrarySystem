@@ -16,7 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view("admin.books");
+        return view("admin.books.index");
     }
 
     /**
@@ -53,7 +53,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view("member.books_view");
+        return view("member.books.show");
     }
 
     /**
@@ -66,7 +66,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view("admin.books_edit");
+        return view("admin.books.edit");
     }
 
     /**
