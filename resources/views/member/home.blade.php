@@ -122,12 +122,12 @@
 
     <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
         @foreach ($hotBooks as $book)
-            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
+            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', 1) }}';">
                 <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
                     style="width: 100%; height: 225px; object-fit: cover;">
                 <div class="card-body p-2">
                     <p class="card-text text-truncate">
-                        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $book->title }}</a>
+                        <a href="#" class="text-gray-800 mb-1">{{ $book->title }}</a>
                         <br />
                         <small class="text-muted">
                             {{ $book['authors'][0]->name }}
@@ -151,12 +151,12 @@
 
     <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
         @foreach ($hotBooks as $book)
-            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;">
+            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', 1) }}';"> 
                 <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
                     style="width: 100%; height: 225px; object-fit: cover;">
                 <div class="card-body p-2">
                     <p class="card-text text-truncate">
-                        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $book->title }}</a>
+                        <a href="#" class="text-gray-800 mb-1">{{ $book->title }}</a>
                         <br />
                         <small class="text-muted">
                             {{ $book['authors'][0]->name }}

@@ -212,12 +212,14 @@
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_books .form-check-input" value="1">
                         </div>
                     </th>
-                    <th class="min-w-150px">Book</th>
+                    <th class="min-w-175px">Book</th>
                     <th class="min-w-100px">Published Date</th>
-                    <th class="min-w-125px">ISBN</th>
-                    <th class="min-w-125px">Genre</th>
-                    <th class="min-w-100px">Total Copies</th>
-                    <th class="text-end min-w-100px">Actions</th>
+                    <th class="min-w-100px">ISBN</th>
+                    <th class="min-w-75px">Genre</th>
+                    <th class="min-w-100px">Date Added</th>
+                    <th class="min-w-50px">Total Copies</th>
+                    <th class="min-w-50px">Available Copies</th>
+                    <th class="text-end min-w-75px">Actions</th>
                 </tr>
             </thead>
             <!--end::Table head-->
@@ -237,15 +239,18 @@
                     <!-- Book -->
                     <td class="d-flex align-items-center">
                         <!-- Cover -->
-                        <div class="symbol symbol-square symbol-50px overflow-hidden me-3">
-                            <a href="#">
-                                <div class="symbol-label fs-3 bg-light-danger text-danger">A</div>
+                        <div class="symbol symbol-100px overflow-hidden me-3">
+                            <a href="{{ route('books.edit', 1) }}">
+                                <div class="symbol-label">
+                                    <img src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Attack on Titan: Volume 13" class="w-100">
+                                </div>
                             </a>
                         </div>
                         
+                        
                         <!-- Book details -->
                         <div class="d-flex flex-column">
-                            <a href="#" class="text-gray-800 text-hover-primary mb-1">Attack on Titan: Volume 13</a>
+                            <a href="{{ route('books.edit', 1) }}" class="text-gray-800 text-hover-primary mb-1">Attack on Titan: Volume 13</a>
                             <span>Hajime Isayama</span>
                         </div>
 
@@ -260,8 +265,14 @@
                     <!-- Genre -->
                     <td>Action, Fiction</td>
 
+                    <!-- Date Added -->
+                    <td>31 Oct 2021</td>
+
                     <!-- Total Copies -->
                     <td>3</td>
+
+                    <!-- Available Copies -->
+                    <td>2</td>
                     
                     <!-- Actions -->
                     <td class="text-end">
@@ -277,7 +288,7 @@
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                             <!-- Menu item -->
                             <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">Edit</a>
+                                <a href="{{ route('books.edit', 1) }}" class="menu-link px-3">Edit</a>
                             </div>
 
                             <!-- Menu item -->
@@ -307,11 +318,14 @@
 <!-- -->
 
 @section("vendor_js")
+    <script src="{{ asset("plugins/custom/datatables/datatables.bundle.js") }}"></script>
 
 @endsection
 
 <!-- -->
 
 @section("custom_js")
-
+    <script src="{{ asset("js/custom/admin/books-page/books-page-table.js") }}"></script>
+    <script src="{{ asset("js/custom/admin/books-page/export-books.js") }}"></script>
+    <script src="{{ asset("js/custom/admin/books-page/new-book.js") }}"></script>
 @endsection

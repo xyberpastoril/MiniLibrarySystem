@@ -16,9 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
-            return view("admin.books");
-        return view('member.books');
+        return view("admin.books.index");
     }
 
     /**
@@ -55,7 +53,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view("member.books.show");
     }
 
     /**
@@ -68,7 +66,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view("admin.books.edit");
     }
 
     /**

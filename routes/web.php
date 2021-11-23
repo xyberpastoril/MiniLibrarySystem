@@ -33,7 +33,6 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/books', App\Http\Controllers\BookController::class);
     Route::get('/result/books/search/', [App\Http\Controllers\BookController::class, 'search']);
 
-
     Route::resource('/users', App\Http\Controllers\UserController::class);
     Route::get('/results/users/search/', [App\Http\Controllers\UserController::class, 'search']);
 
