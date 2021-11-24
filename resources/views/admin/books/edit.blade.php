@@ -53,6 +53,7 @@
                             <div class="col-lg-12">
                                 <!--begin::Label-->
                                 <label class="col-lg-12 col-form-label fw-bold fs-6">Book Cover</label>
+                                <br>
                                 <!--end::Label-->
                                 <!--begin::Image input-->
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(../assets/media/avatars/blank.png)">
@@ -94,7 +95,7 @@
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-2 col-form-label fw-bold fs-6 required">
-                                <span>Title</span>
+                                <span>Book Title</span>
                             </label>
                             <!--end::Label-->
                             <!--begin::Col-->
@@ -155,12 +156,12 @@
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-2 col-form-label fw-bold fs-6 required">
-                                <span>ISBN</span>
+                                <span>Published Date</span>
                             </label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="isbn" class="form-control form-control-lg form-control-solid" value="9780000000" placeholder="Book ISBN">
+                                <input type="date" name="published_date" class="form-control form-control-lg form-control-solid" value="2020-09-08">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -170,12 +171,12 @@
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-2 col-form-label fw-bold fs-6 required">
-                                <span>Total Copies</span>
+                                <span>ISBN</span>
                             </label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="3" placeholder="0" min="0">
+                                <input type="text" name="isbn" class="form-control form-control-lg form-control-solid" value="9780000000" placeholder="Book ISBN">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -199,13 +200,13 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">
-                                <span>Published Date</span>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6 required">
+                                <span>Total Copies</span>
                             </label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="date" name="published_date" class="form-control form-control-lg form-control-solid" value="2020-09-08">
+                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="3" placeholder="0" min="0">
                             </div>
                             <!--end::Col-->
                         </div>
