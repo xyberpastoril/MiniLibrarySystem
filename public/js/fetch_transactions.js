@@ -1,12 +1,28 @@
 document.addEventListener('DOMContentLoaded', async()=>{
     let key = document.getElementById('_table_transactions').getAttribute('key')
     let data = await fetch_transactions(key) // tbd
-
     let _table_body = document.getElementById('_table_body')
-
+    let _search_text = document.getElementById('_search_text')
     if (data){
-        _table_body.innerHTML = _generate_rows(data.data)
+        if (key == 'waiting'){
+            _table_body.innerHTML = _generate_rows_approval(data.data)
+            init_Buttons('_buttonCancel')
+        }
+        else if (key == 'progress'){
+            _table_body.innerHTML = _generate_rows_progress(data.data)
+        }
     }
+    let data_temp = _table_body.innerHTML
+    window.data_arr = [...document.getElementsByClassName('_'+key)]
+    _search_text.addEventListener('input', ()=>{
+        if (_search_text.value!=''){
+            _table_body.innerHTML = search_from_rows(_search_text.value, key)
+        }
+        else{
+            _table_body.innerHTML = data_temp
+        }
+    })
+    
 })
 fetch_transactions = async(status) =>{
     try{
@@ -18,12 +34,12 @@ fetch_transactions = async(status) =>{
         return null
     }
 }
-_generate_rows = (data) =>{
+_generate_rows_approval = (data) =>{
     let inner = ''
     for (d of data){
         inner+=`
         <!--begin::Table row | Book -->
-                <tr>
+                <tr class="_waiting" table_id= ${d.id} book_isbn=${d.isbn}>
                     <!-- Checkbox -->
                     <td>
                         <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -32,7 +48,7 @@ _generate_rows = (data) =>{
                     </td>
 
                     <!-- Transaction Number -->
-                    <td class>TBD</td>
+                    <td class>${d.id}</td>
 
                     <!-- Book ID / ISBN -->
                     <td>
@@ -53,21 +69,63 @@ _generate_rows = (data) =>{
                     
                     <!-- Actions -->
                     <td class="text-end">
-                        <a href="#" id="returnedButton" class="btn btn-light btn-danger btn-sm" >Cancel
+                        <a href="#" id="returnedButton" class="btn btn-light btn-danger btn-sm _buttonCancel" fetch_id='${d.id}'>Cancel
                         </a>
                     </td>
                 </tr>`
     }
     return inner
 }
+_generate_rows_progress = (data) =>{
+    let inner = ''
+    for (d of data){
+        inner+=`
+        <!--begin::Table row | Book -->
+                <tr class='_progress' table_id= ${d.id} book_isbn=${d.isbn}>
 
+                    <!-- Transaction Number -->
+                    <td class>${d.id}</td>
 
+                    <!-- Book ID / ISBN -->
+                    <td>
+                        <a href="#" class="text-gray-800 text-hover-primary mb-1">${d.isbn}</a>
+                    </td>
 
+                    <!-- Accepted Date -->
+                    <td>TBD</td>
 
-/*
-TO BE DISCUSSED (11/24/21):
-1. Usage of row id from both tables
-2. Searching transaction
-3. Paginations
+                    <!-- From -->
+                    <td>${(new Date(d.date_from)).toLocaleString([], {year: 'numeric', month: 'short', day: 'numeric'})}</td>
 
-*/
+                    <!-- To -->
+                    <td>${(new Date(d.date_to)).toLocaleString([], {year: 'numeric', month: 'short', day: 'numeric'})}</td>
+
+                    <!-- Copies -->
+                    <td>TBD</td>
+
+                    <!-- Penalty -->
+                    <td>NaN</td>
+
+                    <!-- Status -->
+                    <td>
+                        <span class="badge badge-light-success">Pending</span>
+                    </td>
+                </tr>
+                <!--end::Table row | Book -->`
+    }
+    return inner
+}
+init_Buttons = (className) => {
+    let btns = document.getElementsByClassName(className)
+    for (_bt of btns){
+        _bt.addEventListener('click', async()=>{
+            console.log(_bt.getAttribute('fetch_id'))
+        })
+    }
+}
+search_from_rows = (keyword, key) =>{
+    let inner=''
+    for (d of Array.from(window.data_arr).filter(val=> val.getAttribute('table_id')==keyword || val.getAttribute('book_isbn')==keyword)){
+        inner+=d.innerHTML
+    }
+    return inner
