@@ -398,23 +398,18 @@
                             <input class="form-check-input" type="checkbox" value="1">
                         </div>
                     </td>
-
+                    
                     <!-- Book -->
                     <td class="d-flex align-items-center">
                         <!-- Cover -->
-                        <div class="symbol symbol-100px overflow-hidden me-3">
-                            <a href="{{ route('books.edit', 1) }}">
-                                <div class="symbol-label">
-                                    <img src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Attack on Titan: Volume 13" class="w-100">
-                                </div>
-                            </a>
+                        <div class="card me-3" style="width: 5rem;flex: 0 0 auto;">
+                            <img class="card" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" style="width: 100%; height: 6rem; object-fit: cover;">
                         </div>
-                        
                         
                         <!-- Book details -->
                         <div class="d-flex flex-column">
-                            <a href="{{ route('books.edit', 1) }}" class="text-gray-800 text-hover-primary mb-1">Attack on Titan: Volume 13</a>
-                            <span>Hajime Isayama</span>
+                            <a href="{{ route('books.edit', 1) }}" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">God of War: The Official Novelization</a>
+                            <span>Hajime</span>
                         </div>
 
                     </td>
