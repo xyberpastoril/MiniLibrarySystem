@@ -249,7 +249,7 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true">
 
                                             <!-- Preview existing cover -->
-                                            <div class="image-input-wrapper w-125px h-125px mx-5" ></div>
+                                            <div class="image-input-wrapper w-175px h-225px mx-5" ></div>
                                             
                                             <!-- Label -->
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change cover">
@@ -291,10 +291,32 @@
                                     <!-- Author -->
                                     <div class="fv-row mb-7">
                                         <!-- Label -->
-                                        <label class="required fw-bold fs-6 mb-2">Author</label>
+                                        <label class="required fw-bold fs-6 mb-2">Author(s)</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="author" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Author" value="">
+                                        <input type="text" name="author" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Author1, Author2">
+
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div class="fv-row mb-7">
+                                        <!-- Label -->
+                                        <label class="required fw-bold fs-6 mb-2">
+                                            <span>Description</span>
+                                        </label>
+
+                                        <!-- Description-->
+                                        <textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0 min-h-150px" placeholder="Book Description here..."></textarea>
+
+                                    </div>
+
+                                    <!-- Page Count -->
+                                    <div class="fv-row mb-7">
+                                        <!-- Label -->
+                                        <label class="required fw-bold fs-6 mb-2">Page Count</label>
+
+                                        <!-- Input -->
+                                        <input type="number" name="page_count" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="1" value="1">
 
                                     </div>
 
@@ -304,7 +326,7 @@
                                         <label class="required fw-bold fs-6 mb-2">Published Date</label>
 
                                         <!-- Input -->
-                                        <input class="form-control form-control-solid" name="published_date" placeholder="Pick date rage" id="kt_published_date_picker"/>
+                                        <input class="form-control form-control-solid" name="published_date" id="kt_published_date_picker"/>
 
                                     </div>
                                     
@@ -321,10 +343,10 @@
                                     <!-- Genre -->
                                     <div class="fv-row mb-7">
                                         <!-- Label -->
-                                        <label class="fw-bold fs-6 mb-2">Genre (ex. Action, Supernatural)</label>
+                                        <label class="fw-bold fs-6 mb-2">Genre(s)</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="genre" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Genre" value="">
+                                        <input type="text" name="genre" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Action, Fiction">
 
                                     </div>
 
@@ -465,6 +487,7 @@
                     </td>
                 </tr>
                 <!--end::Table row | Book -->
+                
             </tbody>
             <!--end::Table body-->
 

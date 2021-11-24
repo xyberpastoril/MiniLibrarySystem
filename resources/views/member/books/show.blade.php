@@ -6,7 +6,9 @@
     Book Details
 @endsection
 
-<link href="{{ asset("plugins/custom/fullcalendar/fullcalendar.bundle.css") }}" rel="stylesheet" type="text/css">
+@section('custom_css')
+    <link href="{{ asset("plugins/custom/fullcalendar/fullcalendar.bundle.css") }}" rel="stylesheet" type="text/css">
+@endsection
 
 <!-- -->
 
