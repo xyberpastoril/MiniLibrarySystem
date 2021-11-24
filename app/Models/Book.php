@@ -54,7 +54,7 @@ class Book extends Model
         return $hotBooks;
     }
 
-    public static function search($search, $genre, $available)
+    public static function search($search, $genre, $status)
     {
         // select distinct books.title, books.copies_owned, sub.copies_used, books.copies_owned - sub.copies_used as copies_left
         // from (
@@ -74,7 +74,7 @@ class Book extends Model
         $sub = Transaction::bookSearchSub();
         
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
-            ->distinct()
+            ->distinct('books.title')
             ->select('books.id' , 'books.title', 'books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
             ->rightJoin('books', 'sub.id', '=', 'books.id')
@@ -99,20 +99,21 @@ class Book extends Model
         }
 
         // Search only books that are available for transaction (borrow)
-        if($available)
+        if($status)
         {
             $obj->where(function ($query) {
                 $query->whereRaw('copies_used != copies_owned')
                     ->orWhereRaw('copies_used IS NULL');
             });
         }
-        
+
         $obj = $obj->paginate(10);
 
         // Add authors to json & set NULL cells to 0
         for($i = 0; $i < count($obj); $i++)
         {
             $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
+            $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id);
             if($obj[$i]->copies_used == NULL)
             {
                 $obj[$i]->copies_used = 0;

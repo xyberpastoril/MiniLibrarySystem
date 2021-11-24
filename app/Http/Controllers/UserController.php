@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("admin.users");
+        return view("admin.users.index");
     }
 
     /**
@@ -57,7 +57,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view("admin.users_view");
+        return view("admin.users.show", [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -92,5 +94,17 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /** JSON */
+
+    public function search(Request $request)
+    {
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return \App\models\User::search(
+                $request->get('search'),
+                $request->get('role')
+            );
+        return redirect()->route('home');
     }
 }

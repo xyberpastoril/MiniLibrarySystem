@@ -8,6 +8,12 @@
 
 <!-- -->
 
+@section('custom_css')
+    
+@endsection
+
+<!-- -->
+
 @section('breadcrumb')
 
     <!-- Item -->
@@ -54,14 +60,14 @@
                                 <span class="menu-title">Basic Information</span>
                             </a>
                         </li>
-                        <li class="menu-item px-3 pt-0">
+                        {{-- <li class="menu-item px-3 pt-0">
                             <a href="#kt_account_settings_deactivate" data-kt-scroll-toggle="true" class="menu-link px-3 nav-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-vertical"></span>
                                 </span>
                                 <span class="menu-title">Deactivate Account</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <!--end::Menu-->
                 </div>
@@ -91,7 +97,7 @@
                         <div class="d-flex flex-wrap align-items-center mb-8">
                             <div id="kt_signin_email">
                                 <div class="fs-5 fw-bolder mb-1">Email Address</div>
-                                <div class="fs-7 fw-bold text-gray-600">aljonclerios@gmail.com</div>
+                                <div class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
                             </div>
                             <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
                                 <!--begin::Form-->
@@ -165,7 +171,7 @@
                         </div>
                         <!--end::Password-->
                         <!--begin::Notice-->
-                        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed rounded p-6">
+                        {{-- <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed rounded p-6">
                             <!--begin::Icon-->
                             <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                             <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
@@ -189,7 +195,7 @@
                                 <!--end::Action-->
                             </div>
                             <!--end::Wrapper-->
-                        </div>
+                        </div> --}}
                         <!--end::Notice-->
                     </div>
                     <!--end::Card body-->
@@ -266,45 +272,16 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Aljon">
+                                            <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{ Auth::user()->first_name }}">
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="Lerios">
+                                            <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{ Auth::user()->last_name }}">
                                         </div>
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Row-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span>Birthdate</span>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="date" name="birthdate" class="form-control form-control-lg form-control-solid" value="2000-06-07">
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span>Contact Phone</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="+639 470 960 043">
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -318,7 +295,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="Plaridel Baybay City Leyte">
+                                    <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="">
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -339,7 +316,7 @@
             <!--end::Basic info-->
 
             <!--begin::Deactivate Account-->
-            <div class="card" id="kt_account_settings_deactivate" data-kt-scroll-offset="{default: 100, md: 125}">
+            {{-- <div class="card" id="kt_account_settings_deactivate" data-kt-scroll-offset="{default: 100, md: 125}">
                 <!--begin::Card header-->
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
                     <div class="card-title m-0">
@@ -397,7 +374,7 @@
                     <!--end::Form-->
                 </div>
                 <!--end::Content-->
-            </div>
+            </div> --}}
             <!--end::Deactivate Account-->
 
         </div>

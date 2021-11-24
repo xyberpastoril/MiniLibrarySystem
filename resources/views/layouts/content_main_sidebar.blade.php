@@ -51,7 +51,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                     </a>
                 </div>
 
-                <!-- Books -->
                 @role('Librarian')
                 <div class="menu-item">
                     <a class="menu-link 
@@ -73,15 +72,17 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <span class="menu-title">Books</span>
                     </a>
                 </div>
-                
+                @endrole
+
                 <!-- Users -->
+                @role('Librarian')
                 <div class="menu-item">
                     <a class="menu-link
                         @if(Route::currentRouteName() == 'users.index' ||
                             Route::currentRouteName() == 'users.show') 
                             active 
                         @endif" 
-                    href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
+                        href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr001.svg-->
                             <span class="svg-icon svg-icon-5">
@@ -120,16 +121,15 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <span class="menu-arrow"></span>
                     </span>
 
-                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-sub menu-sub-accordion menu-active-bg
+                    @if(Route::currentRouteName() == "transactions.waiting_for_approval" ||
+                        Route::currentRouteName() == "transactions.in_progress" ||
+                        Route::currentRouteName() == "transactions.history")
+                        show
+                    @endif
+                    ">
                         <div class="menu-item">
-                            <a class="menu-link @if(Route::currentRouteName() == "transactions.waiting_for_approval") active @endif"
-                            href="
-                                @role('Member')
-                                    {{ route('transactions.waiting_for_approval') }}
-                                @else
-                                    {{ route('transactions.waiting_for_approval') }}
-                                @endrole
-                            ">
+                            <a class="menu-link @if(Route::currentRouteName() == "transactions.waiting_for_approval") active @endif" href="{{ route('transactions.waiting_for_approval') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -137,14 +137,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link @if(Route::currentRouteName() == "transactions.in_progress") active @endif"
-                             href="
-                                @role('Member')
-                                    {{ route('transactions.in_progress') }}
-                                @else
-                                    {{ route('transactions.in_progress') }}
-                                @endrole
-                            ">
+                            <a class="menu-link @if(Route::currentRouteName() == "transactions.in_progress") active @endif" href="{{ route('transactions.in_progress') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -152,14 +145,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link @if(Route::currentRouteName() == "transactions.history") active @endif"
-                            href="
-                                @role('Member')
-                                    {{ route('transactions.history') }}
-                                @else
-                                    {{ route('transactions.history') }}
-                                @endrole
-                            ">
+                            <a class="menu-link @if(Route::currentRouteName() == "transactions.history") active @endif" href="{{ route('transactions.history') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -171,11 +157,10 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                 <!-- Account -->
                 <div data-kt-menu-trigger="click" class="menu-item here menu-accordion
-                    @if(Route::currentRouteName() == "account.overview" ||
-                        Route::currentRouteName() == "account.notifications" ||
-                        Route::currentRouteName() == "account.settings")
-                        show here
-                    @endif
+                @if(Route::currentRouteName() == "account.overview" ||
+                    Route::currentRouteName() == "account.settings")
+                    show
+                @endif
                 ">
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -193,8 +178,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link @if(Route::currentRouteName() == "account.overview") active @endif"
-                            href="{{ route('account.overview') }}">
+                            <a class="menu-link @if(Route::currentRouteName() == "account.overview") active @endif" href="{{ route('account.overview') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -202,8 +186,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link @if(Route::currentRouteName() == "account.settings") active @endif"
-                            href="{{ route('account.settings') }}">
+                            <a class="menu-link @if(Route::currentRouteName() == "account.settings") active @endif" href="{{ route('account.settings') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>

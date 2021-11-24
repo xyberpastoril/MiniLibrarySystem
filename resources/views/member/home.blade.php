@@ -8,6 +8,12 @@
 
 <!-- -->
 
+@section('custom_css')
+    
+@endsection
+
+<!-- -->
+
 @section('breadcrumb')
 
     <!-- Item -->
@@ -29,6 +35,7 @@
 
 @section("custom-css")
     <link href="{{ asset("css/my.style.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset("css/toggles.css") }}" rel="stylesheet" type="text/css">
 @endsection
 
 <!-- -->
@@ -36,7 +43,7 @@
 @section("content")
 
 <!--begin::Form-->
-<form action="search-results.html">
+<!--form tag has been temporarily been removed-->
     <!--begin::Card-->
     <div class="card mb-7">
         <!--begin::Card body-->
@@ -53,13 +60,13 @@
                         </svg>
                     </span>
                     <!--end::Svg Icon-->
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books">
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" id='_search_textBox'>
                 </div>
                 <!--end::Input group-->
                 <!--begin:Action-->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary me-5">Search</button>
-                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>
+                    <button type="submit" class="btn btn-primary me-5" id=_search_btn>Search</button>
+                    <a id="_advanced_search" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form" clicked='0' >Advanced Search</a>
                 </div>
                 <!--end:Action-->
             </div>
@@ -74,7 +81,7 @@
                     <!--begin::Col-->
                     <div class="col-xxl-7">
                         <label class="fs-6 form-label fw-bolder text-dark">Genres</label>
-                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, supernatural, scifi)">
+                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, supernatural, scifi)" id='_genre_textBox'>
                     </div>
                     <!--end::Col-->
                     <!--begin::Col-->
@@ -85,7 +92,7 @@
                             <div class="col-lg-6">
                                 <label class="fs-6 form-label fw-bolder text-dark">Status</label>
                                 <div class="form-check form-switch form-check-custom form-check-solid mt-1">
-                                    <input name="status" class="form-check-input" type="checkbox" value id="flexSwitchChecked" checked="checked">
+                                    <input name="status" class="form-check-input" type="checkbox" id="_checkBox" checked="checked">
                                     <label class="form-check-label" for="flexSwitchChecked">Available</label>
                                 </div>
                             </div>
@@ -101,11 +108,10 @@
         <!--end::Card body-->
     </div>
     <!--end::Card-->
-</form>
+
 <!--end::Form-->
 
-<div class="tab-content">
-    
+<div class="tab-content d-block" id='_tab_main'>
     <div class="d-flex flex-wrap flex-stack pb-2">
         <!--begin::Title-->
         <div class="d-flex flex-wrap align-items-center my-1">
@@ -165,6 +171,8 @@
     </div>
 
 </div>
+<div class="tab-content d-none" id="_tab_search_res">
+</div>
 
 @endsection
 
@@ -177,5 +185,5 @@
 <!-- -->
 
 @section("custom_js")
-
+<script src="{{ asset('js/search_results.js') }}"></script>
 @endsection
