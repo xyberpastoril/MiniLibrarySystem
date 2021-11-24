@@ -16,7 +16,7 @@ class Genre extends Model
 
     /** FUNCTIONS */
 
-    public function getBookGenres($id)
+    public static function getBookGenres($id)
     {
         return self::where('book_id', '=', $id)->orderBy('name', 'asc')->get();
     }

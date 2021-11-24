@@ -87,6 +87,7 @@ class Book extends Model
                 $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
                     ->orWhere('authors.name', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
             });
+            
         }
 
         if($genre)
@@ -106,7 +107,6 @@ class Book extends Model
                     ->orWhereRaw('copies_used IS NULL');
             });
         }
-
         $obj = $obj->paginate(10);
 
         // Add authors to json & set NULL cells to 0
@@ -120,6 +120,23 @@ class Book extends Model
                 $obj[$i]->copies_left = $obj[$i]->copies_owned;
             }
         }
+
+        // Append other parameters to auto-generated page urls
+        if($search) $obj->appends(['search' => $search]);
+        if($genre) 
+        {
+            $gc = "";
+            for($i = 0; $i < count($genre); $i++)
+            {
+                $gc .= $genre[$i];
+                if($i < count($genre) - 1)
+                {
+                    $gc .= ", ";
+                }
+            }
+            $obj->appends(['genre' => $gc]);
+        }
+        if($status) $obj->appends(['status' => $status]);
             
         return $obj;
     }

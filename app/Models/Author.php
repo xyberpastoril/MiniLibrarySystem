@@ -18,7 +18,7 @@ class Author extends Model
 
     /** FUNCTIONS **/
 
-    public function getBookAuthors($id)
+    public static function getBookAuthors($id)
     {
         return self::where('book_id', '=', $id)->orderBy('name', 'asc')->get();
     }
