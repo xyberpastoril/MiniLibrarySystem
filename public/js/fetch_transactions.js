@@ -14,16 +14,17 @@ document.addEventListener('DOMContentLoaded', async()=>{
     }
     let data_temp = _table_body.innerHTML
     window.data_arr = [...document.getElementsByClassName('_'+key)]
-    
+
     _search_text.addEventListener('input', ()=>{
         if (_search_text.value!=''){
             _table_body.innerHTML = search_from_rows(_search_text.value, key)
-            if (key=='waiting'){
-                init_Buttons('_buttonCancel')
-            }
         }
         else{
             _table_body.innerHTML = data_temp
+        }
+
+        if (key=='waiting'){
+            init_Buttons('_buttonCancel')
         }
     })
     
