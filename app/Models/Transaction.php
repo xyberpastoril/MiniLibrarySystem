@@ -37,7 +37,7 @@ class Transaction extends Model
                 'transactions.date_from',
                 'transactions.date_to',
                 'transactions.returned_date',
-                'transactions.created_at',
+                DB::raw('transactions.created_at as request_date'),
                 'transactions.updated_at',
                 DB::raw('books.id as book_id'),
                 'books.isbn')
