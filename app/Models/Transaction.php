@@ -71,7 +71,13 @@ class Transaction extends Model
             $obj->where('users.id', '=', $user->id);
         }
 
-        return $obj->paginate(10);
+        $obj = $obj->paginate(10);
+
+        // Append other parameters to auto-generated page urls
+        if($search) $obj->appends(['search' => $search]);
+        if($status) $obj->appends(['status' => $status]);
+
+        return $obj;
     }
 
     public static function bookSearchSub()

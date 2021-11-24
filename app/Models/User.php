@@ -111,7 +111,13 @@ class User extends Authenticatable
                 break;
         }
 
-        return $obj->paginate(10);
+        $obj = $obj->paginate(10);
+
+        // Append other parameters to auto-generated page urls
+        if($search) $obj->appends(['search' => $search]);
+        if($role) $obj->appends(['role' => $role]);
+
+        return $obj;
     }
 
     /**
