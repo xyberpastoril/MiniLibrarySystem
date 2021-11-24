@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', async()=>{
     let key = document.getElementById('_table_transactions').getAttribute('key')
-    let data = await fetch_transactions(key) // tbd
+    window.data = await fetch_transactions(key) // tbd
     let _table_body = document.getElementById('_table_body')
     let _search_text = document.getElementById('_search_text')
+    
     if (data){
         if (key == 'waiting'){
             _table_body.innerHTML = _generate_rows_approval(data.data)
@@ -13,8 +14,6 @@ document.addEventListener('DOMContentLoaded', async()=>{
         }
     }
     let data_temp = _table_body.innerHTML
-    window.data_arr = [...document.getElementsByClassName('_'+key)]
-
     _search_text.addEventListener('input', ()=>{
         if (_search_text.value!=''){
             _table_body.innerHTML = search_from_rows(_search_text.value, key)
@@ -129,9 +128,10 @@ init_Buttons = (className) => {
     }
 }
 search_from_rows = (keyword, key) =>{
-    let inner=''
-    for (d of Array.from(window.data_arr).filter(val=> val.getAttribute('table_id')==keyword || val.getAttribute('book_isbn')==keyword)){
-        inner+=d.innerHTML
+    if (key=='waiting'){
+        return _generate_rows_approval(window.data.data.filter(x => x.id == keyword || x.isbn == keyword))
     }
-    return inner
+    else if (key =='progress'){
+        return _generate_rows_progress(window.data.data.filter(x => x.id == keyword || x.isbn == keyword))
+    }
 }
