@@ -20,6 +20,10 @@ class Author extends Model
 
     public static function getBookAuthors($id)
     {
+        // return self::selectRaw("GROUP_CONCAT(name SEPARATOR ', ') as `authors`")
+        //     ->groupBy('book_id')
+        //     ->where('book_id', '=', $id)->get();
+            
         return self::where('book_id', '=', $id)->orderBy('name', 'asc')->get();
     }
 }
