@@ -276,10 +276,10 @@
                             <div class="d-flex flex-column">
                                 <a href="#" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">{{ $book->title }}</a>
                                 <span>
-                                    {{-- {{ $book['authors'][0]->name }}
-                                    @if(count($book['authors']) > 1)
-                                        and {{ (count($book['authors']) - 1) }} others.
-                                    @endif --}}
+                                    {{ $book->authors[0]->name }}
+                                    @if(count($book->authors) > 1)
+                                        and {{ (count($book->authors) - 1) }} others.
+                                    @endif
                                 </span>
                             </div>
 
