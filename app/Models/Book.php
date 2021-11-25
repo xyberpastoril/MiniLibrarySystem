@@ -75,7 +75,7 @@ class Book extends Model
         
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
             ->distinct('books.title')
-            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
+            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
             ->rightJoin('books', 'sub.id', '=', 'books.id')
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
@@ -107,13 +107,14 @@ class Book extends Model
             });
         }
 
-        $obj = $obj->paginate(10);
+        // $obj = $obj->paginate(10);
+        $obj = $obj->get();
 
         // Add authors to json & set NULL cells to 0
         for($i = 0; $i < count($obj); $i++)
         {
             $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
-
+            
             $g = Genre::getBookGenres($obj[$i]->id);
             if(isset($g[0]->genres)) 
                 $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id)[0]->genres;

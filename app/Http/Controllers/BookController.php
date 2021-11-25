@@ -16,7 +16,6 @@ class BookController extends Controller
      */
     public function index()
     {
-        // return view("admin.books.index");
         return view("admin.books.index", [
             "allBooks" => \App\Models\Book::search(null,null,null)
         ]);
