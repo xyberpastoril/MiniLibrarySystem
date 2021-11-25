@@ -264,7 +264,7 @@
                         <td class="d-flex align-items-center">
                             <!-- Cover -->
                             <div class="symbol symbol-100px overflow-hidden me-3">
-                                <a href="#">
+                                <a href="{{ route('books.edit', $book->id) }}">
                                     <div class="symbol-label">
                                         <img src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Attack on Titan: Volume 13" class="w-100">
                                     </div>
@@ -274,7 +274,7 @@
                             
                             <!-- Book details -->
                             <div class="d-flex flex-column">
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">{{ $book->title }}</a>
+                                <a href="{{ route('books.edit', $book->id) }}" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">{{ $book->title }}</a>
                                 <span>
                                     {{ $book->authors[0]->name }}
                                     @if(count($book->authors) > 1)
@@ -320,7 +320,7 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!-- Menu item -->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">Edit</a>
+                                    <a href="{{ route('books.edit', $book->id) }}" class="menu-link px-3">Edit</a>
                                 </div>
 
                                 <!-- Menu item -->
