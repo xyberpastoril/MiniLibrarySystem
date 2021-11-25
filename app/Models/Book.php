@@ -78,7 +78,7 @@ class Book extends Model
             ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
             ->rightJoin('books', 'sub.id', '=', 'books.id')
-            // ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
+            ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
             ->leftJoin('authors', 'books.id', '=', 'authors.book_id');
         
         if($search)
@@ -113,7 +113,13 @@ class Book extends Model
         for($i = 0; $i < count($obj); $i++)
         {
             $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
-            $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id);
+
+            $g = Genre::getBookGenres($obj[$i]->id);
+            if(isset($g[0]->genres)) 
+                $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id)[0]->genres;
+            else
+                $obj[$i]->genres = NULL;
+
             if($obj[$i]->copies_used == NULL)
             {
                 $obj[$i]->copies_used = 0;
