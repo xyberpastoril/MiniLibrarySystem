@@ -293,7 +293,7 @@
 
                         <!-- Genre -->
                         <td>
-                            {{-- {{ $book->genres->genres }} --}}
+                            {{ $book->genres }}
                             
                         </td>
 
