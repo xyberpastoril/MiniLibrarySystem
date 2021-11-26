@@ -271,7 +271,7 @@
                         
                         <!-- Joined Date -->
                         <td>
-                            <div class="badge badge-light fw-bolder">{{ $user->created_at }}</div>
+                            <div class="badge badge-light fw-bolder">{{ $user->joined_date }}</div>
                         </td>
                         
                         <!-- Action -->
