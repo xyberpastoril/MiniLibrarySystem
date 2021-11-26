@@ -83,7 +83,7 @@ class User extends Authenticatable
                 'users.first_name',
                 'users.last_name',
                 'users.email',
-                'users.created_at',
+                DB::raw('users.created_at as joined_date'),
                 'model_has_roles.role_id',
                 'roles.name',   
             )
@@ -111,9 +111,13 @@ class User extends Authenticatable
                 break;
         }
 
-        // return $obj->paginate(10);
-        return $obj->get();
+        $obj = $obj->paginate(10);
 
+        // Append other parameters to auto-generated page urls
+        if($search) $obj->appends(['search' => $search]);
+        if($role) $obj->appends(['role' => $role]);
+
+        return $obj;
     }
 
     /**

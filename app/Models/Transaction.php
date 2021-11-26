@@ -37,7 +37,7 @@ class Transaction extends Model
                 'transactions.date_from',
                 'transactions.date_to',
                 'transactions.returned_date',
-                'transactions.created_at',
+                DB::raw('transactions.created_at as request_date'),
                 'transactions.updated_at',
                 DB::raw('books.id as book_id'),
                 'books.isbn')
@@ -49,8 +49,7 @@ class Transaction extends Model
         {
             $obj->where(function ($query) use ($search) {
                 $query->where('transactions.id', 'LIKE', '%' . ($search ? $search : NULL) . '%')
-                    ->orWhere('users.first_name', 'LIKE', '%' . ($search ? $search : NULL) . '%')
-                    ->orWhere('users.last_name', 'LIKE', '%' . ($search ? $search : NULL) . '%');
+                    ->orWhere('books.id', 'LIKE', '%' . ($search ? $search : NULL) . '%');
             });
         }
 
@@ -71,7 +70,13 @@ class Transaction extends Model
             $obj->where('users.id', '=', $user->id);
         }
 
-        return $obj->paginate(10);
+        $obj = $obj->paginate(10);
+
+        // Append other parameters to auto-generated page urls
+        if($search) $obj->appends(['search' => $search]);
+        if($status) $obj->appends(['status' => $status]);
+
+        return $obj;
     }
 
     public static function bookSearchSub()
