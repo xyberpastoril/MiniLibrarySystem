@@ -151,12 +151,13 @@ var KTDatatablesServerSide = (function () {
                 aLengthMenu: [5, 10, 25, 50, 100],
                 searchDelay: 500,
                 order: [[1, "asc"]],
+
                 columnDefs: [
                     {
-                    orderable: !1,
-                    targets: 0,
-                    }
-                ]
+                        targets: 0,
+                        orderable: false,
+                    },
+                ],
             })),
                 e.$,
                 e.on("draw", function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -68,7 +69,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view("admin.books.edit");
+        if(count($book->genres) > 0) $book['genres'] = Genre::getBookGenres($book->id)[0]->genres;
+        else $book['genres'] = "";
+
+        return view("admin.books.edit", compact('book'));
     }
 
     /**

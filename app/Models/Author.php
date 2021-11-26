@@ -24,6 +24,7 @@ class Author extends Model
         //     ->groupBy('book_id')
         //     ->where('book_id', '=', $id)->get();
             
-        return self::where('book_id', '=', $id)->orderBy('name', 'asc')->get();
+        return self::select('authors.name')
+            ->where('book_id', '=', $id)->orderBy('name', 'asc')->get();
     }
 }

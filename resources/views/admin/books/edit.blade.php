@@ -100,7 +100,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="title" class="form-control form-control-lg form-control-solid" value="Attack On Titan Volume 13" placeholder="Enter Book Title">
+                                <input type="text" name="title" class="form-control form-control-lg form-control-solid" value="{{ $book->title }}" placeholder="Enter Book Title">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -115,7 +115,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="authors" class="form-control form-control-lg form-control-solid" value="Hajime Isayama" placeholder="ex. Author1, Author2">
+                                <input type="text" name="authors" class="form-control form-control-lg form-control-solid" value="{{ $book->authors[0]->name }}@for ($i = 1; $i < count($book->authors); $i++), {{ $book->authors[$i]->name }}@endfor" placeholder="ex. Author1, Author2">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -130,7 +130,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <textarea name="description" class="form-control form-control-lg form-control-solid min-h-200px" placeholder="Book Description here...">It is set in a world where humanity lives inside cities surrounded by three enormous walls that protect them from the gigantic man-eating humanoids referred to as Titans; the story follows Eren Yeager, who vows to exterminate the Titans after a Titan brings about the destruction of his hometown and the death of his ...
+                                <textarea name="description" class="form-control form-control-lg form-control-solid min-h-300px" placeholder="Book Description here...">{{ $book->description }}
                                 </textarea>
                             </div>
                             <!--end::Col-->
@@ -146,7 +146,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="192" placeholder="0" min="0">
+                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="{{ $book->copies_owned }}" placeholder="1" min="1">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -161,7 +161,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="date" name="published_date" class="form-control form-control-lg form-control-solid" value="2020-09-08">
+                                <input type="date" name="published_date" class="form-control form-control-lg form-control-solid" value="{{ $book->published_date }}">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -176,7 +176,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="isbn" class="form-control form-control-lg form-control-solid" value="9780000000" placeholder="Book ISBN">
+                                <input type="text" name="isbn" class="form-control form-control-lg form-control-solid" value="{{ $book->isbn }}" placeholder="Book ISBN">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -191,7 +191,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="genre" class="form-control form-control-lg form-control-solid" value="Action, Fiction" placeholder="ex. Action, Fiction">
+                                <input type="text" name="genre" class="form-control form-control-lg form-control-solid" value="{{ $book->genres }}" placeholder="ex. Action, Fiction">
                             </div>
                             <!--end::Col-->
                         </div>

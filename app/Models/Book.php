@@ -58,15 +58,13 @@ class Book extends Model
     {
         // select distinct books.title, books.copies_owned, sub.copies_used, books.copies_owned - sub.copies_used as copies_left
         // from (
-        //     select books.id, books.title, count(transactions.id) as copies_used
+        //     select books.id, books.title, books.published_date, books.isbn, books.created_at, books.copies_owned, count(transactions.id) as copies_used
         //     from transactions
         //     join books on transactions.book_id = books.id
         //     where transactions.status = 'unclaimed' or transactions.status = 'claimed' or transactions.status = 'pending'
         //     group by books.title
         // ) sub
         // right join books on sub.id = books.id
-        // left join genres on books.id = genres.book_id
-        // left join authors on books.id = authors.book_id
 
         // where (books.title LIKE "%%" or authors.name LIKE "%%") and genres.name LIKE "%%"
         //      and (copies_used != copies_owned or copies_used IS NULL)
@@ -75,11 +73,9 @@ class Book extends Model
         
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
             ->distinct('books.title')
-            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
+            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
-            ->rightJoin('books', 'sub.id', '=', 'books.id')
-            ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
-            ->leftJoin('authors', 'books.id', '=', 'authors.book_id');
+            ->rightJoin('books', 'sub.id', '=', 'books.id');
         
         if($search)
         {
@@ -119,7 +115,7 @@ class Book extends Model
             if(isset($g[0]->genres)) 
                 $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id)[0]->genres;
             else
-                $obj[$i]->genres = NULL;
+                $obj[$i]->genres = "none";
 
             if($obj[$i]->copies_used == NULL)
             {

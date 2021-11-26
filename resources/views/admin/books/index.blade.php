@@ -52,7 +52,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <input type="text" data-kt-books-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Customers">
+                <input type="text" data-kt-books-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Books">
             </div>
             <!--end::Search-->
 
@@ -355,13 +355,13 @@
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_books .form-check-input" value="1">
                         </div>
                     </th>
-                    <th class="">Book</th>
-                    <th class="">Published Date</th>
-                    <th class="">ISBN</th>
-                    <th class="">Genre</th>
-                    <th class="">Date Added</th>
-                    <th class="">Total Copies</th>
-                    <th class="">Available Copies</th>
+                    <th>Book</th>
+                    <th>Published Date</th>
+                    <th>ISBN</th>
+                    <th>Genre</th>
+                    <th>Date Added</th>
+                    <th>Total Copies</th>
+                    <th>Available Copies</th>
                     <th class="text-end min-w-75px">Actions</th>
                 </tr>
             </thead>
@@ -382,7 +382,7 @@
                             <div class="symbol symbol-100px overflow-hidden me-3">
                                 <a href="{{ route('books.edit', $book->id) }}">
                                     <div class="symbol-label">
-                                        <img src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Attack on Titan: Volume 13" class="w-100">
+                                        <img src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="{{ $book->title }}" class="w-100">
                                     </div>
                                 </a>
                             </div>
