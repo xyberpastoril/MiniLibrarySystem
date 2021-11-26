@@ -111,7 +111,9 @@ class User extends Authenticatable
                 break;
         }
 
-        return $obj->paginate(10);
+        // return $obj->paginate(10);
+        return $obj->get();
+
     }
 
     /**

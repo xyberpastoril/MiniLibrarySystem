@@ -25,7 +25,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("admin.users.index");
+        return view("admin.users.index", [
+            "allUsers" => \App\Models\User::search(null, 'member')
+        ]);
     }
 
     /**
@@ -57,9 +59,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view("admin.users.show", [
-            'user' => $user
-        ]);
+
+        //
+
     }
 
     /**

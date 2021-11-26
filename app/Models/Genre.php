@@ -22,4 +22,12 @@ class Genre extends Model
             ->groupBy('book_id')
             ->where('book_id', '=', $id)->get();
     }
+
+    public static function getAllGenres()
+    {
+        return self::selectRaw("name")
+            ->orderBy("name", "asc")
+            ->groupBy("name")
+            ->get();
+    }
 }

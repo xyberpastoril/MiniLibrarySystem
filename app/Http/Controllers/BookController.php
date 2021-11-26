@@ -18,7 +18,8 @@ class BookController extends Controller
     public function index()
     {
         return view("admin.books.index", [
-            "allBooks" => \App\Models\Book::search(null,null,null)
+            "allBooks" => \App\Models\Book::search(null,null,null),
+            "allGenres" => \App\Models\Genre::getAllGenres()
         ]);
     }
 

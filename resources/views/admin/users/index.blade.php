@@ -211,11 +211,12 @@
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1">
                         </div>
                     </th>
-                    <th class="min-w-125px">User</th>
-                    <th class="min-w-125px">User ID</th>
-                    <th class="min-w-125px">Last login</th>
-                    <th class="min-w-125px">Status</th>
-                    <th class="min-w-125px">Joined Date</th>
+                    <th>User</th>
+                    <th>User ID</th>
+                    <th>In-Progress Transactions</th>
+                    <th>Unpaid Penalties</th>
+                    <th>Status</th>
+                    <th>Joined Date</th>
                     <th class="text-end min-w-100px">Actions</th>
                 </tr>
             </thead>
@@ -224,147 +225,61 @@
             <!--begin::Table body-->
             <tbody class="text-gray-600 fw-bold">
 
-                <!--begin::Table row | User -->
-                <tr>
-                    <!-- Checkbox -->
-                    <td>
-                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                            <input class="form-check-input" type="checkbox" value="1">
-                        </div>
-                    </td>
-
-                    <!-- User -->
-                    <td class="d-flex align-items-center">
-                        <!-- Avatar -->
-                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                            <a href="#">
-                                <div class="symbol-label">
-                                    <img src="../../../assets/media/avatars/150-1.jpg" alt="Emma Smith" class="w-100">
-                                </div>
-                            </a>
-                        </div>
+                @foreach ($allUsers as $user)
+                    <tr>
+                        <!-- Checkbox -->
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="{{ $user->id }}">
+                            </div>
+                        </td>
                         
-                        <!-- User details -->
-                        <div class="d-flex flex-column">
-                            <a href="#" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-                            <span>e.smith@kpmg.com.au</span>
-                        </div>
-
-                    </td>
-
-                    <!-- User ID -->
-                    <td>25909</td>
-                    
-                    <!-- Last login -->
-                    <td>
-                        <div class="badge badge-light fw-bolder">Yesterday</div>
-                    </td>
-                    
-                    <!-- Status -->
-                    <td>
-                        <div class="badge badge-light-danger fw-bolder">Has Pending Penalties</div>
-                    </td>
-
-                    <!-- Joined Date-->
-                    <td>20 Jun 2021, 5:20 pm</td>
-                    
-                    <!-- Actions -->
-                    <td class="text-end">
-                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions 
-                        <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr072.svg-->
-                            <span class="svg-icon svg-icon-5 m-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"/>
-                                </svg>
-                            </span>
-                        </a>
-                        <!-- Menu -->
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                            <!-- Menu item -->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">Edit</a>
-                            </div>
-
-                            <!-- Menu item -->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
-                            </div>
-                            
-                        </div>
-
-                    </td>
-                </tr>
-                <!--end::Table row | User -->
-                
-                <!--begin::Table row | User-->
-                <tr>
-                    <!-- Checkbox -->
-                    <td>
-                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                            <input class="form-check-input" type="checkbox" value="1">
-                        </div>
-                    </td>
-                    
-                    <!-- User -->
-                    <td class="d-flex align-items-center">
-                        <!-- Avatar -->
-                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                            <a href="#">
+                        <!-- User -->
+                        <td class="d-flex align-items-center">
+                            <!-- Avatar -->
+                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                 <div class="symbol-label fs-3 bg-light-danger text-danger">M</div>
-                            </a>
-                        </div>
-                        
-                        <!-- User details -->
-                        <div class="d-flex flex-column">
-                            <a href="#" class="text-gray-800 text-hover-primary mb-1">Melody Macy</a>
-                            <span>melody@altbox.com</span>
-                        </div>
-                        
-                    </td>
 
-                    <!-- User ID -->
-                    <td>24009</td>
-                    
-                    <!-- Last login -->
-                    <td>
-                        <div class="badge badge-light fw-bolder">20 mins ago</div>
-                    </td>
-                    
-                    <!-- Status-->
-                    <td>
-                        <div class="badge badge-light-success fw-bolder">Eligible To Borrow</div>
-                    </td>
-                    
-                    <!-- Joined Date -->
-                    <td>10 Nov 2021, 10:10 pm</td>
-                    
-                    <!-- Action -->
-                    <td class="text-end">
-                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions 
-                            <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr072.svg-->
-                            <span class="svg-icon svg-icon-5 m-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"/>
-                                </svg>
-                            </span>
-                        </a>
-
-                        <!-- Menu -->
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                            <!-- Menu item -->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3">Edit</a>
+                                    {{-- if user has pic --}}
+                                    {{-- <div class="symbol-label">
+                                        <img src="../../../assets/media/avatars/150-1.jpg" alt="Emma Smith" class="w-100">
+                                    </div> --}}
                             </div>
                             
-                            <!-- Menu item -->
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
+                            <!-- User details -->
+                            <div class="d-flex flex-column">
+                                <p class="text-gray-800 mb-1 cursor-default">{{ $user->first_name}} {{ $user->last_name}}</p>
+                                <span>{{ $user->email}}</span>
                             </div>
                             
-                        </div>
-                    </td>
-                </tr>
-                <!--end::Table row | User-->
+                        </td>
+
+                        <!-- User ID -->
+                        <td>{{ $user->id }}</td>
+
+                        <!-- In-Progress Transactions -->
+                        <td>4</td>
+
+                        <!-- Unpaid Penalties -->
+                        <td>400</td>
+                        
+                        <!-- Status-->
+                        <td>
+                            <div class="badge badge-light-success fw-bolder">Eligible To Borrow</div>
+                            {{-- <div class="badge badge-light-danger fw-bolder">Has Pending Penalties</div> --}}
+                        </td>
+                        
+                        <!-- Joined Date -->
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $user->created_at }}</div>
+                        </td>
+                        
+                        <!-- Action -->
+                        <td class="text-end">
+                            <a href="#" class="btn btn-light btn-danger btn-sm" data-kt-users-table-filter="delete_row">Delete</a>
+                        </td>
+                    </tr>
+                @endforeach
 
             </tbody>
             <!--end::Table body-->
@@ -383,11 +298,12 @@
 <!-- -->
 
 @section("vendor_js")
-
+    <script src="{{ asset("plugins/custom/datatables/datatables.bundle.js") }}"></script>
 @endsection
 
 <!-- -->
 
 @section("custom_js")
-
+    <script src="{{ asset("js/custom/admin/users-page/users-page-table.js") }}"></script>
+    <script src="{{ asset("js/custom/admin/users-page/export-users.js") }}"></script>
 @endsection
