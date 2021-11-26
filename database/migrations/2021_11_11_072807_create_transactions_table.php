@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('user_id');
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();
+            $table->integer('copies');
             $table->date('returned_date')->nullable();
             $table->enum('status', [
                 'pending', // Waiting for Approval 

@@ -36,6 +36,7 @@ class Transaction extends Model
                 'transactions.id',
                 'transactions.date_from',
                 'transactions.date_to',
+                'transactions.copies',
                 'transactions.returned_date',
                 DB::raw('transactions.created_at as request_date'),
                 'transactions.updated_at',
@@ -70,7 +71,8 @@ class Transaction extends Model
             $obj->where('users.id', '=', $user->id);
         }
 
-        $obj = $obj->paginate(10);
+        // $obj = $obj->paginate(10);
+        $obj = $obj->get();
 
         // Append other parameters to auto-generated page urls
         if($search) $obj->appends(['search' => $search]);

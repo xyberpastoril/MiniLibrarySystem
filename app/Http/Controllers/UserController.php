@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         return view("admin.users.index", [
-            "allUsers" => \App\Models\User::search(null, 'member')
+            "allUsers" => \App\Models\User::search(null, 'member'),
         ]);
     }
 

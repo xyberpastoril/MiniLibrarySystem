@@ -51,7 +51,7 @@
                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                     </svg>
                 </span>
-                <input type="text" data-kt-books-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search books">
+                <input type="text" data-kt-books-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search Books">
             </div>
             <!--end::Search-->
 
@@ -90,8 +90,6 @@
                             <label class="form-label fs-6 fw-bold">Status:</label>
                             <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-books-table-filter="status" data-hide-search="true">
                                 <option></option>
-                                {{-- <option value="Eligible To Borrow">Eligible To Borrow</option>
-                                <option value="Has Pending Penalties">Has Pending Penalties</option> --}}
                                 @foreach ($allGenres as $genre)
                                     <option value="{{ $genre->name }}">{{ $genre->name }}</option>
                                 @endforeach
@@ -499,7 +497,7 @@
                         </td>
                     </tr>
                 @endforeach
-
+                
             </tbody>
             <!--end::Table body-->
 
