@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Librarian',
             'username' => 'librarian',
             'email' => 'librarian@example.com',
+            'address' => 'Plaridel Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('librarian123'),
         ]);
         $user->assignRole([1]);
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Member',
             'username' => 'member',
             'email' => 'member@example.com',
+            'address' => 'Plaridel Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Member 2',
             'username' => 'member2',
             'email' => 'member2@example.com',
+            'address' => 'Plaridel Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Member 3',
             'username' => 'member3',
             'email' => 'member3@example.com',
+            'address' => 'Plaridel Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);

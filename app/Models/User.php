@@ -83,6 +83,7 @@ class User extends Authenticatable
                 'users.first_name',
                 'users.last_name',
                 'users.email',
+                'users.address',
                 DB::raw('users.created_at as joined_date'),
                 'model_has_roles.role_id',
                 'roles.name',   

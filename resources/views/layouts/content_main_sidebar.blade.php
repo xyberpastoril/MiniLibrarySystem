@@ -79,7 +79,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <div class="menu-item">
                     <a class="menu-link
                         @if(Route::currentRouteName() == 'users.index' ||
-                            Route::currentRouteName() == 'users.show') 
+                            Route::currentRouteName() == 'users.edit') 
                             active 
                         @endif" 
                         href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->

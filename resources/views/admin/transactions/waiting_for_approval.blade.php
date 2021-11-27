@@ -128,7 +128,7 @@
 
                         <!-- User ID -->
                         <td>
-                            <a href="{{ route('users.index') }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->user_id }}</a>
+                            <a href="{{ route('users.edit', $transaction->user_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->user_id }}</a>
                         </td>
 
                         <!-- Request Date -->

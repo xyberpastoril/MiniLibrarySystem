@@ -240,14 +240,17 @@
                             <td class="d-flex align-items-center">
                                 <!-- Avatar -->
                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                    <a href="#" class="cursor-default">
-                                        <div class="symbol-label fs-3 bg-light-danger text-danger">M</div>
+                                    <a href="#">
+                                        {{-- <div class="symbol-label fs-3 bg-light-danger text-danger">M</div> --}}
+                                        <div class="symbol-label">
+                                            <img src="media/avatars/150-1.jpg" alt="Emma Smith" class="w-100">
+                                        </div>
                                     </a>
                                 </div>
                                 
                                 <!-- User details -->
                                 <div class="d-flex flex-column">
-                                    <p href="user-details.html" class="text-gray-800 mb-1">{{ $user->first_name}} {{ $user->last_name}}</p>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name}} {{ $user->last_name}}</a>
                                     <span>{{ $user->email}}</span>
                                 </div>
                                 
