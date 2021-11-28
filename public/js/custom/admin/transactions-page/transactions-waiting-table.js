@@ -241,7 +241,7 @@ var KTTransactionsList = (function() {
                     aLengthMenu: [5, 10, 25, 50, 100],
                     searchDelay: 500,
                     order: [
-                        [1, "asc"]
+                        [4, "desc"]
                     ],
 
                     columnDefs: [{

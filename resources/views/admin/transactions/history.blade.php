@@ -1,6 +1,6 @@
 @extends("layouts.core")
 
-<!-- Admin > Transactions > History -->
+<!-- Admin > transactions > History -->
 
 @section('title')
     History
@@ -18,12 +18,7 @@
 
     <!-- Item -->
     <li class="breadcrumb-item text-muted">
-        <a href="#" class="text-muted text-hover-primary">Transactions</a>
-    </li>
-
-    <!-- Dash -->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+        <a href="#" class="text-muted text-hover-primary">transactions</a>
     </li>
 
     <!-- Item -->
@@ -35,7 +30,7 @@
 
 @section("content")
 
-<!--begin::Transactions Table Card-->
+<!--begin::transactions Table Card-->
 <div class="card">
 
     <!--begin::Card header-->
@@ -51,7 +46,7 @@
                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                     </svg>
                 </span>
-                <input type="text" data-kt-transaction-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search transaction">
+                <input type="text" data-kt-transactions-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search transactions">
             </div>
             <!--end::Search-->
 
@@ -59,7 +54,7 @@
 
         <!--begin::Card toolbar-->
         <div class="card-toolbar">
-            <div class="d-flex justify-content-end" data-kt-transaction-table-toolbar="base">
+            <div class="d-flex justify-content-end" data-kt-transactions-table-toolbar="base">
 
                 <!-- Export -->
                 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_export_transactions">
@@ -76,14 +71,14 @@
             </div>
 
             <!-- Delete Selected -->
-            <div class="d-flex justify-content-end align-items-center d-none" data-kt-transaction-table-toolbar="selected">
+            <div class="d-flex justify-content-end align-items-center d-none" data-kt-transactions-table-toolbar="selected">
                 <div class="fw-bolder me-5">
-                    <span class="me-2" data-kt-transaction-table-select="selected_count"></span>Selected
+                    <span class="me-2" data-kt-transactions-table-select="selected_count"></span>Selected
                 </div>
-                <button type="button" class="btn btn-danger" data-kt-transaction-table-select="delete_selected">Delete Selected</button>
+                <button type="button" class="btn btn-danger" data-kt-transactions-table-select="delete_selected">Delete Selected</button>
             </div>
 
-            <!--begin::Modal - Export Transactions-->
+            <!--begin::Modal - Export transactions-->
             <div class="modal fade" id="kt_modal_export_transactions" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered mw-650px">
                     <div class="modal-content">
@@ -91,7 +86,7 @@
                         <!-- Modal header -->
                         <div class="modal-header">
                             <!-- Modal title -->
-                            <h2>Export Transactions</h2>
+                            <h2>Export transactions</h2>
                             
                             <!-- Close -->
                             <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-transactions-modal-action="close">
@@ -166,15 +161,16 @@
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_transactions .form-check-input" value="1">
                         </div>
                     </th>
-                    <th class="min-w-100px">Transaction Number</th>
-                    <th class="min-w-100px">Book ID / ISBN</th>
-                    <th class="min-w-100px">User ID</th>
-                    <th class="min-w-125px">Accepted Date</th>
-                    <th class="min-w-100px">From</th>
-                    <th class="min-w-100px">To</th>
-                    <th class="min-w-125px">Returned Date</th>
-                    <th class="min-w-75px">Copies</th>
-                    <th class="min-w-75px">Penalty Issued</th>
+                    <th class="w-75px">Transactions Number</th>
+                    <th>Book ID</th>
+                    <th>User ID</th>
+                    <th>Date Accepted</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Date Returned</th>
+                    <th>Copies</th>
+                    <th>Penalty Issued</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <!--end::Table head-->
@@ -182,47 +178,71 @@
             <!--begin::Table body-->
             <tbody class="text-gray-600 fw-bold">
 
-                <!--begin::Table row | Book -->
-                <tr>
-                    <!-- Checkbox -->
-                    <td>
-                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                            <input class="form-check-input" type="checkbox" value="1">
-                        </div>
-                    </td>
+                @foreach ($allTransactions as $transaction)
+                    <tr class="text-start">
+                        <!-- Checkbox -->
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1">
+                            </div>
+                        </td>
 
-                    <!-- Transaction Number -->
-                    <td class>109-00011</td>
+                        <!-- transactions Number -->
+                        <td>
+                            <p>{{ $transaction->id }}</p>
+                        </td>
 
-                    <!-- Book ID / ISBN -->
-                    <td>
-                        <a href="#" class="text-gray-800 text-hover-primary mb-1">9780000000000</a>
-                    </td>
+                        <!-- Book ID / ISBN -->
+                        <td>
+                            <a href="{{ route('books.edit', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->book_id }}</a>
+                        </td>
 
-                    <!-- User ID -->
-                    <td>
-                        <a href="#" class="text-gray-800 text-hover-primary mb-1">25909</a>
-                    </td>
+                        <!-- User ID -->
+                        <td>
+                            <a href="{{ route('users.edit', $transaction->user_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->user_id }}</a>
+                        </td>
 
-                    <!-- Accepted Date -->
-                    <td>10 Mar 2021, 6:05 pm</td>
+                        <!-- Accepted Date -->
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_accepted }}</div>
+                        </td>
 
-                    <!-- From -->
-                    <td>12 Mar 2021</td>
+                        <!-- From -->
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_from }}</div>
+                        </td>
 
-                    <!-- To -->
-                    <td>14 Mar 2021</td>
+                        <!-- To -->
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_to }}</div>
+                        </td>
 
-                    <!-- Returned Date -->
-                    <td>15 Mar 2021, 6:05 pm</td>
+                        <!-- Returned Date -->
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_returned }}</div>
+                        </td>
 
-                    <!-- Copies -->
-                    <td>1</td>
+                        <!-- Copies -->
+                        <td>{{ $transaction->copies }}</td>
 
-                    <!-- Penalty Issued -->
-                    <td>₱ 100</td>
-                </tr>
-                <!--end::Table row | Book -->
+                        <!-- Penalty Issued -->
+                        <td>{{ $transaction->penalty }}</td>
+
+                        <td>
+                            <a href="#" class="btn btn-icon btn-danger btn-sm" data-kt-transactions-table-filter="delete_row" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <span class="svg-icon svg-icon-1 position-absolute">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
+                                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
+                                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                @endforeach
+                
             </tbody>
             <!--end::Table body-->
 
@@ -233,18 +253,19 @@
     <!--end::Card body-->
 
 </div>
-<!--end::Transactions Table Card-->
+<!--end::transactions Table Card-->
 
 @endsection
 
 <!-- -->
 
 @section("vendor_js")
-
+    <script src="{{ asset("plugins/custom/datatables/datatables.bundle.js") }}"></script>
 @endsection
 
 <!-- -->
 
 @section("custom_js")
-
+    <script src="{{ asset("js/custom/admin/transactions-page/transactions-history-table.js") }}"></script>
+    <script src="{{ asset("js/custom/admin/transactions-page/export-transactions.js") }}"></script>
 @endsection

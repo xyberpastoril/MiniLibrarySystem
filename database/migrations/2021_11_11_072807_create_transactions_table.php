@@ -19,8 +19,10 @@ class CreateTransactionsTable extends Migration
             $table->integer('user_id');
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();
+            $table->date('date_accepted')->nullable();
+            $table->date('date_returned')->nullable();
             $table->integer('copies');
-            $table->date('returned_date')->nullable();
+            $table->integer('penalty')->nullable();
             $table->enum('status', [
                 'pending', // Waiting for Approval 
                 'unclaimed', // Approved, but book yet to be claimed
@@ -28,7 +30,7 @@ class CreateTransactionsTable extends Migration
                 'returned', // Book Returned
                 'cancelled', // Transaction Cancelled
             ]);
-            $table->timestamps(); // `created_at` as `request_date`
+            $table->timestamps(); // `created_at` as `date_requested`
         });
     }
 

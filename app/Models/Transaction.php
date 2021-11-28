@@ -37,9 +37,11 @@ class Transaction extends Model
                 'transactions.date_from',
                 'transactions.date_to',
                 'transactions.copies',
-                'transactions.returned_date',
-                DB::raw('transactions.created_at as request_date'),
-                'transactions.updated_at',
+                'transactions.penalty',
+                'transactions.date_accepted',
+                'transactions.date_returned',
+                'transactions.status',
+                DB::raw('transactions.created_at as date_requested'),
                 DB::raw('books.id as book_id'),
                 'books.isbn')
             ->leftJoin('books', 'transactions.book_id', '=', 'books.id')
@@ -65,6 +67,9 @@ class Transaction extends Model
                         ->orWhere('transactions.status', '=', 'claimed');
                 });
                 break;
+            case "history":
+                $obj->where('transactions.status', '=', 'returned');
+                break;
         }
 
         if($user->getRoleNames()[0] == "Member") {
@@ -75,8 +80,8 @@ class Transaction extends Model
         $obj = $obj->get();
 
         // Append other parameters to auto-generated page urls
-        if($search) $obj->appends(['search' => $search]);
-        if($status) $obj->appends(['status' => $status]);
+        // if($search) $obj->appends(['search' => $search]);
+        // if($status) $obj->appends(['status' => $status]);
 
         return $obj;
     }

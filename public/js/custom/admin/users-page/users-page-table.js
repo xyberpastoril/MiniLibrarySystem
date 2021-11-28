@@ -6,7 +6,7 @@ var KTUsersList = function() {
 				t.addEventListener("click", (function(t) {
 					t.preventDefault();
 					const n = t.target.closest("tr"),
-						r = n.querySelectorAll("td")[1].querySelectorAll("a")[1].innerText;
+						r = n.querySelectorAll("td")[1].querySelectorAll("p")[0].innerText;
 					Swal.fire({
 						text: "Are you sure you want to delete " + r + "?",
 						icon: "warning",

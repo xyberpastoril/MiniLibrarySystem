@@ -21,11 +21,6 @@
         <a href="#" class="text-muted text-hover-primary">Transactions</a>
     </li>
 
-    <!-- Dash -->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-200 w-5px h-2px"></span>
-    </li>
-
     <!-- Item -->
     <li class="breadcrumb-item text-dark">Waiting for Approval</li>
 
@@ -93,13 +88,13 @@
                         </div>
                     </th>
                     <th class="w-75px">Transaction Number</th>
-                    <th>Book ID / ISBN</th>
+                    <th>Book ID</th>
                     <th>User ID</th>
-                    <th>Request Date</th>
+                    <th>Date Requested</th>
                     <th>From</th>
                     <th>To</th>
                     <th>Copies</th>
-                    <th class="text-end min-w-100px">Actions</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <!--end::Table head-->
@@ -108,7 +103,7 @@
             <tbody class="text-gray-600 fw-bold">
 
                 @foreach ($allTransactions as $transaction)
-                    <tr>
+                    <tr class="text-start">
                         <!-- Checkbox -->
                         <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -121,7 +116,7 @@
                             <p>{{ $transaction->id }}</p>
                         </td>
 
-                        <!-- Book ID / ISBN -->
+                        <!-- Book ID -->
                         <td>
                             <a href="{{ route('books.edit', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->book_id }}</a>
                         </td>
@@ -132,39 +127,43 @@
                         </td>
 
                         <!-- Request Date -->
-                        <td>{{ $transaction->request_date }}</td>
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_requested }}</div>
+                        </td>
 
                         <!-- From -->
-                        <td>{{ $transaction->date_from }}</td>
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_from }}</div>
+                        </td>
 
                         <!-- To -->
-                        <td>{{ $transaction->date_to }}</td>
+                        <td>
+                            <div class="badge badge-light fw-bolder">{{ $transaction->date_to }}</div>
+                        </td>
 
                         <!-- Copies -->
                         <td>{{ $transaction->copies }}</td>
                         
                         <!-- Actions -->
-                        <td class="text-end">
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions 
-                            <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr072.svg-->
-                                <span class="svg-icon svg-icon-5 m-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"/>
-                                    </svg>
-                                </span>
-                            </a>
-                            <!-- Menu -->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                <!-- Menu item -->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-kt-transactions-table-filter="accept_row">Accept</a>
-                                </div>
-
-                                <!-- Menu item -->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-kt-transactions-table-filter="decline_row">Decline</a>
-                                </div>
-                                
+                        <td>
+                            <div class="btn-group">
+                                <a href="#" data-kt-transactions-table-filter="accept_row" class="btn btn-icon btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Accept">
+                                    <span class="svg-icon svg-icon-1 position-absolute">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"/>
+                                            <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="black"/>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a href="#" class="btn btn-icon btn-danger btn-sm" data-kt-transactions-table-filter="decline_row" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Decline">
+                                    <span class="svg-icon svg-icon-1 position-absolute">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"/>
+                                            <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black"/>
+                                            <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="black"/>
+                                        </svg>
+                                    </span>
+                                </a>
                             </div>
 
                         </td>
