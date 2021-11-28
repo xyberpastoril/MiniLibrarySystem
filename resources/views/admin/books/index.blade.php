@@ -425,7 +425,7 @@
                             
                             <!-- Book details -->
                             <div class="d-flex flex-column">
-                                <p class="text-gray-800 mb-1 my-text-truncate">{{ $book->title }}</p>
+                                <a href="{{ route("books.edit", $book->id) }}" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">{{ $book->title }}</a>
                                 <span>
                                     {{ $book->authors[0]->name }}
                                     @if(count($book->authors) > 1)
@@ -433,7 +433,6 @@
                                     @endif
                                 </span>
                             </div>
-
                         </td>
 
                         <!-- Published Date-->

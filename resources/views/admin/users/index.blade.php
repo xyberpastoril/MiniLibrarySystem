@@ -232,13 +232,13 @@
                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                     {{-- <div class="symbol-label fs-3 bg-light-danger text-danger">M</div> --}}
                                     <div class="symbol-label">
-                                        <img src="media/avatars/150-1.jpg" alt="{{ $user->first_name}} {{ $user->last_name}}" class="w-100">
+                                        <img src="@if($user->cover_url == null) {{ asset("media/avatars/blank.png") }} @else {{ asset("media/avatars/$user->cover_url") }}  @endif" alt="{{ $user->first_name}} {{ $user->last_name}}" class="w-100">
                                     </div>
                                 </div>
                                 
                                 <!-- User details -->
                                 <div class="d-flex flex-column">
-                                    <p class="text-gray-800 mb-1">{{ $user->first_name}} {{ $user->last_name}}</p>
+                                    <a href="{{ route("users.edit", $user->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name}} {{ $user->last_name}}</a>
                                     <span>{{ $user->email}}</span>
                                 </div>
                                 
