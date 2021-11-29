@@ -13,10 +13,12 @@ class TransactionController extends Controller
      */
     public function waiting_for_approval()
     {
+        $t = \App\Models\Transaction::search(null, "waiting", \Illuminate\Support\Facades\Auth::user());
+
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
         {
             return view("admin.transactions.waiting_for_approval", [
-                "allTransactions" => \App\Models\Transaction::search(null, "waiting", \Illuminate\Support\Facades\Auth::user()),
+                "allTransactions" => $t,
             ]);
         }
         return view("member.transactions.waiting_for_approval");
@@ -28,10 +30,12 @@ class TransactionController extends Controller
      */
     public function in_progress()
     {
+        $t = \App\Models\Transaction::search(null, "in_progress", \Illuminate\Support\Facades\Auth::user());
+
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
         {
             return view("admin.transactions.in_progress", [
-                "allTransactions" => \App\Models\Transaction::search(null, "in_progress", \Illuminate\Support\Facades\Auth::user()),
+                "allTransactions" => $t,
             ]);
         }
         return view("member.transactions.in_progress");
@@ -42,10 +46,11 @@ class TransactionController extends Controller
      */
     public function history()
     {
+        $t = \App\Models\Transaction::search(null, "history", \Illuminate\Support\Facades\Auth::user());
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
         {
             return view("admin.transactions.history", [
-                "allTransactions" => \App\Models\Transaction::search(null, "history", \Illuminate\Support\Facades\Auth::user()),
+                "allTransactions" => $t,
             ]);
         }
         return view("member.transactions.history");
