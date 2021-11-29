@@ -18,7 +18,7 @@
 
     <!-- Item -->
     <li class="breadcrumb-item text-muted">
-        <a href="#" class="text-muted text-hover-primary">transactions</a>
+        <a href="#" class="text-muted text-hover-primary">Transactions</a>
     </li>
 
     <!-- Item -->
@@ -81,7 +81,7 @@
             <!--begin::Table head-->
             <thead>
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                    <th class="w-75px">transactions Number</th>
+                    <th class="w-75px">Transaction Number</th>
                     <th>Book ID</th>
                     <th>User ID</th>
                     <th>Date Accepted</th>

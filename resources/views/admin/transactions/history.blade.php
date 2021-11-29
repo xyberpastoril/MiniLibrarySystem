@@ -18,7 +18,7 @@
 
     <!-- Item -->
     <li class="breadcrumb-item text-muted">
-        <a href="#" class="text-muted text-hover-primary">transactions</a>
+        <a href="#" class="text-muted text-hover-primary">Transactions</a>
     </li>
 
     <!-- Item -->
@@ -161,7 +161,7 @@
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_transactions .form-check-input" value="1">
                         </div>
                     </th>
-                    <th class="w-75px">Transactions Number</th>
+                    <th class="w-75px">Transaction Number</th>
                     <th>Book ID</th>
                     <th>User ID</th>
                     <th>Date Accepted</th>
