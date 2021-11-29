@@ -166,7 +166,7 @@
             <div class="card-footer d-flex justify-content-end py-6 px-9">
                 <div id="btn_group" class="btn-group visually-hidden">
                     <button type="reset" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" id="btn_save" class="btn btn-primary">Save Changes</button>
                 </div>
                 <button id="btn_delete" class="btn btn-danger">Delete</button>
             </div>
