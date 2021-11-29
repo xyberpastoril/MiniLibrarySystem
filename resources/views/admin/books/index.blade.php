@@ -420,7 +420,7 @@
                         <td class="d-flex align-items-center">
                             <!-- Cover -->
                             <div class="me-3" style="width: 5rem;flex: 0 0 auto;">
-                                <img class="card" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="{{ $book->title }}" style="width: 100%; height: 7rem; object-fit: cover;">
+                                <img class="card" src="@if($book->cover_url == null) {{ asset("media/books/blank.jpg") }} @else {{ asset("media/books/$book->cover_url") }}  @endif" alt="{{ $book->title }}" style="width: 100%; height: 7rem; object-fit: cover;">
                             </div>
                             
                             <!-- Book details -->

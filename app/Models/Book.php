@@ -73,7 +73,7 @@ class Book extends Model
         
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
             ->distinct('books.title')
-            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
+            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'books.cover_url','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
             ->rightJoin('books', 'sub.id', '=', 'books.id');
         
