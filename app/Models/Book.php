@@ -202,18 +202,17 @@ class Book extends Model
     /**
      * Updates the book authors by deleting and creating updated ones.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param $authorsRaw
      * @param \App\Models\Book $book
      */
-    public static function updateAuthors($request, $book)
+    public static function updateAuthors($authorsRaw, $book)
     {
         // Maybe someone can do a better implementation of this.
 
-        // Delete current authors
         $book->authors()->delete();
 
-        // Add updated authors
-        $authors = explode(',', $request->authors);
+        // Add authors
+        $authors = explode(',', $authorsRaw);
         if((count($authors) == 1 && $authors[0] != '') || count($authors) > 1)
         {
             foreach($authors as $a)
@@ -228,18 +227,17 @@ class Book extends Model
     /**
      * Updates the book authors by deleting and creating updated ones.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param $genresRaw
      * @param \App\Models\Book $book
      */
-    public static function updateGenres($request, $book)
+    public static function updateGenres($genresRaw, $book)
     {
         // Maybe someone can do a better implementation of this.
 
-        // Delete current genres
         $book->genres()->delete();
 
-        // Add updated genres
-        $genres = explode(',', $request->genre);
+        // Add genres
+        $genres = explode(',', $genresRaw);
         if((count($genres) == 1 && $genres[0] != '') || count($genres) > 1)
         {
             foreach($genres as $g)
