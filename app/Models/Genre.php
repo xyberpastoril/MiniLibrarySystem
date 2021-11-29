@@ -20,7 +20,7 @@ class Genre extends Model
 
     public function book_genres()
     {
-        return $this>belongsTo(Book::class);
+        return $this->belongsTo(Book::class);
     }
 
     /** FUNCTIONS */
