@@ -27,10 +27,13 @@
 
     <div class="card mb-5 mb-xl-10">
 
-        <form action="#" class="form" id="kt_form_book_details">
+        <form method="POST" action="{{ route('books.update', $book->id) }}" class="form" id="kt_form_book_details">
+            @csrf
+            @method('PUT')
+
             <div class="card-body p-9">
                 <div class=" d-flex flex-column flex-lg-row">
-                
+
                     <!-- Aside -->
                     <div class="flex-column flex-md-row-auto w-75 w-lg-200px w-xxl-225px">
                         <div class="row">
@@ -44,10 +47,10 @@
 
                                 <!-- Image input -->
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/books/blank.png") }}')">
-                                    
+
                                     <!-- Preview existing avatar -->
                                     <div class="image-input-wrapper w-175px h-225px" style="background-image: url('@if($book->cover_url == null){{ asset("media/books/blank.png") }}@else{{ asset("media/books/$book->cover_url") }}@endif')"></div>
-                                    
+
                                     <!-- Label -->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change book cover">
                                         <i class="bi bi-pencil-fill fs-7"></i>
@@ -74,7 +77,7 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="flex-md-row-fluid ms-lg-12">
 
                         <!-- Book Title -->
@@ -154,7 +157,7 @@
                                 <span>Total Copies</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="3" placeholder="0" min="0">
+                                <input type="number" name="copies_owned" class="form-control form-control-lg form-control-solid" value="3" placeholder="0" min="0">
                             </div>
                         </div>
                     </div>
@@ -171,7 +174,7 @@
                 <button id="btn_delete" class="btn btn-danger">Delete</button>
             </div>
         </form>
-        
+
     </div>
 
 @endsection
