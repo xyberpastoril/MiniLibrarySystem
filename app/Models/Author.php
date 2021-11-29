@@ -9,7 +9,14 @@ class Author extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name'
+    ];
 
     public function book()
     {

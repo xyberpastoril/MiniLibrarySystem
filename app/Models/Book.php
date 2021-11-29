@@ -10,6 +10,21 @@ class Book extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'page_count',
+        'isbn',
+        'published_date',
+        'copies_owned',
+        'cover_url'
+    ];
+
     public function genres()
     {
         return $this->hasMany(Genre::class);
