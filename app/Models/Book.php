@@ -41,7 +41,7 @@ class Book extends Model
     }
 
     /** FUNCTIONS */
-    
+
     public static function getNewArrivals()
     {
         $newArrivals = self::limit(5)->latest()->get();
@@ -85,20 +85,20 @@ class Book extends Model
         //      and (copies_used != copies_owned or copies_used IS NULL)
 
         $sub = Transaction::bookSearchSub();
-        
+
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
             ->distinct('books.title')
             ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'books.cover_url','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
             ->rightJoin('books', 'sub.id', '=', 'books.id');
-        
+
         if($search)
         {
             $obj->where(function ($query) use ($search) {
                 $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
                     ->orWhere('authors.name', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
             });
-            
+
         }
 
         if($genre)
@@ -125,9 +125,9 @@ class Book extends Model
         for($i = 0; $i < count($obj); $i++)
         {
             $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
-            
+
             $g = Genre::getBookGenres($obj[$i]->id);
-            if(isset($g[0]->genres)) 
+            if(isset($g[0]->genres))
                 $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id)[0]->genres;
             else
                 $obj[$i]->genres = "none";
@@ -141,7 +141,7 @@ class Book extends Model
 
         // Append other parameters to auto-generated page urls
         if($search) $obj->appends(['search' => $search]);
-        if($genre) 
+        if($genre)
         {
             $gc = "";
             for($i = 0; $i < count($genre); $i++)

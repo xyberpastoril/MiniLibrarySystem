@@ -30,7 +30,7 @@ class Author extends Model
         // return self::selectRaw("GROUP_CONCAT(name SEPARATOR ', ') as `authors`")
         //     ->groupBy('book_id')
         //     ->where('book_id', '=', $id)->get();
-            
+
         return self::select('authors.name')
             ->where('book_id', '=', $id)->orderBy('name', 'asc')->get();
     }

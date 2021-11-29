@@ -10,7 +10,7 @@ class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * Different page for Admin and Member
      *
      * @return \Illuminate\Http\Response
@@ -25,7 +25,7 @@ class BookController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * Only Admins are allowed to Create Books
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +48,7 @@ class BookController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * Show Book, with different variant for
      * both Admins and Members
      *
@@ -62,7 +62,7 @@ class BookController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * Allowed only for Admins
      *
      * @param  \App\Models\Book  $book
@@ -90,7 +90,7 @@ class BookController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * Allowed only to Admins.
      *
      * @param  \App\Models\Book  $book
