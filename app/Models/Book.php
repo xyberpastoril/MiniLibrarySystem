@@ -155,7 +155,99 @@ class Book extends Model
             $obj->appends(['genre' => $gc]);
         }
         if($status) $obj->appends(['status' => $status]);
-            
+
         return $obj;
+    }
+
+    /**
+     * Creates or updates a book instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book or NULL (for create)
+     * @return \App\Models\Book
+     */
+    public static function createOrUpdateBook($request, $book = NULL)
+    {
+        // Create Book
+        if(!isset($book))
+        {
+            $obj = Book::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'page_count' => $request->page_count,
+                'isbn' => $request->isbn,
+                'published_date' => $request->published_date,
+                'copies_owned' => $request->copies_owned,
+                'cover_url' => $request->cover_url
+            ]);
+
+        }
+        else
+        {
+            $obj = Book::where('id', '=', $book->id)
+                ->update([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'page_count' => $request->page_count,
+                    'isbn' => $request->isbn,
+                    'published_date' => $request->published_date,
+                    'copies_owned' => $request->copies_owned,
+                    'cover_url' => $request->cover_url
+                ]);
+        }
+
+        return $obj;
+    }
+
+    /**
+     * Updates the book authors by deleting and creating updated ones.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book
+     */
+    public static function updateAuthors($request, $book)
+    {
+        // Maybe someone can do a better implementation of this.
+
+        // Delete current authors
+        $book->authors()->delete();
+
+        // Add updated authors
+        $authors = explode(',', $request->authors);
+        if((count($authors) == 1 && $authors[0] != '') || count($authors) > 1)
+        {
+            foreach($authors as $a)
+            {
+                $book->authors()->create([
+                    'name' => $a
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Updates the book authors by deleting and creating updated ones.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book
+     */
+    public static function updateGenres($request, $book)
+    {
+        // Maybe someone can do a better implementation of this.
+
+        // Delete current genres
+        $book->genres()->delete();
+
+        // Add updated genres
+        $genres = explode(',', $request->genre);
+        if((count($genres) == 1 && $genres[0] != '') || count($genres) > 1)
+        {
+            foreach($genres as $g)
+            {
+                $book->genres()->create([
+                    'name' => $g
+                ]);
+            }
+        }
     }
 }
