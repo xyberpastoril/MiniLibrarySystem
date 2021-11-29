@@ -43,7 +43,16 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: Properly integrate with JS, or redirect to edit page when done.
+        // up to you @iamjuney.
+
+        $obj = Book::createOrUpdateBook($request);
+
+        // Add genres
+        $obj->authors = Book::updateAuthors($request->authors, $obj);
+        $obj->genres = Book::updateGenres($request->genre, $obj);
+
+        return $obj; // Returns JSON of new entry with genres & authors.
     }
 
     /**
@@ -85,7 +94,13 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        // TODO: Integrate with JS. Remove when properly integrated. @iamjuney
+
+        $obj = Book::createOrUpdateBook($request, $book);
+        Book::updateAuthors($request->authors, $book);
+        Book::updateGenres($request->genre, $book);
+
+        return $obj; // Returns book->id
     }
 
     /**
@@ -104,7 +119,6 @@ class BookController extends Controller
     /** JSON RESPONSES */
 
     public function search(Request $request)
-    {  
     {
         $genre = explode(',', $request->get('genre'));
 
