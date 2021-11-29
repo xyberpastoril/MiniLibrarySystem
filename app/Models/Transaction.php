@@ -49,7 +49,7 @@ class Transaction extends Model
         {
             $obj->where(function ($query) use ($search) {
                 $query->where('transactions.id', 'LIKE', '%' . ($search ? $search : NULL) . '%')
-                    ->orWhere('books.id', 'LIKE', '%' . ($search ? $search : NULL) . '%');
+                    ->orWhere('books.isbn', 'LIKE', '%' . ($search ? $search : NULL) . '%');
             });
         }
 
