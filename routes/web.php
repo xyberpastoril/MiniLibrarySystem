@@ -46,6 +46,19 @@ Route::middleware(['auth'])->group(function(){
         ->name('transactions.in_progress');
     Route::get('/transactions/history',[App\Http\Controllers\TransactionController::class,'history'])
         ->name('transactions.history');
+
+    // Transactions Actions
+    Route::post('/transactions', [App\Http\Controllers\TransactionController::class, 'request'])
+        ->name('transactions.request');
+    Route::put('/transactions/{transaction}/cancel', [App\Http\Controllers\TransactionController::class, 'cancel'])
+        ->name('transactions.cancel');
+    Route::put('/transactions/{transaction}/approve', [App\Http\Controllers\TransactionController::class, 'approve'])
+        ->name('transactions.approve');
+    Route::put('/transactions/{transaction}/claim', [App\Http\Controllers\TransactionController::class, 'claim'])
+        ->name('transactions.claim');
+    Route::put('/transactions/{transaction}/return', [App\Http\Controllers\TransactionController::class, 'return'])
+        ->name('transactions.return');
+
     // Transactions JSON
     Route::get('/result/transactions/search/', [App\Http\Controllers\TransactionController::class, 'search']);
 

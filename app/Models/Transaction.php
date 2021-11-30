@@ -101,4 +101,48 @@ class Transaction extends Model
             ->orWhere('transactions.status', '=', 'pending')
             ->groupBy('books.id', 'books.title');
     }
+
+    public static function request($request)
+    {
+        return self::create([
+            'book_id' => $request->book_id,
+            'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
+            'date_from' => $request->date_from,
+            'date_to' => $request->date_to,
+            'copies' => $request->copies,
+            'status' => 'pending'
+        ]);
+    }
+
+    public static function cancel($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->delete();
+    }
+
+    public static function approve($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->update([
+                'status' => 'unclaimed',
+                'date_approved' => \Carbon\Carbon::now()->format('Y-m-d')
+            ]);
+    }
+
+    public static function claim($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->update([
+                'status' => 'claimed',
+            ]);
+    }
+
+    public static function return($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->where([
+                'status' => 'returned',
+                'date_returned' => \Carbon\Carbon::now()->format('Y-m-d')
+            ]);
+    }
 }

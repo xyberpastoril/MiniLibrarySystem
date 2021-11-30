@@ -56,6 +56,38 @@ class TransactionController extends Controller
         return view("member.transactions.history");
     }
 
+    /** Create */
+
+    public function request(Request $request)
+    {
+        // TODO: Include Penalty Rate/Day
+        return \App\Models\Transaction::request($request);
+    }
+
+    /** Delete */
+    public function cancel(Request $request, \App\Models\Transaction $transaction)
+    {
+        return \App\Models\Transaction::cancel($transaction);
+    }
+
+    /** Update */
+    public function approve(Request $request, \App\Models\Transaction $transaction)
+    {
+        return \App\Models\Transaction::approve($transaction);
+    }
+
+    public function claim(Request $request, \App\Models\Transaction $transaction)
+    {
+        return \App\Models\Transaction::claim($transaction);
+    }
+
+    public function return(Request $request, \App\Models\Transaction $transaction)
+    {
+        // TODO: Compute Final Penalty
+        return \App\Models\Transaction::return($transaction);
+    }
+
+
     /** JSON */
     public static function search(Request $request)
     {
