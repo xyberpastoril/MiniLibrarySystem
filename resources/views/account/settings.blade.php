@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -79,7 +79,7 @@
 
         <!--begin::Layout-->
         <div class="flex-md-row-fluid ms-lg-12">
-            
+
             <!--begin::Sign-in Method-->
             <div class="card mb-5 mb-xl-10" id="kt_account_settings_signin_method" data-kt-scroll-offset="{default: 100, md: 125}">
                 <!--begin::Card header-->
@@ -99,14 +99,15 @@
                                 <div class="fs-5 fw-bolder mb-1">Email Address</div>
                                 <div class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
                             </div>
-                            <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
+                            <div id="kt_signin_email_edit" class="flex-row-fluid d-block">
                                 <!--begin::Form-->
-                                <form id="kt_signin_change_email" class="form" novalidate="novalidate">
+                                <form id="kt_signin_change_email" class="form" method="POST" action="{{ route('account.updateEmail') }}">
+                                    @csrf
                                     <div class="row mb-6">
                                         <div class="col-lg-6 mb-4 mb-lg-0">
                                             <div class="fv-row mb-0">
-                                                <label for="emailaddress" class="form-label fs-6 fw-bolder mb-3">Enter New Email Address</label>
-                                                <input type="email" class="form-control form-control-lg form-control-solid fw-bold fs-6" id="emailaddress" placeholder="Email Address" name="emailaddress" value="support@keenthemes.com">
+                                                <label for="email" class="form-label fs-6 fw-bolder mb-3">Enter New Email Address</label>
+                                                <input type="email" class="form-control form-control-lg form-control-solid fw-bold fs-6" id="email" placeholder="Email Address" name="email" value="">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -117,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6">Update Email</button>
+                                        <button id="kt_signin_submit" type="submit" class="btn btn-primary me-2 px-6">Update Email</button>
                                         <button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
                                     </div>
                                 </form>
@@ -134,10 +135,11 @@
                                 <div class="fs-5 fw-bolder mb-1">Password</div>
                                 <div class="fs-7 fw-bold text-gray-600">************</div>
                             </div>
-                            <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
+                            <div id="kt_signin_password_edit" class="flex-row-fluid d-block">
                                 <div class="fs-6 fw-bold text-gray-600 mb-4">Password must be at least 8 character and contain symbols</div>
                                 <!--begin::Form-->
-                                <form id="kt_signin_change_password" class="form" novalidate="novalidate">
+                                <form id="kt_signin_change_password" class="form" method="POST" action="{{ route('account.updatePassword') }}">
+                                    @csrf
                                     <div class="row mb-6">
                                         <div class="col-lg-4">
                                             <div class="fv-row mb-0">
@@ -159,7 +161,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">Update Password</button>
+                                        <button id="kt_password_submit" type="submit" class="btn btn-primary me-2 px-6">Update Password</button>
                                         <button id="kt_password_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
                                     </div>
                                 </form>
@@ -348,7 +350,7 @@
                                     <!--begin::Content-->
                                     <div class="fw-bold">
                                         <h4 class="text-gray-900 fw-bolder">You Are Deactivating Your Account</h4>
-                                        <div class="fs-6 text-gray-700">For extra security, this requires you to confirm your email. 
+                                        <div class="fs-6 text-gray-700">For extra security, this requires you to confirm your email.
                                         <br>
                                         <a href="#">Learn more</a></div>
                                     </div>
@@ -380,7 +382,7 @@
         </div>
         <!--end::Layout-->
     </div>
-    
+
     <!--begin::Modals-->
     <!--begin::Modal - Two-factor authentication-->
     <div class="modal fade" id="kt_modal_two_factor_authentication" tabindex="-1" aria-hidden="true">
@@ -463,11 +465,11 @@
                         <h3 class="text-dark fw-bolder fs-3 mb-7">Authenticator Apps</h3>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="text-gray-500 fw-bold fs-5 mb-10">Using an authenticator app like 
-                        <a href="https://support.google.com/accounts/answer/1066447?hl=en" target="_blank">Google Authenticator</a>, 
-                        <a href="https://www.microsoft.com/en-us/account/authenticator" target="_blank">Microsoft Authenticator</a>, 
-                        <a href="https://authy.com/download/" target="_blank">Authy</a>, or 
-                        <a href="https://support.1password.com/one-time-passwords/" target="_blank">1Password</a>, scan the QR code. It will generate a 6 digit code for you to enter below. 
+                        <div class="text-gray-500 fw-bold fs-5 mb-10">Using an authenticator app like
+                        <a href="https://support.google.com/accounts/answer/1066447?hl=en" target="_blank">Google Authenticator</a>,
+                        <a href="https://www.microsoft.com/en-us/account/authenticator" target="_blank">Microsoft Authenticator</a>,
+                        <a href="https://authy.com/download/" target="_blank">Authy</a>, or
+                        <a href="https://support.1password.com/one-time-passwords/" target="_blank">1Password</a>, scan the QR code. It will generate a 6 digit code for you to enter below.
                         <!--begin::QR code image-->
                         <div class="pt-5 text-center">
                             <img src="../assets/media/misc/qr.png" alt class="mw-150px">
@@ -491,7 +493,7 @@
                             <div class="d-flex flex-stack flex-grow-1">
                                 <!--begin::Content-->
                                 <div class="fw-bold">
-                                    <div class="fs-6 text-gray-700">If you having trouble using the QR code, select manual entry on your app, and enter your username and the code: 
+                                    <div class="fs-6 text-gray-700">If you having trouble using the QR code, select manual entry on your app, and enter your username and the code:
                                     <div class="fw-bolder text-dark pt-2">KBSS3QDAAFUMCBY63YCKI5WSSVACUMPN</div></div>
                                 </div>
                                 <!--end::Content-->
@@ -511,7 +513,7 @@
                                 <button type="reset" data-kt-element="apps-cancel" class="btn btn-light me-3">Cancel</button>
                                 <button type="submit" data-kt-element="apps-submit" class="btn btn-primary">
                                     <span class="indicator-label">Submit</span>
-                                    <span class="indicator-progress">Please wait... 
+                                    <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
@@ -540,7 +542,7 @@
                                 <button type="reset" data-kt-element="sms-cancel" class="btn btn-light me-3">Cancel</button>
                                 <button type="submit" data-kt-element="sms-submit" class="btn btn-primary">
                                     <span class="indicator-label">Submit</span>
-                                    <span class="indicator-progress">Please wait... 
+                                    <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
@@ -570,5 +572,5 @@
 <!-- -->
 
 @section("custom_js")
-
+    {{-- <script src="{{ asset("js/custom/account/settings/signin-methods.js") }}"></script> --}}
 @endsection
