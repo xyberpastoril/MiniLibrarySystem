@@ -248,4 +248,17 @@ class Book extends Model
             }
         }
     }
+
+    /**
+     * Creates or updates a book instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book or NULL (for create)
+     * @return \App\Models\Book
+     */
+    public static function deleteBook($book)
+    {
+        // Delete Book
+        return Book::where('id', '=', $book->id)->delete();
+    }
 }
