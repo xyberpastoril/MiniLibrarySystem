@@ -27,11 +27,12 @@
 
     <div class="card mb-5 mb-xl-10">
 
-        <form method="POST" action="{{ route('books.update', $book->id) }}"  class="form" id="kt_form_book_details">
-            @csrf
-            @method('PUT')
+        <div id="kt_form_book_details">
 
-            <div class="card-body p-9">
+
+            <form id="book_update" method="POST" action="{{ route('books.update', $book->id) }}"  class="form" class="card-body p-9">
+                @csrf
+                @method('PUT')
                 <div class=" d-flex flex-column flex-lg-row">
 
                     <!-- Aside -->
@@ -164,18 +165,21 @@
                     </div>
 
                 </div>
-            </div>
+            </form>
 
             <!-- Actions -->
             <div class="card-footer d-flex justify-content-end py-6 px-9">
                 <div id="btn_group" class="btn-group visually-hidden">
                     <button type="reset" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button form="book_update" type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
-                
-                <button id="btn_delete" class="btn btn-danger">Delete</button>
+
+                <form method="POST" action="{{  route('books.destroy', $book->id) }}">
+                    @csrf
+                    <button id="btn_delete" class="btn btn-danger">Delete</button>
+                </form>
             </div>
-        </form>
+        </div>
 
     </div>
 
