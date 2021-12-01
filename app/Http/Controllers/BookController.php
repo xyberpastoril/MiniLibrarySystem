@@ -94,13 +94,11 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        // TODO: Integrate with JS. Remove when properly integrated. @iamjuney
-
-        $obj = Book::createOrUpdateBook($request, $book);
+        Book::createOrUpdateBook($request, $book);
         Book::updateAuthors($request->authors, $book);
-        Book::updateGenres($request->genre, $book);
+        Book::updateGenres($request->genres, $book);
 
-        return $obj; // Returns book->id
+        return redirect()->to('books');
     }
 
     /**
@@ -111,9 +109,11 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Request $request, $book)
     {
-        return $book->delete();
+        Book::deleteBook($book);
+
+        return redirect()->to('books');
     }
 
     /** JSON RESPONSES */

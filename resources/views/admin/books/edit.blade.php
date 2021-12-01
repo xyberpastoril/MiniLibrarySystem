@@ -27,7 +27,7 @@
 
     <div class="card mb-5 mb-xl-10">
 
-        <form method="POST" action="{{ route('books.update', $book->id) }}" class="form" id="kt_form_book_details">
+        <form method="POST" action="{{ route('books.update', $book->id) }}"  class="form" id="kt_form_book_details">
             @csrf
             @method('PUT')
 
@@ -46,15 +46,15 @@
                                 <br>
 
                                 <!-- Image input -->
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/books/blank.png") }}')">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/books/blank.jpg") }}')">
 
                                     <!-- Preview existing avatar -->
-                                    <div class="image-input-wrapper w-175px h-225px" style="background-image: url('@if($book->cover_url == null){{ asset("media/books/blank.png") }}@else{{ asset("media/books/$book->cover_url") }}@endif')"></div>
+                                    <div class="image-input-wrapper w-175px h-225px" style="background-image: url('@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif'); background-position: center;"></div>
 
                                     <!-- Label -->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change book cover">
                                         <i class="bi bi-pencil-fill fs-7"></i>
-                                        <input type="file" name="cover" accept=".png, .jpg, .jpeg">
+                                        <input type="file" name="cover_url" accept=".png, .jpg, .jpeg">
                                         <input type="hidden" name="cover_remove">
                                     </label>
 
@@ -117,7 +117,7 @@
                                 <span>Page Count</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="{{ $book->copies_owned }}" placeholder="1" min="1">
+                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="{{ $book->page_count }}" placeholder="1" min="1">
                             </div>
                         </div>
 
@@ -147,7 +147,7 @@
                                 <span>Genre(s)</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="genre" class="form-control form-control-lg form-control-solid" value="{{ $book->genres }}" placeholder="ex. Action, Fiction">
+                                <input type="text" name="genres" class="form-control form-control-lg form-control-solid" value="{{ $book->genres }}" placeholder="ex. Action, Fiction">
                             </div>
                         </div>
 
@@ -157,9 +157,10 @@
                                 <span>Total Copies</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="copies_owned" class="form-control form-control-lg form-control-solid" value="3" placeholder="0" min="0">
+                                <input type="number" name="copies_owned" class="form-control form-control-lg form-control-solid" value="{{ $book->copies_owned }}" placeholder="0" min="0">
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -169,8 +170,9 @@
             <div class="card-footer d-flex justify-content-end py-6 px-9">
                 <div id="btn_group" class="btn-group visually-hidden">
                     <button type="reset" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                    <button type="submit" id="btn_save" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
+                
                 <button id="btn_delete" class="btn btn-danger">Delete</button>
             </div>
         </form>

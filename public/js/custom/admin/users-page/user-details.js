@@ -52,7 +52,7 @@ btn_delete.addEventListener('click', e => {
 	}))
 });
 
-btn_save.addEventListener('click', e => {
+btn_save.addEventListener('submit', e => {
     e.preventDefault();
 
     Swal.fire({
@@ -74,9 +74,10 @@ btn_save.addEventListener('click', e => {
 			confirmButtonText: "Ok, got it!",
 			customClass: {
 				confirmButton: "btn fw-bold btn-primary"
-			}
-		}).then((function() {
-			e.draw()
+			},
+			closeOnConfirm: false
+		}).then((function(isConfirm) {
+			if (isConfirm) form.submit();
 		}))
 		 : "cancel" === e.dismiss && Swal.fire({
 			text: "Changes was not saved.",
