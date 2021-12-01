@@ -43,16 +43,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: Properly integrate with JS, or redirect to edit page when done.
-        // up to you @iamjuney.
-
         $obj = Book::createOrUpdateBook($request);
 
         // Add genres
         $obj->authors = Book::updateAuthors($request->authors, $obj);
         $obj->genres = Book::updateGenres($request->genre, $obj);
 
-        return $obj; // Returns JSON of new entry with genres & authors.
+        return redirect()->to('books');
     }
 
     /**
@@ -109,11 +106,9 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $book)
+    public function destroy(Book $book)
     {
-        Book::deleteBook($book);
-
-        return redirect()->to('books');
+        return Book::deleteBook($book);
     }
 
     /** JSON RESPONSES */

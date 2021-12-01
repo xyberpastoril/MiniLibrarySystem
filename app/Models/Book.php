@@ -258,7 +258,8 @@ class Book extends Model
      */
     public static function deleteBook($book)
     {
-        // Delete Book
-        return Book::where('id', '=', $book->id)->delete();
+        $book->authors()->delete();
+        $book->genres()->delete();
+        return $book->delete();
     }
 }

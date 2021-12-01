@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -63,7 +63,7 @@
 
                 <!-- Filter Dropdown-->
                 <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
-                    
+
                     <!-- Header -->
                     <div class="px-7 py-5">
                         <div class="fs-5 text-dark fw-bolder">Filter Options</div>
@@ -108,7 +108,7 @@
                         </svg>
                     </span>Export
                 </button>
-                
+
                 <!--begin::Add user-->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_book">
                 <!-- Svg Icon | path: assets/media/icons/duotune/arrows/arr075.svg-->
@@ -139,7 +139,7 @@
                         <div class="modal-header">
                             <!-- Modal title -->
                             <h2>Export Books</h2>
-                            
+
                             <!-- Close -->
                             <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-books-modal-action="close">
                                 <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr061.svg-->
@@ -179,7 +179,7 @@
                                     <button type="reset" class="btn btn-light me-3" data-kt-books-modal-action="cancel">Discard</button>
                                     <button type="submit" class="btn btn-primary" data-kt-books-modal-action="submit">
                                         <span class="indicator-label">Submit</span>
-                                        <span class="indicator-progress">Please wait... 
+                                        <span class="indicator-progress">Please wait...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 </div>
@@ -196,7 +196,7 @@
             <!--begin::Modal - Book Details-->
             <div class="modal fade" id="kt_modal_new_book" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered mw-650px">
-                
+
                     <!--begin::Modal content-->
                     <div class="modal-content">
 
@@ -205,7 +205,7 @@
 
                             <!-- Modal title -->
                             <h2>Add Book</h2>
-                            
+
                             <!-- Close -->
                             <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-books-modal-action="close">
                                 <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr061.svg-->
@@ -216,74 +216,74 @@
                                     </svg>
                                 </span>
                             </div>
-                            
+
                         </div>
-                        
+
                         <!-- Modal body -->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 
                             <!-- Form -->
-                            <form id="kt_modal_new_book_form" class="form" action="#">
-
+                            <form id="kt_modal_new_book_form" method="POST" class="form" action="{{ route('books.store') }}">
+                                @csrf
                                 <!-- Content -->
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_new_book_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_book_header" data-kt-scroll-wrappers="#kt_modal_new_book_scroll" data-kt-scroll-offset="300px">
-                                    
+
                                     <!-- Cover -->
                                     <div class="fv-row mb-7">
 
                                         <!-- Label -->
                                         <label class="d-block fw-bold fs-6 mb-5">Cover</label>
-                                        
+
                                         <!-- Image input -->
                                         <div class="image-input image-input-outline" data-kt-image-input="true">
 
                                             <!-- Preview existing cover -->
                                             <div class="image-input-wrapper w-175px h-225px mx-5" ></div>
-                                            
+
                                             <!-- Label -->
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change cover">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
 
                                                 <!-- Inputs -->
-                                                <input type="file" name="cover" accept=".png, .jpg, .jpeg">
+                                                <input type="file" name="cover_url" accept=".png, .jpg, .jpeg">
                                                 <input type="hidden" name="cover_remove">
-                                                
+
                                             </label>
-                                            
+
                                             <!-- Cancel -->
                                             <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel cover">
                                                 <i class="bi bi-x fs-2"></i>
                                             </span>
-                                            
+
                                             <!-- Remove -->
                                             <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove cover">
                                                 <i class="bi bi-x fs-2"></i>
                                             </span>
-                                            
+
                                         </div>
-                                        
+
                                         <!-- Hint-->
                                         <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                                        
+
                                     </div>
-                                    
+
                                     <!-- Book Title -->
                                     <div class="fv-row mb-7">
                                         <!-- Label -->
                                         <label class="required fw-bold fs-6 mb-2">Book Title</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="book_title" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Book Title" value="">
+                                        <input type="text" name="title" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Book Title" value="">
 
                                     </div>
-                                    
+
                                     <!-- Author -->
                                     <div class="fv-row mb-7">
                                         <!-- Label -->
                                         <label class="required fw-bold fs-6 mb-2">Author(s)</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="author" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Author1, Author2">
+                                        <input type="text" name="authors" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Author1, Author2">
 
                                     </div>
 
@@ -318,7 +318,7 @@
                                         <input class="form-control form-control-solid" name="published_date" id="kt_published_date_picker"/>
 
                                     </div>
-                                    
+
                                     <!-- ISBN -->
                                     <div class="fv-row mb-7">
                                         <!-- Label -->
@@ -335,7 +335,7 @@
                                         <label class="fw-bold fs-6 mb-2">Genre(s)</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="genre" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Action, Fiction">
+                                        <input type="text" name="genres" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Action, Fiction">
 
                                     </div>
 
@@ -345,26 +345,26 @@
                                         <label class="required fw-bold fs-6 mb-2">Total Copies</label>
 
                                         <!-- Input -->
-                                        <input type="number" name="total_copies" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="1" value="1">
+                                        <input type="number" name="copies_owned" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="1" value="1">
 
                                     </div>
 
                                 </div>
-                                
+
                                 <!-- Actions -->
                                 <div class="text-center pt-15">
                                     <button type="reset" class="btn btn-light me-3" data-kt-books-modal-action="cancel">Discard</button>
                                     <button type="submit" class="btn btn-primary" data-kt-books-modal-action="submit">
                                         <span class="indicator-label">Submit</span>
-                                        <span class="indicator-progress">Please wait... 
+                                        <span class="indicator-progress">Please wait...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 </div>
-                                
+
                             </form>
-                            
+
                         </div>
-                        
+
                     </div>
                     <!--end::Modal content-->
 
@@ -389,7 +389,7 @@
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="w-10px pe-2">
                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_books .form-check-input" value="1">
+                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_books .form-check-input" value="0">
                         </div>
                     </th>
                     <th>Book</th>
@@ -406,7 +406,7 @@
 
             <!--begin::Table body-->
             <tbody class="text-gray-600 fw-bold">
-                
+
                 @foreach ($allBooks as $book)
                     <tr class="text-start">
                         <!-- Checkbox -->
@@ -422,7 +422,7 @@
                             <div class="me-3" style="width: 5rem;flex: 0 0 auto;">
                                 <img class="card" src="@if($book->cover_url == null) {{ asset("media/books/blank.jpg") }} @else {{ asset("media/books/$book->cover_url") }}  @endif" alt="{{ $book->title }}" style="width: 100%; height: 7rem; object-fit: cover;">
                             </div>
-                            
+
                             <!-- Book details -->
                             <div class="d-flex flex-column">
                                 <a href="{{ route("books.edit", $book->id) }}" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">{{ $book->title }}</a>
@@ -458,7 +458,7 @@
 
                         <!-- Available Copies -->
                         <td>{{ $book->copies_left }}</td>
-                        
+
                         <!-- Actions -->
                         <td>
                             <div class="btn-group">
@@ -471,7 +471,7 @@
                                         </svg>
                                     </span>
                                 </a>
-                                <a href="#" class="btn btn-icon btn-danger btn-sm" data-kt-books-table-filter="delete_row" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <button class="btn btn-icon btn-danger btn-sm" data-kt-books-table-filter="delete_row" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                                     <span class="svg-icon svg-icon-1 position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
@@ -479,12 +479,12 @@
                                             <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
                                         </svg>
                                     </span>
-                                </a>
+                                </button>
                             </div>
                         </td>
                     </tr>
                 @endforeach
-                
+
             </tbody>
             <!--end::Table body-->
 

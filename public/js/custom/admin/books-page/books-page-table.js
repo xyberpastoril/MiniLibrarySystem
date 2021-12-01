@@ -6,7 +6,8 @@ var KTbooksList = function() {
 				t.addEventListener("click", (function(t) {
 					t.preventDefault();
 					const n = t.target.closest("tr"),
-						r = n.querySelectorAll("td")[1].querySelectorAll("a")[0].innerText;
+						r = n.querySelectorAll("td")[1].querySelectorAll("a")[0].innerText,
+                        z = n.querySelectorAll("td")[0].querySelectorAll("input")[0].value;
 					Swal.fire({
 						text: "Are you sure you want to delete " + r + "?",
 						icon: "warning",
@@ -28,6 +29,13 @@ var KTbooksList = function() {
 								confirmButton: "btn fw-bold btn-primary"
 							}
 						}).then((function() {
+                             $.ajax({
+                                url:"books/"+z,
+                                type:'DELETE',
+                                data:{
+                                    _token: $("input[name=_token]").val()
+                                }
+                             })
 							e.row($(n)).remove().draw()
 						})).then((function() {
 							a()
@@ -78,6 +86,16 @@ var KTbooksList = function() {
 					}).then((function() {
 						c.forEach((t => {
 							t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
+                            if(t.checked && t.value > 0)
+                            {
+                                $.ajax({
+                                    url:"books/"+t.value,
+                                    type:'DELETE',
+                                    data:{
+                                        _token: $("input[name=_token]").val()
+                                    }
+                                })
+                            }
 						}));
 						o.querySelectorAll('[type="checkbox"]')[0].checked = !1
 					})).then((function() {
