@@ -152,23 +152,74 @@ var KTAccountSettingsSigninMethods = {
                     }
                 }), n.querySelector("#kt_password_submit").addEventListener("click", (function(t) {
                     t.preventDefault(), console.log("click"), e.validate().then((function(t) {
-                        "Valid" == t ? swal.fire({
-                            text: "Sent password reset. Please check your email",
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        }) : swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn font-weight-bold btn-light-primary"
-                            }
-                        })
+
+                        // reset errors
+                        $("#currentpassword-error").hide()
+                        $("#newpassword-error").hide()
+                        $("#confirmpassword-error").hide()
+
+                        $("#currentpassword").removeClass("is-invalid")
+                        $("#newpassword").removeClass("is-invalid")
+                        $("#confirmpassword").removeClass("is-invalid")
+
+                        if( $("#currentpassword").val() &&
+                            $("#newpassword").val() &&
+                            $("#confirmpassword").val() &&
+                            $("#newpassword").val() == $("#confirmpassword").val() )
+                        {
+                            $.ajax({
+                                url: "/account/updatePassword",
+                                type: 'POST',
+                                data: {
+                                    _token: $("input[name=_token]").val(),
+                                    currentpassword: $("#currentpassword").val(),
+                                    newpassword: $("#newpassword").val(),
+                                    confirmpassword: $("#confirmpassword").val(),
+                                },
+                                success: function(data, status, xhr) { // success callback function
+                                    if (data.success) {
+                                        // reset
+                                        $("#kt_signin_password_edit").addClass("d-none")
+                                        $("#kt_signin_password").removeClass("d-none")
+                                        $("#kt_signin_password_button").removeClass("d-none")
+                                        $("#currentpassword").val("")
+                                        $("#newpassword").val("")
+                                        $("#confirmpassword").val("")
+
+                                        swal.fire({
+                                            text: "Password successfully updated.",
+                                            icon: "success",
+                                            buttonsStyling: !1,
+                                            confirmButtonText: "Ok, got it!",
+                                            customClass: {
+                                                confirmButton: "btn font-weight-bold btn-light-primary"
+                                            }
+                                        })
+                                    }
+                                    else if (data.error == "wrong_password") {
+                                        $("#currentpassword-error").show()
+                                        $("#currentpassword-error strong").html("You entered a wrong password.")
+                                        $("#currentpassword").addClass("is-invalid")
+                                    }
+                                    else if (data.error == "passwords_not_match") {
+                                        $("#confirmpassword-error").show()
+                                        $("#confirmpassword-error strong").html("Passwords do not match.")
+                                        $("#confirmpassword").addClass("is-invalid")
+                                    }
+                                },
+                                error: function(jqXhr, textStatus, errorMessage) { // error callback
+                                    swal.fire({
+                                        text: "It's not your fault. Something seems wrong on our end. Please try again later.",
+                                        icon: "error",
+                                        buttonsStyling: !1,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn font-weight-bold btn-light-primary"
+                                        }
+                                    })
+                                }
+                            })
+                        }
                     }))
                 }))
             }()

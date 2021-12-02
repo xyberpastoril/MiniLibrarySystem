@@ -142,7 +142,7 @@
                                 <div class="fs-7 fw-bold text-gray-600">************</div>
                             </div>
                             <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
-                                <div class="fs-6 fw-bold text-gray-600 mb-4">Password must be at least 8 character and contain symbols</div>
+                                {{-- <div class="fs-6 fw-bold text-gray-600 mb-4">Password must be at least 8 character and contain symbols</div> --}}
                                 <!--begin::Form-->
                                 <form id="kt_signin_change_password" class="form" method="POST" action="{{ route('account.updatePassword') }}">
                                     @csrf
@@ -151,18 +151,27 @@
                                             <div class="fv-row mb-0">
                                                 <label for="currentpassword" class="form-label fs-6 fw-bolder mb-3">Current Password</label>
                                                 <input type="password" class="form-control form-control-lg form-control-solid fw-bold fs-6" name="currentpassword" id="currentpassword">
+                                                <span id="currentpassword-error" class="invalid-feedback" role="alert">
+                                                    <strong></strong>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="fv-row mb-0">
                                                 <label for="newpassword" class="form-label fs-6 fw-bolder mb-3">New Password</label>
                                                 <input type="password" class="form-control form-control-lg form-control-solid fw-bold fs-6" name="newpassword" id="newpassword">
+                                                <span id="newpassword-error" class="invalid-feedback" role="alert">
+                                                    <strong></strong>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="fv-row mb-0">
                                                 <label for="confirmpassword" class="form-label fs-6 fw-bolder mb-3">Confirm New Password</label>
                                                 <input type="password" class="form-control form-control-lg form-control-solid fw-bold fs-6" name="confirmpassword" id="confirmpassword">
+                                                <span id="confirmpassword-error" class="invalid-feedback" role="alert">
+                                                    <strong></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
