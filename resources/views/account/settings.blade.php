@@ -99,7 +99,7 @@
                                 <div class="fs-5 fw-bolder mb-1">Email Address</div>
                                 <div class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
                             </div>
-                            <div id="kt_signin_email_edit" class="flex-row-fluid d-block">
+                            <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
                                 <!--begin::Form-->
                                 <form id="kt_signin_change_email" class="form" method="POST" action="{{ route('account.updateEmail') }}">
                                     @csrf
@@ -135,7 +135,7 @@
                                 <div class="fs-5 fw-bolder mb-1">Password</div>
                                 <div class="fs-7 fw-bold text-gray-600">************</div>
                             </div>
-                            <div id="kt_signin_password_edit" class="flex-row-fluid d-block">
+                            <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
                                 <div class="fs-6 fw-bold text-gray-600 mb-4">Password must be at least 8 character and contain symbols</div>
                                 <!--begin::Form-->
                                 <form id="kt_signin_change_password" class="form" method="POST" action="{{ route('account.updatePassword') }}">
@@ -572,5 +572,5 @@
 <!-- -->
 
 @section("custom_js")
-    {{-- <script src="{{ asset("js/custom/account/settings/signin-methods.js") }}"></script> --}}
+    <script src="{{ asset("js/custom/account/settings/signin-methods.js") }}"></script>
 @endsection
