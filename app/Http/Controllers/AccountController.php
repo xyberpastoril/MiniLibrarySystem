@@ -47,18 +47,30 @@ class AccountController extends Controller
 
     public function updatePassword(Request $request)
     {
-        if(\Illuminate\Support\Facades\Hash::check($request->currentpassword, auth()->user()->password))
+        if(!\Illuminate\Support\Facades\Hash::check($request->currentpassword, auth()->user()->password))
         {
-            if($request->newpassword == $request->confirmpassword)
-            {
-
-                return \App\Models\User::where('id', '=', \Illuminate\Support\Facades\Auth::user()->id)
-                    ->update([
-                        'password' => \Illuminate\Support\Facades\Hash::make($request->newpassword)
-                    ]);
-            }
-            return 0;
+            return [
+                'success' => 0,
+                'error' => 'wrong_password'
+            ];
         }
-        return 0;
+
+        if($request->newpassword != $request->confirmpassword)
+        {
+            return [
+                'success' => 0,
+                'error' => 'passwords_not_match'
+            ];
+        }
+
+        \App\Models\User::where('id', '=', \Illuminate\Support\Facades\Auth::user()->id)
+            ->update([
+                'password' => \Illuminate\Support\Facades\Hash::make($request->newpassword)
+            ]);
+
+        return [
+            'success' => 1,
+            'error' => null
+        ];
     }
 }
