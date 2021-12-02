@@ -100,7 +100,7 @@ var KTAccountSettingsSigninMethods = {
                         },
                         error: function(jqXhr, textStatus, errorMessage) { // error callback
                             swal.fire({
-                                text: "It's not your fault. Something seems wrong on our end. Please try again.",
+                                text: "It's not your fault. Something seems wrong on our end. Please try again later.",
                                 icon: "error",
                                 buttonsStyling: !1,
                                 confirmButtonText: "Ok, got it!",
