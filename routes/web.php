@@ -22,7 +22,7 @@ Auth::routes();
 
 // Route group that requires authentication
 Route::middleware(['auth'])->group(function(){
-    
+
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // Route group for Admin Pages
@@ -40,8 +40,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/transactions/in_progress',[App\Http\Controllers\TransactionController::class,'in_progress'])->name('transactions.in_progress');
     Route::get('/transactions/history',[App\Http\Controllers\TransactionController::class,'history'])->name('transactions.history');
     Route::get('/result/transactions/search/', [App\Http\Controllers\TransactionController::class, 'search']);
-    
+
     Route::get('/account/overview',[App\Http\Controllers\AccountController::class,'overview'])->name('account.overview');
     Route::get('/account/settings',[App\Http\Controllers\AccountController::class,'settings'])->name('account.settings');
-
+    Route::post('/account/updateEmail', [App\Http\Controllers\AccountController::class, 'updateEmail'])->name('account.updateEmail');
+    Route::post('/account/updatePassword', [App\Http\Controllers\AccountController::class, 'updatePassword'])->name('account.updatePassword');
 });
