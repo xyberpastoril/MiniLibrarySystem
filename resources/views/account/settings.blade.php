@@ -108,12 +108,18 @@
                                             <div class="fv-row mb-0">
                                                 <label for="email" class="form-label fs-6 fw-bolder mb-3">Enter New Email Address</label>
                                                 <input type="email" class="form-control form-control-lg form-control-solid fw-bold fs-6" id="email" placeholder="Email Address" name="email" value="">
+                                                <span id="email-error" class="invalid-feedback" role="alert">
+                                                    <strong></strong>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="fv-row mb-0">
                                                 <label for="confirmemailpassword" class="form-label fs-6 fw-bolder mb-3">Confirm Password</label>
                                                 <input type="password" class="form-control form-control-lg form-control-solid fw-bold fs-6" name="confirmemailpassword" id="confirmemailpassword">
+                                                <span id="confirmemailpassword-error" class="invalid-feedback" role="alert">
+                                                    <strong></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
