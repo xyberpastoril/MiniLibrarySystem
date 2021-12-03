@@ -168,7 +168,7 @@ class User extends Authenticatable
      */
     public static function createOrUpdateUser($request, $user = NULL)
     {
-        // Create Book
+        // Create User
         if(!isset($user))
         {
             $obj = User::create([
