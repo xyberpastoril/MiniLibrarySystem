@@ -70,5 +70,10 @@ Route::middleware(['auth'])->group(function(){
         ->name('account.overview');
     Route::get('/account/settings',[App\Http\Controllers\AccountController::class,'settings'])
         ->name('account.settings');
+  
+    Route::post('/account/updateEmail', [App\Http\Controllers\AccountController::class, 'updateEmail'])
+        ->name('account.updateEmail');
+    Route::post('/account/updatePassword', [App\Http\Controllers\AccountController::class, 'updatePassword'])
+        ->name('account.updatePassword');
 
 });

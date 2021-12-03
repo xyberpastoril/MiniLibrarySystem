@@ -40,7 +40,7 @@
                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                     </svg>
                 </span>
-                <input type="text" data-kt-transaction-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search transaction">
+                <input type="text" data-kt-transaction-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search transaction" id='_search_text'>
             </div>
             <!--end::Search-->
 
@@ -71,7 +71,7 @@
     <div class="card-body pt-0">
 
         <!--begin::Table-->
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_transactions">
+        <table class="table align-middle table-row-dashed fs-6 gy-5" id="_table_transactions" key='waiting'>
 
             <!--begin::Table head-->
             <thead>
@@ -93,44 +93,7 @@
             <!--end::Table head-->
 
             <!--begin::Table body-->
-            <tbody class="text-gray-600 fw-bold">
-
-                <!--begin::Table row | Book -->
-                <tr>
-                    <!-- Checkbox -->
-                    <td>
-                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                            <input class="form-check-input" type="checkbox" value="1">
-                        </div>
-                    </td>
-
-                    <!-- Transaction Number -->
-                    <td class>109-00011</td>
-
-                    <!-- Book ID / ISBN -->
-                    <td>
-                        <a href="#" class="text-gray-800 text-hover-primary mb-1">9780000000000</a>
-                    </td>
-
-                    <!-- Request Date -->
-                    <td>10 Mar 2021, 6:05 pm</td>
-
-                    <!-- From -->
-                    <td>12 Mar 2021</td>
-
-                    <!-- To -->
-                    <td>14 Mar 2021</td>
-
-                    <!-- Copies -->
-                    <td>1</td>
-                    
-                    <!-- Actions -->
-                    <td class="text-end">
-                        <a href="#" id="returnedButton" class="btn btn-light btn-danger btn-sm" >Cancel
-                        </a>
-                    </td>
-                </tr>
-                <!--end::Table row | Book -->
+            <tbody class="text-gray-600 fw-bold" id='_table_body'>
             </tbody>
             <!--end::Table body-->
 
@@ -154,5 +117,6 @@
 <!-- -->
 
 @section("custom_js")
-    <script src="{{ asset("js/custom/user/transactions-page/transactions-waiting-table.js") }}"></script>
+    <!--script src="{{ asset("js/custom/user/transactions-page/transactions-waiting-table.js") }}"></script>-->
+    <script src="{{ asset("js/fetch_transactions.js") }}"></script>
 @endsection
