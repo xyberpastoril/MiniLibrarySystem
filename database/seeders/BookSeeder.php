@@ -26,31 +26,31 @@ class BookSeeder extends Seeder
             'isbn' => '978-1612626796',
             'published_date' => '2014-07-31',
             'copies_owned' => 2,
-            'cover_url' => '1.jpg',
+            'cover_url' => '1',
         ]);
         $book->authors()->createMany([
             ['name' => "Hajime Isayama"],
         ]);
-        
+
         // #2
         $book = \App\Models\Book::create([
             'title' => "Antiques Roadkill: A Trash 'n' Treasures Mystery",
-            'description' => 'Determined to make a new start in her quaint hometown on the banks of the Mississippi, Brandy Borne never dreams she\'ll become the prime suspect in a murder case. . . 
+            'description' => 'Determined to make a new start in her quaint hometown on the banks of the Mississippi, Brandy Borne never dreams she\'ll become the prime suspect in a murder case. . .
 
-            Moving back in with her eccentric, larger-than-life mother, Brandy Borne finds small-town Serenity anything but serene. It seems an unscrupulous antiques dealer has swindled Vivian out of the family\'s heirlooms. But when he is found run over in a country lane, Brandy becomes Murder Suspect Number One--with her mother coming in a very close second. . . 
-            
-            The list of other suspects is impressive--the victim\'s business seems to have been based on bilking seniors out of their possessions. And when the Borne "girls" uncover a few very unsavory Serenity secrets, they become targets for a murderer whose favorite hobby seems to be collecting victims. 
-            
-            Don\'t miss Brandy Borne\'s tips on antiques! 
-            
-            "Cozy mystery fans will love this down-to-earth heroine with the wry sense of humor and a big heart." --Nancy Pickard 
-            
+            Moving back in with her eccentric, larger-than-life mother, Brandy Borne finds small-town Serenity anything but serene. It seems an unscrupulous antiques dealer has swindled Vivian out of the family\'s heirlooms. But when he is found run over in a country lane, Brandy becomes Murder Suspect Number One--with her mother coming in a very close second. . .
+
+            The list of other suspects is impressive--the victim\'s business seems to have been based on bilking seniors out of their possessions. And when the Borne "girls" uncover a few very unsavory Serenity secrets, they become targets for a murderer whose favorite hobby seems to be collecting victims.
+
+            Don\'t miss Brandy Borne\'s tips on antiques!
+
+            "Cozy mystery fans will love this down-to-earth heroine with the wry sense of humor and a big heart." --Nancy Pickard
+
             "With its small-town setting and quirky characters, Antiques Roadkill is fun from start to finish. Dive in and enjoy."--Laurien Berenson',
             'page_count' => 288,
             'isbn' => '0758211929',
             'published_date' => '2007-07-01',
             'copies_owned' => 1,
-            'cover_url' => '2.jpg',
+            'cover_url' => '2',
         ]);
         $book->authors()->createMany([
             ['name' => "Barbara Allan"],
@@ -68,13 +68,13 @@ class BookSeeder extends Seeder
             'description' => "Take a globetrotting journey all over the world--and beyond!--with this companion art book to the hit video game for the Nintendo Switch(TM) system!
 
             In October of 2017, Super Mario Odyssey(TM) took the gaming world by storm. Now, discover the art and expertise that went into creating one of Nintendo's best-loved games!
-            
+
             This full-color volume clocks in at over 350 pages and features concept art, preliminary sketches, and notes from the development team, plus insight into some early ideas that didn't make it into the game itself! Explore the world of Super Mario Odyssey from every angle, including screen shots, marketing material, and more, to fully appreciate this captivating adventure",
             'page_count' => 368,
             'isbn' => '978-1506713755',
             'published_date' => '2019-11-05',
             'copies_owned' => 2,
-            'cover_url' => '3.jpg',
+            'cover_url' => '3',
         ]);
         $book->authors()->createMany([
             ['name' => "Nintendo"],
@@ -92,7 +92,7 @@ class BookSeeder extends Seeder
             'isbn' => '978-0758278333',
             'published_date' => '2009-03-01',
             'copies_owned' => 1,
-            'cover_url' => '4.jpg',
+            'cover_url' => '4',
         ]);
         $book->authors()->createMany([
             ['name' => "Sara Rosett"],
@@ -106,7 +106,7 @@ class BookSeeder extends Seeder
             'isbn' => '0345503805',
             'published_date' => '2009-01-08',
             'copies_owned' => 1,
-            'cover_url' => '5.jpg',
+            'cover_url' => '5',
         ]);
         $book->authors()->createMany([
             ['name' => "Peter V. Brett"],
@@ -127,7 +127,7 @@ class BookSeeder extends Seeder
             'isbn' => '0006486126',
             'published_date' => '2011-02-24',
             'copies_owned' => 1,
-            'cover_url' => '6.jpg',
+            'cover_url' => '6',
         ]);
         $book->authors()->createMany([
             ['name' => "George R.R. Martin"],
@@ -142,7 +142,7 @@ class BookSeeder extends Seeder
             'isbn' => '978-1789090147',
             'published_date' => '2018-08-28',
             'copies_owned' => 1,
-            'cover_url' => '7.jpg',
+            'cover_url' => '7',
         ]);
         $book->authors()->createMany([
             ['name' => "J.M. Barlog"],
@@ -161,7 +161,7 @@ class BookSeeder extends Seeder
             'isbn' => '978-1250166548',
             'published_date' => '2017-10-17',
             'copies_owned' => 1,
-            'cover_url' => '8.jpg',
+            'cover_url' => '8',
         ]);
         $book->authors()->createMany([
             ['name' => "Brandon Sanderson"],
@@ -180,7 +180,7 @@ class BookSeeder extends Seeder
             'isbn' => '978-0062651235',
             'published_date' => '2017-09-05',
             'copies_owned' => 1,
-            'cover_url' => '9.jpg',
+            'cover_url' => '9',
         ]);
         $book->authors()->createMany([
             ['name' => "Jason Schreier"],
@@ -198,7 +198,7 @@ class BookSeeder extends Seeder
             'isbn' => '978-1529018585',
             'published_date' => '2019-10-17',
             'copies_owned' => 1,
-            'cover_url' => '10.jpg',
+            'cover_url' => '10',
         ]);
         $book->authors()->createMany([
             ['name' => "Adam Kay"],

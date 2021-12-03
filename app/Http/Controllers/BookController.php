@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -91,6 +93,31 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:books,title,'.$book->id,
+            'authors' => 'required|string|max:100',
+            'description' => 'required',
+            'page_count' => 'required|numeric|min:1',
+            'published_date' => 'required|date',
+            'isbn' => 'required|string|max:20',
+            'genres' => 'nullable|string|max:100',
+            'copies_owned' => 'required|numeric|min:1',
+            'cover_url' => 'nullable|mimes:jpeg,png,jpg|max:10000',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator);
+
+        if(isset($request->cover_url))
+        {
+            if (Storage::exists(public_path('media/books/'.$book->id)))
+                unlink('media/books/'.$book->id);
+
+            $request->cover_url->move(public_path('media/books/'), $book->id);
+            $request->cover_url = $book->id;
+        }
+        else $request->cover_url = $book->cover_url;
+
         Book::createOrUpdateBook($request, $book);
         Book::updateAuthors($request->authors, $book);
         Book::updateGenres($request->genres, $book);
