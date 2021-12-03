@@ -97,7 +97,7 @@
                         <div class="d-flex flex-wrap align-items-center mb-8">
                             <div id="kt_signin_email">
                                 <div class="fs-5 fw-bolder mb-1">Email Address</div>
-                                <div class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
+                                <div id="email-readonly" class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
                             </div>
                             <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
                                 <!--begin::Form-->

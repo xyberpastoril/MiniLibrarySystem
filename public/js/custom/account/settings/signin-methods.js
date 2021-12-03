@@ -84,6 +84,9 @@ var KTAccountSettingsSigninMethods = {
                                 $("#kt_signin_email_edit").addClass("d-none")
                                 $("#kt_signin_email").removeClass("d-none")
                                 $("#kt_signin_email_button").removeClass("d-none")
+
+                                $("#email-readonly").html($("#email").val())
+
                                 $("#email").val("")
                                 $("#confirmemailpassword").val("")
 
