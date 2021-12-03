@@ -66,8 +66,12 @@ var KTAccountSettingsSigninMethods = {
                             // reset errors
                             $("#confirmemailpassword-error").hide()
                             $("#email-error").hide()
+
                             $("#email").removeClass("is-invalid")
                             $("#confirmemailpassword").removeClass("is-invalid")
+
+                            $("#email").removeClass("is-valid")
+                            $("#confirmemailpassword").removeClass("is-valid")
 
                             if (data.success) {
                                 // reset
@@ -161,6 +165,10 @@ var KTAccountSettingsSigninMethods = {
                         $("#currentpassword").removeClass("is-invalid")
                         $("#newpassword").removeClass("is-invalid")
                         $("#confirmpassword").removeClass("is-invalid")
+
+                        $("#currentpassword").removeClass("is-valid")
+                        $("#newpassword").removeClass("is-valid")
+                        $("#confirmpassword").removeClass("is-valid")
 
                         if( $("#currentpassword").val() &&
                             $("#newpassword").val() &&
