@@ -29,13 +29,13 @@ var KTbooksList = function() {
 								confirmButton: "btn fw-bold btn-primary"
 							}
 						}).then((function() {
-                             $.ajax({
+                            $.ajax({
                                 url:"books/"+z,
                                 type:'DELETE',
                                 data:{
                                     _token: $("input[name=_token]").val()
                                 }
-                             })
+                            })
 							e.row($(n)).remove().draw()
 						})).then((function() {
 							a()

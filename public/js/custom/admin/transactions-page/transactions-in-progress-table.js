@@ -34,6 +34,13 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        $.ajax({
+                            url:"/transactions/" + r + "/return",
+                            type:'PUT',
+                            data:{
+                                _token: $("input[name=_token]").val()
+                            }
+                        })
                         e.row($(n)).remove().draw()
                     })).then((function() {
                         a()
@@ -77,8 +84,14 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
-                        // e.row($(n)).remove().draw()
-                        window.location.reload()
+                        $.ajax({
+                            url:"/transactions/" + r + "/claim",
+                            type:'PUT',
+                            data:{
+                                _token: $("input[name=_token]").val()
+                            }
+                        })
+                        window.location.reload();
                     })).then((function() {
                         a()
                     })) : "cancel" === t.dismiss && Swal.fire({

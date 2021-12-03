@@ -75,10 +75,10 @@
                     <!-- Content-->
                     <div class="px-7 py-5" data-kt-books-table-filter="form">
 
-                        <!-- Status -->
+                        <!-- Genres -->
                         <div class="mb-10">
-                            <label class="form-label fs-6 fw-bold">Status:</label>
-                            <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-books-table-filter="status" data-hide-search="true">
+                            <label class="form-label fs-6 fw-bold">Genres:</label>
+                            <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-books-table-filter="genres" data-hide-search="true">
                                 <option></option>
                                 @foreach ($allGenres as $genre)
                                     <option value="{{ $genre->name }}">{{ $genre->name }}</option>
@@ -464,10 +464,10 @@
                             <!-- Book details -->
                             <div class="d-flex flex-column">
                                 <a href="{{ route("books.edit", $book->id) }}" class="text-gray-800 text-hover-primary mb-1 my-text-truncate">{{ $book->title }}</a>
-                                <span>
+                                <span class="fs-7">
                                     {{ $book->authors[0]->name }}
                                     @if(count($book->authors) > 1)
-                                        and {{ (count($book->authors) - 1) }} others.
+                                        and {{ (count($book->authors) - 1) }} other(s).
                                     @endif
                                 </span>
                             </div>

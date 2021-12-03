@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/result/books/search/', [App\Http\Controllers\BookController::class, 'search']);
 
     // Users
+    Route::delete('/users/destroyWithRedirect/{user}',[App\Http\Controllers\UserController::class,'destroyWithRedirect'])
+        ->name('users.destroyWithRedirect');
     Route::resource('/users', App\Http\Controllers\UserController::class);
     Route::get('/result/users/search/', [App\Http\Controllers\UserController::class, 'search']);
 
@@ -52,7 +54,7 @@ Route::middleware(['auth'])->group(function(){
     // Transactions Actions
     Route::post('/transactions', [App\Http\Controllers\TransactionController::class, 'request'])
         ->name('transactions.request');
-    Route::put('/transactions/{transaction}/cancel', [App\Http\Controllers\TransactionController::class, 'cancel'])
+    Route::delete('/transactions/{transaction}/cancel', [App\Http\Controllers\TransactionController::class, 'cancel'])
         ->name('transactions.cancel');
     Route::put('/transactions/{transaction}/approve', [App\Http\Controllers\TransactionController::class, 'approve'])
         ->name('transactions.approve');

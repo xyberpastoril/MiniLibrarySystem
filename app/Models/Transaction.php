@@ -30,9 +30,9 @@ class Transaction extends Model
     public static function search($search, $status, $user)
     {
         $obj = self::select(
-                DB::raw('users.id as user_id'), 
-                'users.first_name', 
-                'users.last_name', 
+                DB::raw('users.id as user_id'),
+                'users.first_name',
+                'users.last_name',
                 'transactions.id',
                 'transactions.date_from',
                 'transactions.date_to',
@@ -125,7 +125,7 @@ class Transaction extends Model
         return self::where('id', '=', $transaction->id)
             ->update([
                 'status' => 'unclaimed',
-                'date_approved' => \Carbon\Carbon::now()->format('Y-m-d')
+                'date_accepted' => \Carbon\Carbon::now()->format('Y-m-d')
             ]);
     }
 
@@ -140,7 +140,7 @@ class Transaction extends Model
     public static function return($transaction)
     {
         return self::where('id', '=', $transaction->id)
-            ->where([
+            ->update([
                 'status' => 'returned',
                 'date_returned' => \Carbon\Carbon::now()->format('Y-m-d')
             ]);

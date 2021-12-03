@@ -32,6 +32,13 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        $.ajax({
+                            url:"/transactions/" + r + "/cancel",
+                            type:'DELETE',
+                            data:{
+                                _token: $("input[name=_token]").val()
+                            }
+                        })
                         e.row($(n)).remove().draw()
                     })).then((function() {
                         a()
@@ -75,6 +82,13 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        $.ajax({
+                            url:"/transactions/" + r + "/approve",
+                            type:'PUT',
+                            data:{
+                                _token: $("input[name=_token]").val()
+                            }
+                        })
                         e.row($(n)).remove().draw()
                     })).then((function() {
                         a()
@@ -124,36 +138,41 @@ var KTTransactionsList = (function() {
                     },
                 }).then(function(t) {
                     t.value ? Swal.fire({
-                            text: "You have decline all selected transactions!.",
-                            icon: "danger",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
-                        })
-                        .then(function() {
-                            c.forEach((t) => {
-                                t.checked &&
-                                    e
-                                    .row($(t.closest("tbody tr")))
-                                    .remove()
-                                    .draw();
-                            });
-                            o.querySelectorAll('[type="checkbox"]')[0].checked = !1;
-                        })
-                        .then(function() {
-                            a(), l();
-                        }) : "cancel" === t.dismiss &&
-                        Swal.fire({
-                            text: "Selected transactions was not declined.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
+                        text: "You have decline all selected transactions!.",
+                        icon: "danger",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        },
+                    })
+                    .then(function() {
+                        c.forEach((t) => {
+                            if(t.checked && t.value > 0){
+                                $.ajax({
+                                    url:"/transactions/" + t.value + "/cancel",
+                                    type:'DELETE',
+                                    data:{
+                                        _token: $("input[name=_token]").val()
+                                    }
+                                })
+                            }
+                            t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
                         });
+                        o.querySelectorAll('[type="checkbox"]')[0].checked = !1;
+                    })
+                    .then(function() {
+                        a(), l();
+                    }) : "cancel" === t.dismiss &&
+                    Swal.fire({
+                        text: "Selected transactions was not declined.",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        },
+                    });
                 });
             });
     };
@@ -190,36 +209,41 @@ var KTTransactionsList = (function() {
                     },
                 }).then(function(t) {
                     t.value ? Swal.fire({
-                            text: "You have accepted all selected transactions!.",
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
-                        })
-                        .then(function() {
-                            c.forEach((t) => {
-                                t.checked &&
-                                    e
-                                    .row($(t.closest("tbody tr")))
-                                    .remove()
-                                    .draw();
-                            });
-                            o.querySelectorAll('[type="checkbox"]')[0].checked = !1;
-                        })
-                        .then(function() {
-                            a(), m();
-                        }) : "cancel" === t.dismiss &&
-                        Swal.fire({
-                            text: "Selected transactions was not accepted.",
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            },
+                        text: "You have accepted all selected transactions!.",
+                        icon: "success",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        },
+                    })
+                    .then(function() {
+                        c.forEach((t) => {
+                            t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
+                            if(t.checked && t.value > 0){
+                                $.ajax({
+                                    url:"/transactions/" + t.value + "/approve",
+                                    type:'PUT',
+                                    data:{
+                                        _token: $("input[name=_token]").val()
+                                    }
+                                })
+                            }
                         });
+                        o.querySelectorAll('[type="checkbox"]')[0].checked = !1;
+                    })
+                    .then(function() {
+                        a(), m();
+                    }) : "cancel" === t.dismiss &&
+                    Swal.fire({
+                        text: "Selected transactions was not accepted.",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        },
+                    });
                 });
             });
     };

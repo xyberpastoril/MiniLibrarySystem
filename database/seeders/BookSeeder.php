@@ -30,6 +30,7 @@ class BookSeeder extends Seeder
         ]);
         $book->authors()->createMany([
             ['name' => "Hajime Isayama"],
+            ['name' => "Hajime Isayama"],
         ]);
 
         // #2

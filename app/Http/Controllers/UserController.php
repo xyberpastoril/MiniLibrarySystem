@@ -10,7 +10,7 @@ class UserController extends Controller
 
     /**
      * Construct object. Require admin role to all functions.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function __construct()
@@ -95,7 +95,26 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->cover_url)
+            unlink('media/avatars/'.$user->cover_url);
+        return User::deleteUser($user);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * Allowed only to Admins.
+     *
+     * @param  \App\Models\User  $user
+     * @return Redirect to Users Route
+     */
+    public function destroyWithRedirect(User $user)
+    {
+        if ($user->cover_url)
+            unlink('media/avatars/'.$user->cover_url);
+
+        User::deleteUser($user);
+        return redirect()->to('users');
     }
 
     /** JSON */

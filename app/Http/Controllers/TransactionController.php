@@ -71,7 +71,7 @@ class TransactionController extends Controller
     }
 
     /** Update */
-    public function approve(Request $request, \App\Models\Transaction $transaction)
+    public function approve(\App\Models\Transaction $transaction)
     {
         return \App\Models\Transaction::approve($transaction);
     }

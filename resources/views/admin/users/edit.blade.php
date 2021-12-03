@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -32,8 +32,9 @@
 
     <div class="card mb-5 mb-xl-10">
 
-        <form action="#" class="form" id="kt_form_user_details">
-            <div class="card-body p-9">
+        <div class="card-body p-9">
+            <form id="user_update_form" method="POST" action="{{ route('users.update', $user->id) }}"  class="form" enctype="multipart/form-data">
+
                 <div class=" d-flex flex-column flex-lg-row">
 
                     <!-- Aside -->
@@ -49,16 +50,16 @@
 
                                 <!-- Image input -->
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/avatars/blank.png") }}')">
-                                    
+
                                     <!-- Preview existing avatar -->
                                     <div class="image-input-wrapper w-175px h-175px" style="background-image: url('@if($user->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/$user->cover_url") }}@endif')"></div>
-                                    
+
                                     <!-- Label -->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change profile picture">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input type="hidden" name="picture_remove">
                                     </label>
-                                    
+
                                     <!-- Cancel -->
                                     <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel profile picture">
                                         <i class="bi bi-x fs-2"></i>
@@ -142,19 +143,25 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
 
-            <!-- Actions -->
-            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <div id="btn_group" class="btn-group visually-hidden">
-                    <button type="reset" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                    <button type="submit" id="btn_save" class="btn btn-primary">Save Changes</button>
                 </div>
-                <button id="btn_delete" class="btn btn-danger">Delete</button>
+                
+            </form>
+        </div>
+
+        <!-- Actions -->
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <div id="btn_group" class="btn-group visually-hidden">
+                <button type="reset" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+                <button type="submit" id="btn_save" class="btn btn-primary">Save Changes</button>
             </div>
-        </form>
-        
+            <form method="POST" id="user_destroy_form" action="{{  route('users.destroyWithRedirect', $user->id) }}" class="form">
+                @csrf
+                @method("DELETE")
+                <button type="submit" id="btn_delete" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+
     </div>
 
 @endsection

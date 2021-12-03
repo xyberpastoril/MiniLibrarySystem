@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -67,7 +67,7 @@
                         </svg>
                     </span>Export
                 </button>
-                
+
             </div>
 
             <!-- Delete Selected -->
@@ -87,7 +87,7 @@
                         <div class="modal-header">
                             <!-- Modal title -->
                             <h2>Export transactions</h2>
-                            
+
                             <!-- Close -->
                             <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-transactions-modal-action="close">
                                 <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr061.svg-->
@@ -127,7 +127,7 @@
                                     <button type="reset" class="btn btn-light me-3" data-kt-transactions-modal-action="cancel">Discard</button>
                                     <button type="submit" class="btn btn-primary" data-kt-transactions-modal-action="submit">
                                         <span class="indicator-label">Submit</span>
-                                        <span class="indicator-progress">Please wait... 
+                                        <span class="indicator-progress">Please wait...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 </div>
@@ -158,7 +158,7 @@
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="w-10px pe-2">
                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_transactions .form-check-input" value="1">
+                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_transactions .form-check-input" value="0">
                         </div>
                     </th>
                     <th class="w-75px">Transaction Number</th>
@@ -183,7 +183,7 @@
                         <!-- Checkbox -->
                         <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="1">
+                                <input class="form-check-input" type="checkbox" value="{{ $transaction->id }}">
                             </div>
                         </td>
 
@@ -240,9 +240,9 @@
                             </a>
                         </td>
                     </tr>
-                    
+
                 @endforeach
-                
+
             </tbody>
             <!--end::Table body-->
 

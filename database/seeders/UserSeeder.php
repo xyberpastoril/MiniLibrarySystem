@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         $user = \App\Models\User::create([
             'first_name' => 'Cristobal',
             'last_name' => 'Legaspi',
-            'cover_url' => 'CristobalLegaspi.jpg',
+            'cover_url' => 'CristobalLegaspi',
             'username' => '@cris1412',
             'email' => 'librarian@example.com',
             'gender' => 'Male',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         $user = \App\Models\User::create([
             'first_name' => 'Raymon',
             'last_name' => 'Magno',
-            'cover_url' => 'RaymonMagno.jpg',
+            'cover_url' => 'RaymonMagno',
             'username' => 'raymon123',
             'email' => 'member@example.com',
             'gender' => 'Male',
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         $user = \App\Models\User::create([
             'first_name' => 'Chrisanna Megan',
             'last_name' => 'Dimaculangan',
-            'cover_url' => 'Chrisanna MeganDimaculangan.jpg',
+            'cover_url' => 'Chrisanna MeganDimaculangan',
             'username' => 'megan143',
             'email' => 'member2@example.com',
             'gender' => 'Female',
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
         $user = \App\Models\User::create([
             'first_name' => 'Kelsey',
             'last_name' => 'Cembrano',
-            'cover_url' => 'KelseyCembrano.jpg',
+            'cover_url' => 'KelseyCembrano',
             'username' => 'kelcembrano',
             'email' => 'member3@example.com',
             'gender' => 'Female',
