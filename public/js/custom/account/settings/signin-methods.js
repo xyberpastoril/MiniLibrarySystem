@@ -22,9 +22,11 @@ var KTAccountSettingsSigninMethods = {
             }));
             var l = function() {
                     t.classList.toggle("d-none"), o.classList.toggle("d-none"), e.classList.toggle("d-none")
+                    $("#email").focus()
                 },
                 d = function() {
                     n.classList.toggle("d-none"), r.classList.toggle("d-none"), i.classList.toggle("d-none")
+                    $("#currentpassword").focus()
                 }
         }(), e = document.getElementById("kt_signin_change_email"), t = FormValidation.formValidation(e, {
                 fields: {
