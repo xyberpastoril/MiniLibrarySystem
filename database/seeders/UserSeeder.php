@@ -15,40 +15,52 @@ class UserSeeder extends Seeder
     {
         // Create Librarian Account
         $user = \App\Models\User::create([
-            'first_name' => 'Test',
-            'last_name' => 'Librarian',
-            'username' => 'librarian',
+            'first_name' => 'Cristobal',
+            'last_name' => 'Legaspi',
+            'cover_url' => 'CristobalLegaspi',
+            'username' => 'cris1412',
             'email' => 'librarian@example.com',
+            'gender' => 'Male',
+            'address' => 'Visca, Baybay City, Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('librarian123'),
         ]);
         $user->assignRole([1]);
 
         // Create Test Member Account
         $user = \App\Models\User::create([
-            'first_name' => 'Test',
-            'last_name' => 'Member',
-            'username' => 'member',
+            'first_name' => 'Raymon',
+            'last_name' => 'Magno',
+            'cover_url' => 'RaymonMagno',
+            'username' => 'raymon123',
             'email' => 'member@example.com',
+            'gender' => 'Male',
+            'address' => 'Visca, Baybay City, Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
 
         // Create Test Member Account
         $user = \App\Models\User::create([
-            'first_name' => 'Test',
-            'last_name' => 'Member 2',
-            'username' => 'member2',
+            'first_name' => 'Chrisanna Megan',
+            'last_name' => 'Dimaculangan',
+            'cover_url' => 'Chrisanna MeganDimaculangan',
+            'username' => 'megan143',
             'email' => 'member2@example.com',
+            'gender' => 'Female',
+            'address' => 'Visca, Baybay City, Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
 
         // Create Test Member Account
         $user = \App\Models\User::create([
-            'first_name' => 'Test',
-            'last_name' => 'Member 3',
-            'username' => 'member3',
+            'first_name' => 'Kelsey',
+            'last_name' => 'Cembrano',
+            'cover_url' => 'KelseyCembrano',
+            'username' => 'kelcembrano',
             'email' => 'member3@example.com',
+            'gender' => 'Female',
+            'address' => 'Visca, Baybay City, Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
