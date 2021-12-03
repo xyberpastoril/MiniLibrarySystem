@@ -16,3 +16,5 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .vscode/settings.json
+
+public/media/avatars
