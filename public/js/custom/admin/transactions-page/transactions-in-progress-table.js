@@ -111,7 +111,6 @@ var KTTransactionsList = (function() {
         init: function() {
             o && (e = $(o).DataTable({
                     aLengthMenu: [5, 10, 25, 50, 100],
-                    searchDelay: 500,
                     order: [
                         [3, "desc"]
                     ],

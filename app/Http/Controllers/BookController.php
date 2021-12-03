@@ -85,7 +85,10 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view("member.books.show");
+        if(count($book->genres) > 0) $book['genres'] = Genre::getBookGenres($book->id)[0]->genres;
+        else $book['genres'] = "";
+
+        return view("member.books.show", compact('book'));
     }
 
     /**

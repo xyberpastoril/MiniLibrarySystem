@@ -262,21 +262,20 @@ var KTTransactionsList = (function() {
     return {
         init: function() {
             o && (e = $(o).DataTable({
-                    aLengthMenu: [5, 10, 25, 50, 100],
-                    searchDelay: 500,
-                    order: [
-                        [4, "desc"]
-                    ],
+                aLengthMenu: [5, 10, 25, 50, 100],
+                order: [
+                    [4, "desc"]
+                ],
 
-                    columnDefs: [{
-                        targets: 0,
-                        orderable: false,
-                    }, ],
-                })).on("draw", function() {
-                    l(), m(), c(), d(), a();
-                }),
-                l(), m(),
-                c(), d();
+                columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                }, ],
+            })).on("draw", function() {
+                l(), m(), c(), d(), a();
+            }),
+            l(), m(),
+            c(), d();
         },
     };
 })();

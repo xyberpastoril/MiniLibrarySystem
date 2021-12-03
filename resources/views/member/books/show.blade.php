@@ -33,7 +33,6 @@
         <div class="card-header card-header-stretch">
             <!--begin::Title-->
             <div class="card-title d-flex align-items-center">
-                <h2 class="text-black">Title : Attack On Titan Volume 13</h2>
             </div>
 
             <div class="card-toolbar p-5">
@@ -41,7 +40,7 @@
             </div>
         </div>
         <div class="card-body p-9">
-            
+
             <div class=" d-flex flex-column flex-lg-row">
                 <!--begin::Aside-->
                 <div class="flex-column flex-md-row-auto w-75 w-lg-200px w-xxl-225px">
@@ -50,7 +49,7 @@
                         <!--begin::Col-->
                         <div class="col-lg-12">
                             <div class="card" style="width: 14rem;flex: 0 0 auto;">
-                                <img class="card" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
+                                <img class="card" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
                                     style="width: 100%; height: 225px; object-fit: cover;">
                             </div>
                         </div>
@@ -59,32 +58,37 @@
                     <!--end::Input group-->
                 </div>
                 <div class="flex-md-row-fluid ms-lg-12">
+                    <div class="fs-4 mt-2"><span class="fw-bolder">Title :</span> {{ $book->title }}</div>
+
                     <div class="fs-5 fw-bolder mt-2">Author(s) : </div>
-                    <p class="fs-6">Hajime Isayama</p>
+                    <p class="fs-6">
+                        {{ $book->authors[0]->name }}@for ($i = 1; $i < count($book->authors); $i++), {{ $book->authors[$i]->name }}@endfor
+                    </p>
 
                     <div class="fs-5 fw-bolder mt-2">Description : </div>
-                    <p class="fs-6">It is set in a world where humanity lives inside cities surrounded by three enormous walls that protect them from the gigantic man-eating humanoids referred to as Titans; the story follows Eren Yeager, who vows to exterminate the Titans after a Titan brings about the destruction of his hometown and the death of his ...</p>
-                    
+                    <p class="fs-6">{{ $book->description }}</p>
+
                     <div class="fs-5 fw-bolder mt-2">Page Count : </div>
-                    <p class="fs-6">192</p>
+                    <p class="fs-6">{{ $book->page_count }}</p>
 
                     <div class="fs-5 fw-bolder mt-2">ISBN : </div>
-                    <p class="fs-6">9780000000</p>
+                    <p class="fs-6">{{ $book->isbn }}</p>
 
                     <div class="fs-5 fw-bolder mt-2">Total Copies : </div>
-                    <p class="fs-6">3</p>
+                    <p class="fs-6">{{ $book->page_count }}</p>
 
+                    {{-- Todo Available copies --}}
                     <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
-                    <p class="fs-6">1</p>
+                    <p class="fs-6"></p>
 
                     <div class="fs-5 fw-bolder mt-2">Genre(s) : </div>
-                    <p class="fs-6">Action, Fiction</p>
+                    <p class="fs-6">{{ $book->genres }}</p>
 
                     <div class="fs-5 fw-bolder mt-2">Published Date : </div>
-                    <p class="fs-6">2020-09-08</p>
+                    <p class="fs-6">{{ $book->published_date }}</p>
 
                     <div class="fs-5 fw-bolder mt-2">Date Added: </div>
-                    <p class="fs-6">2020-09-08</p>
+                    <p class="fs-6">{{ $book->created_at }}</p>
                 </div>
             </div>
         </div>
@@ -141,15 +145,11 @@
 <!-- -->
 
 @section("vendor_js")
-
     <script src="{{ asset("plugins/custom/fullcalendar/fullcalendar.bundle.js") }}"></script>
-
 @endsection
 
 <!-- -->
 
 @section("custom_js")
-
-    <script src="{{ asset("js/custom/user/homepage/book-details.js") }}"></script>
-
+    <script src="{{ asset("js/custom/member/homepage/book-details.js") }}"></script>
 @endsection

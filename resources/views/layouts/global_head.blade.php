@@ -14,4 +14,5 @@
 <link href="{{ asset("css/my.style.css") }}" rel="stylesheet" type="text/css">
 
 <!-- Page Icon -->
+
 <link rel="shortcut icon" href="{{ asset("media/logos/icon.ico") }}">

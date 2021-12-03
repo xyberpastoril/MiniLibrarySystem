@@ -21,8 +21,9 @@ class TransactionController extends Controller
                 "allTransactions" => $t,
             ]);
         }
-        return view("member.transactions.waiting_for_approval");
-
+        return view("member.transactions.waiting_for_approval", [
+            "allTransactions" => $t,
+        ]);
     }
 
     /**
@@ -38,7 +39,9 @@ class TransactionController extends Controller
                 "allTransactions" => $t,
             ]);
         }
-        return view("member.transactions.in_progress");
+        return view("member.transactions.in_progress", [
+            "allTransactions" => $t,
+        ]);
     }
 
     /**
@@ -53,7 +56,9 @@ class TransactionController extends Controller
                 "allTransactions" => $t,
             ]);
         }
-        return view("member.transactions.history");
+        return view("member.transactions.history", [
+            "allTransactions" => $t,
+        ]);
     }
 
     /** Create */
