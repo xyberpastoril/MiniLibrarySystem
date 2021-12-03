@@ -22,9 +22,15 @@ var KTAccountSettingsSigninMethods = {
             }));
             var l = function() {
                     t.classList.toggle("d-none"), o.classList.toggle("d-none"), e.classList.toggle("d-none")
+                    if(n.classList.contains("d-none"))
+                        n.classList.toggle("d-none"), r.classList.toggle("d-none"), i.classList.toggle("d-none")
+                    $("#email").focus()
                 },
                 d = function() {
                     n.classList.toggle("d-none"), r.classList.toggle("d-none"), i.classList.toggle("d-none")
+                    if(t.classList.contains("d-none"))
+                        t.classList.toggle("d-none"), o.classList.toggle("d-none"), e.classList.toggle("d-none")
+                    $("#currentpassword").focus()
                 }
         }(), e = document.getElementById("kt_signin_change_email"), t = FormValidation.formValidation(e, {
                 fields: {
@@ -66,14 +72,21 @@ var KTAccountSettingsSigninMethods = {
                             // reset errors
                             $("#confirmemailpassword-error").hide()
                             $("#email-error").hide()
+
                             $("#email").removeClass("is-invalid")
                             $("#confirmemailpassword").removeClass("is-invalid")
+
+                            $("#email").removeClass("is-valid")
+                            $("#confirmemailpassword").removeClass("is-valid")
 
                             if (data.success) {
                                 // reset
                                 $("#kt_signin_email_edit").addClass("d-none")
                                 $("#kt_signin_email").removeClass("d-none")
                                 $("#kt_signin_email_button").removeClass("d-none")
+
+                                $("#email-readonly").html($("#email").val())
+
                                 $("#email").val("")
                                 $("#confirmemailpassword").val("")
 
@@ -161,6 +174,10 @@ var KTAccountSettingsSigninMethods = {
                         $("#currentpassword").removeClass("is-invalid")
                         $("#newpassword").removeClass("is-invalid")
                         $("#confirmpassword").removeClass("is-invalid")
+
+                        $("#currentpassword").removeClass("is-valid")
+                        $("#newpassword").removeClass("is-valid")
+                        $("#confirmpassword").removeClass("is-valid")
 
                         if( $("#currentpassword").val() &&
                             $("#newpassword").val() &&
