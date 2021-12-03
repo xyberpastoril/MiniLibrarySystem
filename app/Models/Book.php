@@ -250,11 +250,11 @@ class Book extends Model
     }
 
     /**
-     * Creates or updates a book instance.
+     * Deletes a book instance.
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Book $book or NULL (for create)
-     * @return \App\Models\Book
+     * @return bool|null
      */
     public static function deleteBook($book)
     {
@@ -262,4 +262,6 @@ class Book extends Model
         $book->genres()->delete();
         return $book->delete();
     }
+
+    
 }

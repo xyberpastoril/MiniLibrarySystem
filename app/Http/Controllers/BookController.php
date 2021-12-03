@@ -45,11 +45,32 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $obj = Book::createOrUpdateBook($request);
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:books,title',
+            'authors' => 'required|string|max:100',
+            'description' => 'required',
+            'page_count' => 'required|numeric|min:1',
+            'published_date' => 'required|date',
+            'isbn' => 'required|string|max:20',
+            'genres' => 'nullable|string|max:100',
+            'copies_owned' => 'required|numeric|min:1',
+            'cover_url' => 'nullable|mimes:jpeg,png,jpg|max:10000',
+        ]);
 
-        // Add genres
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        $obj = Book::createOrUpdateBook($request);
         $obj->authors = Book::updateAuthors($request->authors, $obj);
-        $obj->genres = Book::updateGenres($request->genre, $obj);
+        $obj->genres = Book::updateGenres($request->genres, $obj);
+
+        if(isset($request->cover_url))
+        {
+            $request->cover_url->move(public_path('media/books/'), $obj->id);
+            $request->cover_url = $obj->id;
+
+            Book::createOrUpdateBook($request, $obj);
+        }
 
         return redirect()->to('books');
     }
@@ -106,12 +127,12 @@ class BookController extends Controller
         ]);
 
         if ($validator->fails())
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
 
         if(isset($request->cover_url))
         {
-            if (Storage::exists(public_path('media/books/'.$book->id)))
-                unlink('media/books/'.$book->id);
+            if ($book->cover_url)
+                unlink('media/books/'.$book->cover_url);
 
             $request->cover_url->move(public_path('media/books/'), $book->id);
             $request->cover_url = $book->id;
@@ -135,7 +156,27 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        if ($book->cover_url)
+            unlink('media/books/'.$book->cover_url);
         return Book::deleteBook($book);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * Allowed only to Admins.
+     *
+     * @param  \App\Models\Book  $book
+     * @return Redirect to Books Route
+     */
+    public function destroyWithRedirect(Book $book)
+    {
+        if ($book->cover_url)
+            unlink('media/books/'.$book->cover_url);
+
+        Book::deleteBook($book);
+        return redirect()->to('books');
     }
 
     /** JSON RESPONSES */

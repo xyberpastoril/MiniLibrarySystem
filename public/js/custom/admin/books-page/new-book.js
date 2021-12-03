@@ -17,84 +17,22 @@ var KTNewBook = (function() {
     return {
         init: function() {
             (() => {
-                var o = FormValidation.formValidation(e, {
-                    fields: {
-                        book_title: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Book Title is required",
-                                },
-                            },
-                        },
-                        author: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Author is required",
-                                },
-                            },
-                        },
-                        published_date: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Published Date is required",
-                                },
-                            },
-                        },
-                        isbn: {
-                            validators: {
-                                notEmpty: {
-                                    message: "ISBN is required",
-                                },
-                            },
-                        },
-                        total_copies: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Total Copies is required",
-                                },
-                            },
-                        },
-                    },
-                    plugins: {
-                        trigger: new FormValidation.plugins.Trigger(),
-                        bootstrap: new FormValidation.plugins.Bootstrap5({
-                            rowSelector: ".fv-row",
-                            eleInvalidClass: "",
-                            eleValidClass: "",
-                        }),
-                    },
-                });
                 const i = t.querySelector('[data-kt-books-modal-action="submit"]');
                 i.addEventListener("click", (t) => {
                         t.preventDefault(),
-                            o &&
-                            o.validate().then(function(t) {
-                                console.log("validated!"),
-                                    "Valid" == t ? (i.setAttribute("data-kt-indicator", "on"), (i.disabled = !0),
-                                        setTimeout(function() {
-                                            i.removeAttribute("data-kt-indicator"), (i.disabled = !1),
-                                                Swal.fire({
-                                                    text: "Form has been successfully submitted!",
-                                                    icon: "success",
-                                                    buttonsStyling: !1,
-                                                    confirmButtonText: "Ok, got it!",
-                                                    customClass: {
-                                                        confirmButton: "btn btn-primary",
-                                                    },
-                                                }).then(function(t) {
-                                                    t.isConfirmed && n.hide()
-                                                    e.submit();
-                                                });
-                                        }, 2e3)) : Swal.fire({
-                                        text: "Sorry, looks like there are some errors detected, please try again.",
-                                        icon: "error",
-                                        buttonsStyling: !1,
-                                        confirmButtonText: "Ok, got it!",
-                                        customClass: {
-                                            confirmButton: "btn btn-primary",
-                                        },
-                                    });
-                            });
+
+                        Swal.fire({
+                            text: "Form has been successfully submitted!",
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            },
+                        }).then(function(t) {
+                            t.isConfirmed && n.hide()
+                            e.submit();
+                        });
                     }),
                     t
                     .querySelector('[data-kt-books-modal-action="cancel"]')

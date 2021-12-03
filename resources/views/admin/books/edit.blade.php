@@ -106,7 +106,7 @@
                                 <span>Author(s)</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="authors" class="form-control form-control-lg form-control-solid" value="{{ $book->authors[0]->name }}@for ($i = 1; $i < count($book->authors); $i++), {{ $book->authors[$i]->name }}@endfor" placeholder="ex. Author1, Author2">
+                                <input type="text" name="authors" class="form-control form-control-lg form-control-solid @error('authors') is-invalid @enderror" value="{{ $book->authors[0]->name }}@for ($i = 1; $i < count($book->authors); $i++), {{ $book->authors[$i]->name }}@endfor" placeholder="ex. Author1, Author2">
                                 @error('authors')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="authors">{{ $message }}</div>
@@ -121,7 +121,7 @@
                                 <span>Description</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <textarea name="description" class="form-control form-control-lg form-control-solid min-h-300px" placeholder="Book Description here...">{{ $book->description }}</textarea>
+                                <textarea name="description" class="form-control form-control-lg form-control-solid min-h-300px @error('description') is-invalid @enderror" placeholder="Book Description here...">{{ $book->description }}</textarea>
                                 @error('description')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="description">{{ $message }}</div>
@@ -136,7 +136,7 @@
                                 <span>Page Count</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid" value="{{ $book->page_count }}" placeholder="1" min="1">
+                                <input type="number" name="page_count" class="form-control form-control-lg form-control-solid @error('page_count') is-invalid @enderror" value="{{ $book->page_count }}" placeholder="1" min="1">
                                 @error('page_count')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="page_count">{{ $message }}</div>
@@ -151,7 +151,7 @@
                                 <span>Published Date</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="date" name="published_date" class="form-control form-control-lg form-control-solid" value="{{ $book->published_date }}">
+                                <input type="date" name="published_date" class="form-control form-control-lg form-control-solid @error('published_date') is-invalid @enderror" value="{{ $book->published_date }}">
                                 @error('published_date')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="published_date">{{ $message }}</div>
@@ -166,7 +166,7 @@
                                 <span>ISBN</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="isbn" class="form-control form-control-lg form-control-solid" value="{{ $book->isbn }}" placeholder="Book ISBN">
+                                <input type="text" name="isbn" class="form-control form-control-lg form-control-solid @error('isbn') is-invalid @enderror" value="{{ $book->isbn }}" placeholder="Book ISBN">
                                 @error('isbn')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="isbn">{{ $message }}</div>
@@ -181,7 +181,7 @@
                                 <span>Genre(s)</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="genres" class="form-control form-control-lg form-control-solid" value="{{ $book->genres }}" placeholder="ex. Action, Fiction">
+                                <input type="text" name="genres" class="form-control form-control-lg form-control-solid @error('genres') is-invalid @enderror" value="{{ $book->genres }}" placeholder="ex. Action, Fiction">
                                 @error('genres')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="genres">{{ $message }}</div>
@@ -196,7 +196,7 @@
                                 <span>Total Copies</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="number" name="copies_owned" class="form-control form-control-lg form-control-solid" value="{{ $book->copies_owned }}" placeholder="0" min="0">
+                                <input type="number" name="copies_owned" class="form-control form-control-lg form-control-solid @error('copies_owned') is-invalid @enderror" value="{{ $book->copies_owned }}" placeholder="1" min="1">
                                 @error('copies_owned')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="copies_owned">{{ $message }}</div>
@@ -218,11 +218,12 @@
                 <button form="book_update_form" type="submit" class="btn btn-primary">Save Changes</button>
             </div>
 
-            <form method="POST" id="book_destroy_form" action="{{  route('books.destroy', $book->id) }}">
+            <form method="POST" id="book_destroy_form" action="{{  route('books.destroyWithRedirect', $book->id) }}" class="form">
                 @csrf
                 @method("DELETE")
-                <button form="book_delete_form" type="submit" id="btn_delete" class="btn btn-danger">Delete</button>
+                <button type="submit" id="btn_delete" class="btn btn-danger">Delete</button>
             </form>
+
         </div>
     </div>
 

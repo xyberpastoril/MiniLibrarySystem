@@ -223,7 +223,7 @@
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 
                             <!-- Form -->
-                            <form id="kt_modal_new_book_form" method="POST" class="form" action="{{ route('books.store') }}">
+                            <form id="kt_modal_new_book_form" method="POST" class="form" action="{{ route('books.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <!-- Content -->
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_new_book_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_book_header" data-kt-scroll-wrappers="#kt_modal_new_book_scroll" data-kt-scroll-offset="300px">
@@ -238,25 +238,25 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true">
 
                                             <!-- Preview existing cover -->
-                                            <div class="image-input-wrapper w-175px h-225px mx-5" ></div>
+                                            <div class="image-input-wrapper w-175px h-225px mx-5" style="background-position: center;"></div>
 
                                             <!-- Label -->
-                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change cover">
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change book cover">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
 
                                                 <!-- Inputs -->
-                                                <input type="file" name="cover_url" accept=".png, .jpg, .jpeg">
+                                                <input type="file" name="cover_url" accept=".png, .jpg, .jpeg" value="{{ old('cover_url') }}">
                                                 <input type="hidden" name="cover_remove">
 
                                             </label>
 
                                             <!-- Cancel -->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel cover">
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel book cover">
                                                 <i class="bi bi-x fs-2"></i>
                                             </span>
 
                                             <!-- Remove -->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove cover">
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove book cover">
                                                 <i class="bi bi-x fs-2"></i>
                                             </span>
 
@@ -264,6 +264,12 @@
 
                                         <!-- Hint-->
                                         <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+
+                                        @error('cover_url')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="cover_url">{{ $message }}</div>
+                                            </div>
+                                        @enderror
 
                                     </div>
 
@@ -273,18 +279,26 @@
                                         <label class="required fw-bold fs-6 mb-2">Book Title</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="title" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Book Title" value="">
-
+                                        <input type="text" name="title" class="form-control form-control-solid mb-3 mb-lg-0  @error('title') is-invalid @enderror" placeholder="Enter Book Title" value="{{ old('title') }}">
+                                        @error('title')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="title">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
-                                    <!-- Author -->
+                                    <!-- Authors -->
                                     <div class="fv-row mb-7">
                                         <!-- Label -->
                                         <label class="required fw-bold fs-6 mb-2">Author(s)</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="authors" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Author1, Author2">
-
+                                        <input type="text" name="authors" class="form-control form-control-solid mb-3 mb-lg-0 @error('authors') is-invalid @enderror" placeholder="ex. Author1, Author2" value="{{ old('authors') }}">
+                                        @error('authors')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="authors">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <!-- Description -->
@@ -295,8 +309,12 @@
                                         </label>
 
                                         <!-- Description-->
-                                        <textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0 min-h-150px" placeholder="Book Description here..."></textarea>
-
+                                        <textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0 min-h-150px @error('description') is-invalid @enderror" placeholder="Book Description here...">{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="description">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <!-- Page Count -->
@@ -305,8 +323,12 @@
                                         <label class="required fw-bold fs-6 mb-2">Page Count</label>
 
                                         <!-- Input -->
-                                        <input type="number" name="page_count" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="1" value="1">
-
+                                        <input type="number" name="page_count" class="form-control form-control-solid mb-3 mb-lg-0 @error('page_count') is-invalid @enderror" placeholder="0" value="{{ old('page_count') }}">
+                                        @error('page_count')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="page_count">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <!-- Published Date -->
@@ -315,8 +337,12 @@
                                         <label class="required fw-bold fs-6 mb-2">Published Date</label>
 
                                         <!-- Input -->
-                                        <input class="form-control form-control-solid" name="published_date" id="kt_published_date_picker"/>
-
+                                        <input class="form-control form-control-solid @error('published_date') is-invalid @enderror" name="published_date" id="kt_published_date_picker" value="{{ old('published_date') }}">
+                                        @error('published_date')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="published_date">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <!-- ISBN -->
@@ -325,8 +351,12 @@
                                         <label class="required fw-bold fs-6 mb-2">ISBN</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="isbn" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ISBN" value="">
-
+                                        <input type="text" name="isbn" class="form-control form-control-solid mb-3 mb-lg-0 @error('isbn') is-invalid @enderror" placeholder="Book ISBN" value="{{ old('isbn') }}">
+                                        @error('isbn')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="isbn">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <!-- Genre -->
@@ -335,8 +365,12 @@
                                         <label class="fw-bold fs-6 mb-2">Genre(s)</label>
 
                                         <!-- Input -->
-                                        <input type="text" name="genres" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="ex. Action, Fiction">
-
+                                        <input type="text" name="genres" class="form-control form-control-solid mb-3 mb-lg-0 @error('genres') is-invalid @enderror" placeholder="ex. Action, Fiction" value="{{ old('genres') }}">
+                                        @error('genres')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="genres">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <!-- Total Copies -->
@@ -345,8 +379,12 @@
                                         <label class="required fw-bold fs-6 mb-2">Total Copies</label>
 
                                         <!-- Input -->
-                                        <input type="number" name="copies_owned" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="1" value="1">
-
+                                        <input type="number" name="copies_owned" class="form-control form-control-solid mb-3 mb-lg-0 @error('copies_owned') is-invalid @enderror" placeholder="0" value="{{ old('copies_owned') }}" min="1">
+                                        @error('copies_owned')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                <div data-field="copies_owned">{{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
 
                                 </div>

@@ -17,7 +17,7 @@ btn_discard.addEventListener('click', function() {
     btn_delete.classList.remove("visually-hidden");
 });
 
-book_destroy_form.addEventListener('click', e => {
+book_destroy_form.addEventListener('submit', e => {
     e.preventDefault();
 
     Swal.fire({
@@ -43,7 +43,6 @@ book_destroy_form.addEventListener('click', e => {
 			closeOnConfirm: false
 		}).then((function() {
             book_destroy_form.submit();
-            window.location.href = "/books"
 		}))
 		 : "cancel" === e.dismiss && Swal.fire({
 			text: "Book was not deleted.",
