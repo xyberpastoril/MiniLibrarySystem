@@ -129,16 +129,25 @@ class BookController extends Controller
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
 
-        if(isset($request->cover_url))
+        // Unlink existing image if changing or removing image.
+        if((isset($request->cover_url) && $book->cover_url) || $request->cover_remove)
         {
-            if ($book->cover_url)
+            try {
                 unlink('media/books/'.$book->cover_url);
-
-            $request->cover_url->move(public_path('media/books/'), $book->id);
-            $request->cover_url = $book->id;
+            }
+            catch(\Throwable $e) {}
         }
-        else $request->cover_url = $book->cover_url;
 
+        // Move image to storage if uploading new ones
+        if(isset($request->cover_url)) {
+            $request->cover_url->move(public_path('media/books/'), $book->id);
+        }
+
+        // Include cover_url every update unless removing image.
+        if(!$request->cover_remove)
+            $request->cover_url = $book->id;
+
+        // Update book details on database
         Book::createOrUpdateBook($request, $book);
         Book::updateAuthors($request->authors, $book);
         Book::updateGenres($request->genres, $book);
