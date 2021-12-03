@@ -213,7 +213,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <!--begin::Hover Content-->
                 <div class="me-5">
                     <div class="symbol symbol-40px cursor-pointer" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-overflow="true">
-                        <img alt="Logo" src="{{ asset("media/avatars/150-15.jpg") }}">
+                        <img alt="Logo" src="@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/" . Auth::user()->cover_url) }}@endif">
                     </div>
 
                     <!--begin:: Hover Menu-->
@@ -225,7 +225,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                                 <!-- Avatar -->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{ asset("media/avatars/150-15.jpg") }}">
+                                    <img alt="Logo" src="@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/" . Auth::user()->cover_url) }}@endif">
                                 </div>
 
                                 <!-- Username -->
