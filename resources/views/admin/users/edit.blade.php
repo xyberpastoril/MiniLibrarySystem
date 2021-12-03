@@ -36,7 +36,7 @@
             <form id="user_update_form" method="POST" action="{{ route('users.update', $user->id) }}"  class="form" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            
+
                 <div class=" d-flex flex-column flex-lg-row">
 
                     <!-- Aside -->
@@ -59,7 +59,8 @@
                                     <!-- Label -->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change profile picture">
                                         <i class="bi bi-pencil-fill fs-7"></i>
-                                        <input type="hidden" name="picture_remove">
+                                        <input type="file" name="cover_url" accept=".png, .jpg, .jpeg">
+                                        <input type="hidden" name="cover_remove">
                                     </label>
 
                                     <!-- Cancel -->
