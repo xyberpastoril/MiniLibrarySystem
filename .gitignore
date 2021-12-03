@@ -16,3 +16,6 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .vscode/settings.json
+
+# User specific
+public/media/books
