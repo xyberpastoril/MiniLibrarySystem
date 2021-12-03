@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -84,7 +85,40 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => 'required|unique:users,username,'.$user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'gender' => 'nullable',
+            'address' => 'nullable',
+            'cover_url' => 'nullable|mimes:jpeg,png,jpg|max:10000',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        // Unlink existing image if changing or removing image.
+        if((isset($request->cover_url) && $user->cover_url) || $request->cover_remove)
+        {
+            try {
+                unlink('media/avatars/'.$user->cover_url);
+            }
+            catch(\Throwable $e) {}
+        }
+
+        // Move image to storage if uploading new ones
+        if(isset($request->cover_url)) {
+            $request->cover_url->move(public_path('media/avatars/'), $user->id);
+        }
+
+        // Include cover_url every update unless removing image.
+        if(!$request->cover_remove)
+            $request->cover_url = $user->id;
+
+        User::createOrUpdateUser($request, $user);
+
+        return redirect()->to('users');
     }
 
     /**

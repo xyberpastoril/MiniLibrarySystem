@@ -12,7 +12,7 @@ user_update_form.addEventListener("input",e => {
 });
 
 btn_discard.addEventListener("click", function() {
-    
+
     btn_group.classList.add("visually-hidden");
     btn_delete.classList.remove("visually-hidden");
 });
@@ -54,7 +54,7 @@ user_destroy_form.addEventListener('submit', e => {
     }))
 });
 
-btnuser_update_form_save.addEventListener('submit', e => {
+user_update_form.addEventListener('submit', e => {
     e.preventDefault();
 
     Swal.fire({

@@ -24,6 +24,9 @@ class User extends Authenticatable
         'last_name',
         'username',
         'email',
+        'gender',
+        'address',
+        'cover_url',
         'password',
     ];
 
@@ -157,6 +160,46 @@ class User extends Authenticatable
     }
 
     /**
+     * Creates or updates a user instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user or NULL (for create)
+     * @return \App\Models\User
+     */
+    public static function createOrUpdateUser($request, $user = NULL)
+    {
+        // Create Book
+        if(!isset($user))
+        {
+            $obj = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'address' => $request->address,
+                'cover_url' => $request->cover_url
+            ]);
+
+        }
+        else
+        {
+            $obj = User::where('id', '=', $user->id)
+                ->update([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'gender' => $request->gender,
+                    'address' => $request->address,
+                    'cover_url' => $request->cover_url
+                ]);
+        }
+
+        return $obj;
+    }
+
+    /**
      * Deletes a user instance.
      *
      * @param \Illuminate\Http\Request $request
@@ -167,4 +210,5 @@ class User extends Authenticatable
     {
         return $user->delete();
     }
+
 }

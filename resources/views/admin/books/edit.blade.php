@@ -45,7 +45,7 @@
                                 <br>
 
                                 <!-- Image input -->
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/books/blank.jpg") }}')">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/books/blank.jpg") }}'); background-position: center;">
 
                                     <!-- Preview existing avatar -->
                                     <div class="image-input-wrapper w-175px h-225px" style="background-image: url('@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif'); background-position: center;"></div>
@@ -91,7 +91,7 @@
                                 <span>Book Title</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="title" class="form-control form-control-lg form-control-solid @error('title') is-invalid @enderror" value="{{ $book->title }}" placeholder="Enter Book Title">
+                                <input type="text" name="title" class="form-control form-control-lg form-control-solid @error('title') is-invalid @enderror" value="{{ $book->title }}" placeholder="Enter Book Title" autofocus>
                                 @error('title')
                                     <div class="fv-plugins-message-container invalid-feedback">
                                         <div data-field="title">{{ $message }}</div>

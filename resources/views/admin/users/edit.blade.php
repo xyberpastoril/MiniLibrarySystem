@@ -34,7 +34,9 @@
 
         <div class="card-body p-9">
             <form id="user_update_form" method="POST" action="{{ route('users.update', $user->id) }}"  class="form" enctype="multipart/form-data">
-
+            @csrf
+            @method('PUT')
+            
                 <div class=" d-flex flex-column flex-lg-row">
 
                     <!-- Aside -->
@@ -49,10 +51,10 @@
                                 <br>
 
                                 <!-- Image input -->
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/avatars/blank.png") }}')">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/avatars/blank.png") }}'); background-position: center;">
 
                                     <!-- Preview existing avatar -->
-                                    <div class="image-input-wrapper w-175px h-175px" style="background-image: url('@if($user->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/$user->cover_url") }}@endif')"></div>
+                                    <div class="image-input-wrapper w-175px h-175px" style="background-image: url('@if($user->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/$user->cover_url") }}@endif'); background-position: center;"></div>
 
                                     <!-- Label -->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change profile picture">
@@ -73,18 +75,30 @@
 
                                 <!-- Hint -->
                                 <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+
+                                @error('cover_url')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="cover_url">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="flex-md-row-fluid ms-lg-12">
+
                         <!-- Username -->
                         <div class="row mb-10">
                             <label class="col-lg-2 col-form-label fw-bold fs-6 required">
                                 <span>Username</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="username" class="form-control form-control-lg form-control-solid" value="{{ $user->username }}" placeholder="Enter Username" required autofocus/>
+                                <input type="text" name="username" class="form-control form-control-lg form-control-solid @error('username') is-invalid @enderror" value="{{ $user->username }}" placeholder="Enter Username" autofocus/>
+                                @error('username')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="username">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -95,7 +109,12 @@
                                 <label class="col-form-label fw-bold fs-6 required">
                                     First Name
                                 </label>
-                                <input id="first_name" class="form-control form-control-lg form-control-solid" name="first_name" type="text" placeholder="Enter First Name" value="{{ $user->first_name }}" required/>
+                                <input id="first_name" class="form-control form-control-lg form-control-solid @error('first_name') is-invalid @enderror" name="first_name" type="text" placeholder="Enter First Name" value="{{ $user->first_name }}"/>
+                                @error('first_name')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="first_name">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
 
                             <!-- Last Name -->
@@ -103,7 +122,12 @@
                                 <label class="col-form-label fw-bold fs-6 required">
                                     Last Name
                                 </label>
-                                <input id="last_name" class="form-control form-control-lg form-control-solid" name="last_name" type="text" placeholder="Enter Last Name" value="{{ $user->last_name }}" required/>
+                                <input id="last_name" class="form-control form-control-lg form-control-solid @error('last_name') is-invalid @enderror" name="last_name" type="text" placeholder="Enter Last Name" value="{{ $user->last_name }}"/>
+                                @error('last_name')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="last_name">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
 
                         </div>
@@ -114,7 +138,12 @@
                                 <span>Email</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" value="{{ $user->email }}" placeholder="Enter Email" />
+                                <input type="email" name="email" class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" value="{{ $user->email }}" placeholder="Enter Email" />
+                                @error('email')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="email">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -124,11 +153,16 @@
                                 <span>Gender</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <select name="genre" class="form-select form-select-lg form-select-solid">
+                                <select name="gender" class="form-select form-select-lg form-select-solid @error('gender') is-invalid @enderror">
                                     <option>Select Gender</option>
                                     <option value="Male" @if ($user->gender == 'Male') selected="selected" @endif>Male</option>
                                     <option value="Female" @if ($user->gender == 'Female') selected="selected" @endif>Female</option>
                                 </select>
+                                @error('gender')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="gender">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -138,22 +172,27 @@
                                 <span>Address</span>
                             </label>
                             <div class="col-lg-10 fv-row">
-                                <input type="text" name="address" class="form-control form-control-lg form-control-solid" value="{{ $user->address }}" placeholder="Enter Address" />
+                                <input type="text" name="address" class="form-control form-control-lg form-control-solid @error('address') is-invalid @enderror" value="{{ $user->address }}" placeholder="Enter Address" />
+                                @error('address')
+                                    <div class="fv-plugins-message-container invalid-feedback">
+                                        <div data-field="address">{{ $message }}</div>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
                     </div>
 
                 </div>
-                
+
             </form>
         </div>
 
         <!-- Actions -->
         <div class="card-footer d-flex justify-content-end py-6 px-9">
             <div id="btn_group" class="btn-group visually-hidden">
-                <button type="reset" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                <button type="submit" id="btn_save" class="btn btn-primary">Save Changes</button>
+                <button type="reset" form="user_update_form" id="btn_discard" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+                <button type="submit" form="user_update_form" id="btn_save" class="btn btn-primary">Save Changes</button>
             </div>
             <form method="POST" id="user_destroy_form" action="{{  route('users.destroyWithRedirect', $user->id) }}" class="form">
                 @csrf
