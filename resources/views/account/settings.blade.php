@@ -264,9 +264,9 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(../assets/media/avatars/blank.png)">
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ asset("media/avatars/blank.png") }})">
                                         <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ asset('media/avatars/' .Auth::user()->cover_url) }})"></div>
+                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/" . Auth::user()->cover_url) }}@endif)"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
