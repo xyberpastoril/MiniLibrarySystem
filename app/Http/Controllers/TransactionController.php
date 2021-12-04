@@ -107,8 +107,6 @@ class TransactionController extends Controller
             'success' => 1,
             'error' => null
         ];
-
-        // TODO: Integrate with UI
     }
 
     /** Delete */

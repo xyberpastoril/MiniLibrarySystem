@@ -112,7 +112,7 @@
         </div>
     </div>
 
-    <div class="card mb-5 mb-xl-10">
+    {{-- <div class="card mb-5 mb-xl-10">
         <div class="card-header card-header-stretch">
             <!--begin::Title-->
             <div class="card-title d-flex align-items-center">
@@ -122,7 +122,7 @@
         <div class="card-body p-9">
             <div id='calendar'></div>
         </div>
-    </div>
+    </div> --}}
 
     <!--begin:: Borrow Modal-->
     <form class="modal fade" tabindex="-1" id="borrow_modal" method="POST" action="{{ route('transactions.request', $book->id) }}">
