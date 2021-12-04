@@ -149,6 +149,7 @@
                     <th>Returned Date</th>
                     <th>Copies</th>
                     <th>Penalty Issued</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <!--end::Table head-->
@@ -201,8 +202,16 @@
                         <td>{{ $transaction->copies }}</td>
 
                         <!-- Penalty Issued -->
+                        <td>₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</td>
 
                         <td>
+                            @if($transaction->penalty_status == 'unpaid')
+                                <div class="badge badge-danger fw-bolder">Unpaid</div>
+                            @elseif($transaction->penalty_status == 'paid')
+                                <div class="badge badge-success fw-bolder">Paid</div>
+                            @elseif($transaction->amount == null)
+                                <div class="badge badge-success fw-bolder">Cleared</div>
+                            @endif
                         </td>
                     </tr>
                     <!--end::Table row | Book -->
