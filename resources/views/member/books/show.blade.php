@@ -36,7 +36,13 @@
             </div>
 
             <div class="card-toolbar p-5">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#borrow_modal">Borrow</button>
+                <button class="btn btn-primary"  
+                    @if($book->copies_left < 1) 
+                        disabled 
+                    @else
+                        data-bs-toggle="modal" 
+                        data-bs-target="#borrow_modal"
+                    @endif>Borrow</button>
             </div>
         </div>
         <div class="card-body p-9">
@@ -79,7 +85,13 @@
 
                     {{-- Todo Available copies --}}
                     <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
-                    <p class="fs-6"></p>
+                    <p class="fs-6">
+                        @if($book->copies_left > 0)
+                            <span class="badge badge-success">{{ $book->copies_left }}</span>
+                        @else
+                            <span class="badge badge-danger">{{ $book->copies_left }}</span>
+                        @endif
+                    </p>
 
                     <div class="fs-5 fw-bolder mt-2">Genre(s) : </div>
                     <p class="fs-6">{{ $book->genres }}</p>
