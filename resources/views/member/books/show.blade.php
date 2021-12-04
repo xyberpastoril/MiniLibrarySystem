@@ -36,7 +36,7 @@
             </div>
 
             <div class="card-toolbar p-5">
-                <button class="btn btn-primary"  
+                <button id="borrow_modal_button" class="btn btn-primary"  
                     @if($book->copies_left < 1) 
                         disabled 
                     @else
@@ -141,12 +141,14 @@
                 <div class="modal-body">
                     <div class="mb-0">
                         <label for class="form-label">Pick Date Range</label>
-                        <input name="date" class="form-control form-control-solid" placeholder="Pick date rage" id="borrow_modal_date_range_picker">
+                        <input name="date" class="form-control form-control-solid" placeholder="Pick date range" id="borrow_modal_date_range_picker">
+                        
+                        <input type="hidden" id="book_id_input" name="book_id" value="{{ $book->id }}">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Send Borrow Request</button>
+                    <button id="transaction_request_submit" type="submit" class="btn btn-primary">Send Borrow Request</button>
                 </div>
             </div>
         </div>
