@@ -24,10 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('status', [
-                'unverified', // needs approval on admin prior borrowing for first time
-                'verified' // approved for borrowing. this is diff. from account standing
-            ]);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
