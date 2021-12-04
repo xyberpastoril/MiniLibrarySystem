@@ -65,12 +65,50 @@ class TransactionController extends Controller
 
     public function request(Request $request, \App\Models\Book $book)
     {
-        // TODO: Include Penalty Rate/Day
+        // Check for copy availability
+        $used_books = \App\Models\Transaction::where('book_id', '=', $book->id)
+            ->where('status', '!=', 'returned')->count();
+
+        $book->copies_left = $book->copies_owned - $used_books;
+
+        if($book->copies_left < 1) {
+            return [
+                'success' => 0,
+                'error' => 'no_copies_left'
+            ];
+        }
+
         $date = explode(" - ", $request->date);
         $request->date_from = date('Y-m-d', strtotime($date[0]));
         $request->date_to = date('Y-m-d', strtotime($date[1]));
 
-        return \App\Models\Transaction::request($request, $book);
+        $today = \Carbon\Carbon::now()->toDateString();
+        
+        // Check if date_from is before today
+        if($today > $request->date_from) {
+            return [
+                'success' => 0,
+                'error' => 'date_from_before_today'
+            ];
+        }
+        // Check if date_to is before date_from
+        if($request->date_from > $request->date_to) {
+            return [
+                'success' => 0,
+                'error' => 'date_to_before_date_from'
+            ];
+        }
+
+        // TODO: Include Penalty Rate/Day
+
+        \App\Models\Transaction::request($request, $book);
+
+        return [
+            'success' => 1,
+            'error' => null
+        ];
+
+        // TODO: Integrate with UI
     }
 
     /** Delete */
