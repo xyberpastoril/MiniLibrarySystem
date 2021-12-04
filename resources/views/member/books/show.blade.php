@@ -36,6 +36,15 @@
             </div>
 
             <div class="card-toolbar p-5">
+                <div class="card-title" style="margin-right:24px">
+                    <h3 class="fw-bolder m-0">
+                        @if($book->copies_left > 0)
+                            <span id="copies_left">{{ $book->copies_left }}</span> copies left
+                        @else
+                            Next copy available as early as {{ $book->next_available->date_to }}
+                        @endif
+                    </h3>
+                </div>
                 <button id="borrow_modal_button" class="btn btn-primary"
                     @if($book->copies_left < 1 || Auth::user()->getRoleNames()[0] == "Unverified Member")
                         disabled
@@ -110,14 +119,14 @@
                     <div class="fs-5 fw-bolder mt-2">Total Copies : </div>
                     <p class="fs-6">{{ $book->copies_owned }}</p>
 
-                    <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
+                    {{-- <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
                     <p class="fs-6">
                         @if($book->copies_left > 0)
                             <span id="copies_left" class="badge badge-success">{{ $book->copies_left }}</span>
                         @else
                             <span id="copies_left" class="badge badge-danger">{{ $book->copies_left }}</span>
                         @endif
-                    </p>
+                    </p> --}}
 
                     <div class="fs-5 fw-bolder mt-2">Genre(s) : </div>
                     <p class="fs-6">
