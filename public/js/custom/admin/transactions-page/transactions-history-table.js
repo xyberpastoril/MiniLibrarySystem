@@ -160,3 +160,69 @@ var KTTransactionsList = (function() {
 KTUtil.onDOMContentLoaded(function() {
     KTTransactionsList.init();
 });
+
+$("[data-kt-transactions-table-filter='pay_row']").click(function(e){
+    e.preventDefault();
+    console.log("Penalty ID: " + this.getAttribute('penalty-id'))
+    console.log("Transaction ID: " + this.getAttribute('transaction-id'))
+    
+    var penalty_id = this.getAttribute('penalty-id')
+    var transaction_id = this.getAttribute('transaction-id')
+    var btn = this
+
+    Swal.fire({
+        text: "Are you sure you want to mark penalty of transaction number " + transaction_id + " as paid?",
+        icon: "warning",
+        showCancelButton: !0,
+        buttonsStyling: !1,
+        confirmButtonText: "Yes, mark as paid!",
+        cancelButtonText: "No, cancel",
+        customClass: {
+            confirmButton: "btn fw-bold btn-success",
+            cancelButton: "btn fw-bold btn-active-light-primary"
+        }
+    }).then((function(t) {
+        t.value ? Swal.fire({
+            text: "You have marked penalty of transaction number " + transaction_id + " as paid!.",
+            icon: "success",
+            buttonsStyling: !1,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn fw-bold btn-primary"
+            }
+        }).then((function() {
+            $.ajax({
+                url:"/penalty/" + penalty_id + "/pay",
+                type:'POST',
+                data:{
+                    _token: $("input[name=_token]").val()
+                },
+                success: function(data, status, xhr) {
+                    console.log(data)
+                    window.location.reload();
+                },
+                error: function(jqXhr, textStatus, errorMessage) {
+                    swal.fire({
+                        text: "It's not your fault. Something seems wrong on our end. Please try again later.",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    })
+                }
+            })
+        })).then((function() {
+            a()
+        })) : "cancel" === t.dismiss && Swal.fire({
+            text: "Transaction number " + transaction_id + " was not marked as paid.",
+            icon: "error",
+            buttonsStyling: !1,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn fw-bold btn-primary"
+            }
+        })
+    }))
+})
