@@ -241,11 +241,11 @@
                         </div>
                         <br>
                     </li>
-                    <li>Submit the information above to the library along with a photocopy of the following (bring only one):
+                    <li>Submit the information above to the library along with a photocopy of either the following:
                         <ul>
                             <li>Government-Issued IDs</li>
-                            <li>Birth Certificate</li>
                             <li>School-Issued ID</li>
+                            <li>Birth Certificate</li>
                         </ul>
                     </li><br>
                     <li>Once approved, you can start borrowing our books in our expanding library.</li>
