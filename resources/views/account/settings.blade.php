@@ -330,7 +330,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input id="address" type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="">
+                                    <input id="address" type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ Auth::user()->address }}">
                                 </div>
                                 <!--end::Col-->
                             </div>
