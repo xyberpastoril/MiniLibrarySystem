@@ -42,6 +42,33 @@
 
 @section("content")
 
+<!--begin::Row-->
+@role('Unverified Member')
+<div class="row g-5 g-xl-8">
+    <div class="col-12">
+        <!--begin::Widget 1-->
+        <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-250px card-xl-stretch mb-5 mb-xl-8 bg-gray-200 border-0" style="background-position: 100% 100%;background-size: 350px auto;background-image:url('{{ asset("media/misc/city.png") }}')">
+            <!--begin::Body-->
+            <div class="card-body d-flex flex-column justify-content-center ps-lg-15">
+                <!--begin::Title-->
+                <h3 class="text-gray-800 fs-2qx fw-boldest line-height-lg mb-4 mb-lg-8 col-8">Welcome to README! 
+                <br><i>You're one step ahead to having a privilege to borrow books on our expanding library.</i></h3>
+                <!--end::Title-->
+                <!--begin::Action-->
+                <div class="m-0">
+                    <a href="#" class="btn btn-dark fw-bold" data-bs-toggle="modal" data-bs-target="#get_verified_modal">Get verified</a>
+                </div>
+                <!--begin::Action-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Widget 1-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->
+@endrole
+
 <!--begin::Form-->
 <!--form tag has been temporarily been removed-->
     <!--begin::Card-->
