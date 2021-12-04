@@ -128,7 +128,21 @@ class TransactionController extends Controller
 
     public function return(Request $request, \App\Models\Transaction $transaction)
     {
-        // TODO: Compute Final Penalty
+        $today = \Carbon\Carbon::now()->toDateString();
+        $today = date_create($today);
+        $date_to = date_create($transaction->date_to);
+        if($today > $date_to)
+        {
+            $difference = date_diff($today, $date_to)->days;
+            
+            // Compute Penalty
+            $transaction->penalty()->create([
+                'transaction_id' => $transaction->id,
+                'amount' => $difference * 10,
+                'status' => 'unpaid'
+            ]);
+        }
+
         return \App\Models\Transaction::return($transaction);
     }
 
