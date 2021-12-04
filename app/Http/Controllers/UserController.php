@@ -162,4 +162,11 @@ class UserController extends Controller
             );
         return redirect()->route('home');
     }
+
+    public function verify(User $user)
+    {
+        $user->roles()->detach();
+        $user->assignRole([2]);
+        return 1;
+    }
 }

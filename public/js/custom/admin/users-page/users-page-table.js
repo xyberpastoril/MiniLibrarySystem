@@ -157,3 +157,81 @@ var KTUsersList = function() {
 KTUtil.onDOMContentLoaded((function() {
 	KTUsersList.init()
 }));
+
+$(".verify-btn").click(function(e){
+	e.preventDefault()
+	console.log(this.getAttribute('data-id'))
+
+	var user_id = this.getAttribute('data-id')
+	var btn = this
+
+	Swal.fire({
+		text: "Are you sure you want to verify " + user_id + "?",
+		icon: "warning",
+		showCancelButton: !0,
+		buttonsStyling: !1,
+		confirmButtonText: "Yes, verify!",
+		cancelButtonText: "No, cancel",
+		customClass: {
+			confirmButton: "btn fw-bold btn-danger",
+			cancelButton: "btn fw-bold btn-active-light-primary"
+		}
+	}).then((function(t) {
+		t.value ? $.ajax({
+			url:"users/verify/"+user_id,
+			type:'POST',
+			data:{
+				_token: $("input[name=_token]").val()
+			},
+			success: function(data, status, xhr) {
+				console.log(data)
+
+				if(data == '1')
+				{
+					Swal.fire({
+						text: "You have verified " + user_id + "!.",
+						icon: "success",
+						buttonsStyling: !1,
+						confirmButtonText: "Ok, got it!",
+						customClass: {
+							confirmButton: "btn fw-bold btn-primary"
+						}
+					})
+					btn.remove()
+				}
+				else
+				{
+					swal.fire({
+						text: "It's not your fault. Something seems wrong on our end. Please try again later.",
+						icon: "error",
+						buttonsStyling: !1,
+						confirmButtonText: "Ok, got it!",
+						customClass: {
+							confirmButton: "btn font-weight-bold btn-light-primary"
+						}
+					})
+				}
+
+			},
+			error: function(jqXhr, textStatus, errorMessage) {
+				swal.fire({
+					text: "It's not your fault. Something seems wrong on our end. Please try again later.",
+					icon: "error",
+					buttonsStyling: !1,
+					confirmButtonText: "Ok, got it!",
+					customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+				})
+			}
+		}) : "cancel" === t.dismiss && Swal.fire({
+			text: user_id + " was not verified.",
+			icon: "error",
+			buttonsStyling: !1,
+			confirmButtonText: "Ok, got it!",
+			customClass: {
+				confirmButton: "btn fw-bold btn-primary"
+			}
+		})
+	}))
+})

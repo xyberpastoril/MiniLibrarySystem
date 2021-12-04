@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/users/destroyWithRedirect/{user}',[App\Http\Controllers\UserController::class,'destroyWithRedirect'])
         ->name('users.destroyWithRedirect');
     Route::resource('/users', App\Http\Controllers\UserController::class);
+    Route::post('/users/verify/{user}', [App\Http\Controllers\UserController::class, 'verify'])
+        ->name('users.verify');
     Route::get('/result/users/search/', [App\Http\Controllers\UserController::class, 'search']);
 
     // Transactions Pages
