@@ -57,9 +57,9 @@ class Book extends Model
     public static function getHotBooks()
     {
         // Subject to change
-        $hotBooks = self::selectRaw('books.id, books.title, COUNT(transactions.id) as total')
+        $hotBooks = self::selectRaw('books.id, books.title, books.cover_url, COUNT(transactions.id) as total')
             ->leftJoin('transactions', 'books.id', '=', 'transactions.book_id')
-            ->groupBy('books.id', 'books.title')
+            ->groupBy('books.id', 'books.title', 'books.cover_url')
             ->orderBy('total', 'desc')
             ->limit(5)
             ->get();
@@ -263,5 +263,5 @@ class Book extends Model
         return $book->delete();
     }
 
-    
+
 }

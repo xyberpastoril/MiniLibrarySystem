@@ -16,7 +16,7 @@
 
     <!-- Item -->
     <li class="breadcrumb-item text-muted">
-        <a href="#" class="text-muted">Books</a>
+        <a href="{{ route('home') }}" class="text-muted">Home</a>
     </li>
 
     <!-- Item -->
@@ -36,11 +36,11 @@
             </div>
 
             <div class="card-toolbar p-5">
-                <button id="borrow_modal_button" class="btn btn-primary"  
-                    @if($book->copies_left < 1 || Auth::user()->getRoleNames()[0] == "Unverified Member") 
-                        disabled 
+                <button id="borrow_modal_button" class="btn btn-primary"
+                    @if($book->copies_left < 1 || Auth::user()->getRoleNames()[0] == "Unverified Member")
+                        disabled
                     @else
-                        data-bs-toggle="modal" 
+                        data-bs-toggle="modal"
                         data-bs-target="#borrow_modal"
                     @endif>Borrow</button>
             </div>
@@ -56,7 +56,7 @@
                         <!--begin::Body-->
                         <div class="card-body d-flex flex-column justify-content-center ps-lg-15">
                             <!--begin::Title-->
-                            <h3 class="text-gray-800 fs-2qx fw-boldest line-height-lg mb-4 mb-lg-8 col-8">You're still unverified! 
+                            <h3 class="text-gray-800 fs-2qx fw-boldest line-height-lg mb-4 mb-lg-8 col-8">You're still unverified!
                             <br><i>To borrow books, you must verify your identity to our officer-in-charge.</i></h3>
                             <!--end::Title-->
                             <!--begin::Action-->
@@ -108,9 +108,8 @@
                     <p class="fs-6">{{ $book->isbn }}</p>
 
                     <div class="fs-5 fw-bolder mt-2">Total Copies : </div>
-                    <p class="fs-6">{{ $book->page_count }}</p>
+                    <p class="fs-6">{{ $book->copies_owned }}</p>
 
-                    {{-- Todo Available copies --}}
                     <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
                     <p class="fs-6">
                         @if($book->copies_left > 0)
@@ -176,7 +175,7 @@
                     <div class="mb-0">
                         <label for class="form-label">Pick Date Range</label>
                         <input name="date" class="form-control form-control-solid" placeholder="Pick date range" id="borrow_modal_date_range_picker">
-                        
+
                         <input type="hidden" id="book_id_input" name="book_id" value="{{ $book->id }}">
                     </div>
                 </div>
