@@ -85,6 +85,11 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        $used_books = \App\Models\Transaction::where('book_id', '=', $book->id)
+            ->where('status', '!=', 'returned')->count();
+
+        $book->copies_left = $book->copies_owned - $used_books;
+
         if(count($book->genres) > 0) $book['genres'] = Genre::getBookGenres($book->id)[0]->genres;
         else $book['genres'] = "";
 

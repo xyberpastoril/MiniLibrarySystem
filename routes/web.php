@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function(){
         ->name('transactions.history');
 
     // Transactions Actions
-    Route::post('/transactions', [App\Http\Controllers\TransactionController::class, 'request'])
+    Route::post('/transactions/request/{book}', [App\Http\Controllers\TransactionController::class, 'request'])
         ->name('transactions.request');
     Route::delete('/transactions/{transaction}/cancel', [App\Http\Controllers\TransactionController::class, 'cancel'])
         ->name('transactions.cancel');

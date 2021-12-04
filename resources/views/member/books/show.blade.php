@@ -36,7 +36,13 @@
             </div>
 
             <div class="card-toolbar p-5">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#borrow_modal">Borrow</button>
+                <button id="borrow_modal_button" class="btn btn-primary"  
+                    @if($book->copies_left < 1) 
+                        disabled 
+                    @else
+                        data-bs-toggle="modal" 
+                        data-bs-target="#borrow_modal"
+                    @endif>Borrow</button>
             </div>
         </div>
         <div class="card-body p-9">
@@ -79,10 +85,22 @@
 
                     {{-- Todo Available copies --}}
                     <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
-                    <p class="fs-6"></p>
+                    <p class="fs-6">
+                        @if($book->copies_left > 0)
+                            <span id="copies_left" class="badge badge-success">{{ $book->copies_left }}</span>
+                        @else
+                            <span id="copies_left" class="badge badge-danger">{{ $book->copies_left }}</span>
+                        @endif
+                    </p>
 
                     <div class="fs-5 fw-bolder mt-2">Genre(s) : </div>
-                    <p class="fs-6">{{ $book->genres }}</p>
+                    <p class="fs-6">
+                        @if($book->genres)
+                            {{ $book->genres }}
+                        @else
+                            <span class="text-muted">none</span>
+                        @endif
+                    </p>
 
                     <div class="fs-5 fw-bolder mt-2">Published Date : </div>
                     <p class="fs-6">{{ $book->published_date }}</p>
@@ -94,7 +112,7 @@
         </div>
     </div>
 
-    <div class="card mb-5 mb-xl-10">
+    {{-- <div class="card mb-5 mb-xl-10">
         <div class="card-header card-header-stretch">
             <!--begin::Title-->
             <div class="card-title d-flex align-items-center">
@@ -104,10 +122,11 @@
         <div class="card-body p-9">
             <div id='calendar'></div>
         </div>
-    </div>
+    </div> --}}
 
     <!--begin:: Borrow Modal-->
-    <div class="modal fade" tabindex="-1" id="borrow_modal">
+    <form class="modal fade" tabindex="-1" id="borrow_modal" method="POST" action="{{ route('transactions.request', $book->id) }}">
+        @csrf
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,16 +147,18 @@
                 <div class="modal-body">
                     <div class="mb-0">
                         <label for class="form-label">Pick Date Range</label>
-                        <input class="form-control form-control-solid" placeholder="Pick date rage" id="borrow_modal_date_range_picker">
+                        <input name="date" class="form-control form-control-solid" placeholder="Pick date range" id="borrow_modal_date_range_picker">
+                        
+                        <input type="hidden" id="book_id_input" name="book_id" value="{{ $book->id }}">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send Borrow Request</button>
+                    <button id="transaction_request_submit" type="submit" class="btn btn-primary">Send Borrow Request</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <!--end: Borrow Modal-->
 
 @endsection
