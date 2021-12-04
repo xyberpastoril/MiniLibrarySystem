@@ -119,14 +119,14 @@ class Transaction extends Model
             ->groupBy('books.id', 'books.title');
     }
 
-    public static function request($request)
+    public static function request($request, Book $book)
     {
         return self::create([
-            'book_id' => $request->book_id,
+            'book_id' => $book->id,
             'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
             'date_from' => $request->date_from,
             'date_to' => $request->date_to,
-            'copies' => $request->copies,
+            'copies' => 1,
             'status' => 'pending'
         ]);
     }

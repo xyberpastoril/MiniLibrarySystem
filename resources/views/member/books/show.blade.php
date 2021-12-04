@@ -107,7 +107,8 @@
     </div>
 
     <!--begin:: Borrow Modal-->
-    <div class="modal fade" tabindex="-1" id="borrow_modal">
+    <form class="modal fade" tabindex="-1" id="borrow_modal" method="POST" action="{{ route('transactions.request', $book->id) }}">
+        @csrf
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,16 +129,16 @@
                 <div class="modal-body">
                     <div class="mb-0">
                         <label for class="form-label">Pick Date Range</label>
-                        <input class="form-control form-control-solid" placeholder="Pick date rage" id="borrow_modal_date_range_picker">
+                        <input name="date" class="form-control form-control-solid" placeholder="Pick date rage" id="borrow_modal_date_range_picker">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send Borrow Request</button>
+                    <button type="submit" class="btn btn-primary">Send Borrow Request</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <!--end: Borrow Modal-->
 
 @endsection

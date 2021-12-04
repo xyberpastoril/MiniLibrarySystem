@@ -63,10 +63,14 @@ class TransactionController extends Controller
 
     /** Create */
 
-    public function request(Request $request)
+    public function request(Request $request, \App\Models\Book $book)
     {
         // TODO: Include Penalty Rate/Day
-        return \App\Models\Transaction::request($request);
+        $date = explode(" - ", $request->date);
+        $request->date_from = date('Y-m-d', strtotime($date[0]));
+        $request->date_to = date('Y-m-d', strtotime($date[1]));
+
+        return \App\Models\Transaction::request($request, $book);
     }
 
     /** Delete */
