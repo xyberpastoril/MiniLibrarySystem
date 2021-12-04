@@ -214,7 +214,7 @@
                         <td>{{ $transaction->copies }}</td>
 
                         <!-- Penalty Issued -->
-                        <td>{{ ($transaction->amount ? $transaction->amount : 0) }}</td>
+                        <td>₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</td>
 
                         <td>
                             @if($transaction->amount > 0 && $transaction->penalty_status == 'unpaid')
