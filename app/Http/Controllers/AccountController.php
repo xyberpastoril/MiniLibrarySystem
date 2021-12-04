@@ -73,4 +73,30 @@ class AccountController extends Controller
             'error' => null
         ];
     }
+
+    public function updateBasicInfo(Request $request)
+    {
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        // If user has existing photo
+        if((isset($request->avatar) && $user->cover_url) || $request->avatar_remove) 
+        {
+            try {
+                unlink('media/avatars/'.$user->cover_url);
+            } catch(\Throwable $e) {}
+        }
+
+        \App\Models\User::where('id', '=', $user->id)
+            ->update([
+                'cover_url' => !$request->avatar_remove ? $user->id : null,
+                'address' => $request->address,
+            ]);
+
+        if(isset($request->avatar))
+        {
+            $request->avatar->move(public_path('media/avatars/'), $user->id);
+        }
+
+        return redirect('account/settings?basicinfoupdated=1');
+    }
 }

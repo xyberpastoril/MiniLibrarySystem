@@ -15,5 +15,6 @@ class RoleSeeder extends Seeder
     {
         \Spatie\Permission\Models\Role::create(['name' => 'Librarian']);
         \Spatie\Permission\Models\Role::create(['name' => 'Member']);
+        \Spatie\Permission\Models\Role::create(['name' => 'Unverified Member']);
     }
 }

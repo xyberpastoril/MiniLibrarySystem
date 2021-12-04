@@ -91,7 +91,7 @@
                         <div class="d-flex flex-wrap align-items-center mb-8">
                             <div id="kt_signin_email">
                                 <div class="fs-5 fw-bolder mb-1">Email Address</div>
-                                <div class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
+                                <div id="email-readonly" class="fs-7 fw-bold text-gray-600">{{ Auth::user()->email }}</div>
                             </div>
                             <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
                                 <!--begin::Form-->
@@ -229,23 +229,42 @@
 
                 <!-- Content -->
                 <div id="kt_account_basic_info" class="collapse show">
-
-                    <form id="kt_account_basic_info_form" class="form">
+                    <!--begin::Form-->
+                    <form id="kt_account_basic_info_form" class="form" method="POST" action="{{ route('account.updateBasicInfo') }}" enctype="multipart/form-data">
+                        @csrf
+                        <!--begin::Card body-->
                         <div class="card-body border-top p-9">
+                            
+                            @if(isset($_GET['basicinfoupdated']))
+                                <div class="alert alert-success d-flex align-items-center p-5 mb-10">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                                    <span class="svg-icon svg-icon-2hx svg-icon-success me-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="black"></path>
+                                            <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <div class="d-flex flex-column">
+                                        <h4 class="mb-1 text-success">Basic Information successfully updated.</h4>
+                                    </div>
+                                </div>
+                            @endif
 
-                            <!-- Avatar -->
+                            <!--begin::Input group-->
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
                                 <div class="col-lg-8">
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset("media/avatars/blank.png") }}')">
-
-                                        <!-- Preview existing avatar -->
-                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url('@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/".Auth::user()->cover_url) }}@endif')"></div>
-
-                                        <!-- Label -->
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ asset("media/avatars/blank.png") }})">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/" . Auth::user()->cover_url) }}@endif)"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
-                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg">
+                                            <!--begin::Inputs-->
+                                            <input id="avatar" type="file" name="avatar" accept=".png, .jpg, .jpeg">
                                             <input type="hidden" name="avatar_remove">
                                         </label>
 
@@ -265,53 +284,33 @@
                                     <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                 </div>
                             </div>
-
-                            <!-- Full Name -->
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6 required">Full Name</label>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            {{-- <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <div class="row">
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{ Auth::user()->first_name }}">
+                                            <input id="fname" type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{ Auth::user()->first_name }}">
                                         </div>
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{ Auth::user()->last_name }}">
+                                            <input id="lname" type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{ Auth::user()->last_name }}">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-bold fs-6 required">
-                                    <span>Email</span>
-                                </label>
-                                <div class="col-lg-8 fv-row">
-                                    <input type="email" name="email" class="form-control form-control-lg form-control-solid" value="{{ Auth::user()->email }}" placeholder="Enter Email" />
-                                </div>
-                            </div>
-
-                            <!-- Gender -->
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span>Gender</span>
-                                </label>
-                                <div class="col-lg-8 fv-row">
-                                    <select name="gender" class="form-select form-select-lg form-select-solid">
-                                        <option>Select Gender</option>
-                                        <option value="Male" @if (Auth::user()->gender == 'Male') selected="selected" @endif>Male</option>
-                                        <option value="Female" @if (Auth::user()->gender == 'Female') selected="selected" @endif>Female</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Address -->
+                                <!--end::Col-->
+                            </div> --}}
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
                                     <span>Address</span>
                                 </label>
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="address" class="form-control form-control-lg form-control-solid" value="{{ Auth::user()->address }}" placeholder="Enter Address" />
+                                    <input id="address" type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ Auth::user()->address }}">
                                 </div>
                             </div>
 

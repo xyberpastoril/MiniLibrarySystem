@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'username' => '@cris1412',
             'email' => 'librarian@example.com',
             'gender' => 'Male',
-            'address' => 'Plaridel Baybay City Leyte',
+            'address' => 'Visca Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('librarian123'),
         ]);
         $user->assignRole([1]);
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'username' => 'raymon123',
             'email' => 'member@example.com',
             'gender' => 'Male',
-            'address' => 'Plaridel Baybay City Leyte',
+            'address' => 'Visca Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
             'username' => 'megan143',
             'email' => 'member2@example.com',
             'gender' => 'Female',
-            'address' => 'Plaridel Baybay City Leyte',
+            'address' => 'Visca Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);
@@ -60,7 +60,7 @@ class UserSeeder extends Seeder
             'username' => 'kelcembrano',
             'email' => 'member3@example.com',
             'gender' => 'Female',
-            'address' => 'Plaridel Baybay City Leyte',
+            'address' => 'Visca Baybay City Leyte',
             'password' => \Illuminate\Support\Facades\Hash::make('member123'),
         ]);
         $user->assignRole([2]);

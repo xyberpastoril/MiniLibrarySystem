@@ -75,5 +75,6 @@ Route::middleware(['auth'])->group(function(){
         ->name('account.updateEmail');
     Route::post('/account/updatePassword', [App\Http\Controllers\AccountController::class, 'updatePassword'])
         ->name('account.updatePassword');
-
+    Route::post('/account/updateBasicInfo', [App\Http\Controllers\AccountController::class, 'updateBasicInfo'])
+        ->name('account.updateBasicInfo');
 });
