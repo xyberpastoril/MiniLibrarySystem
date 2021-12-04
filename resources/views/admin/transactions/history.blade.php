@@ -212,7 +212,7 @@
                         <td>{{ $transaction->copies }}</td>
 
                         <!-- Penalty Issued -->
-                        <td>{{ $transaction->penalty }}</td>
+                        <td>{{ ($transaction->amount ? $transaction->amount : 0) }}</td>
 
                         <td>
                             <a href="#" class="btn btn-icon btn-danger btn-sm" data-kt-transactions-table-filter="delete_row" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
