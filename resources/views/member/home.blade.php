@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -41,7 +41,7 @@
             <!--begin::Body-->
             <div class="card-body d-flex flex-column justify-content-center ps-lg-15">
                 <!--begin::Title-->
-                <h3 class="text-gray-800 fs-2qx fw-boldest line-height-lg mb-4 mb-lg-8 col-8">Welcome to README! 
+                <h3 class="text-gray-800 fs-2qx fw-boldest line-height-lg mb-4 mb-lg-8 col-8">Welcome to README!
                 <br><i>You're one step ahead to having a privilege to borrow books on our expanding library.</i></h3>
                 <!--end::Title-->
                 <!--begin::Action-->
@@ -137,19 +137,19 @@
         <!--end::Title-->
     </div>
 
-    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
-        @foreach ($hotBooks as $book)
-            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', 1) }}';">
-                <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto" style="gap: 2.5rem">
+        @foreach ($newArrivals as $book)
+            <div class="card card-block my-card cursor-pointer shadow" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
+                <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
                     style="width: 100%; height: 225px; object-fit: cover;">
                 <div class="card-body p-2">
                     <p class="card-text text-truncate">
-                        <a href="#" class="text-gray-800 mb-1">{{ $book->title }}</a>
+                        <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                         <br />
                         <small class="text-muted">
                             {{ $book['authors'][0]->name }}
                             @if(count($book['authors']) > 1)
-                                and {{ (count($book['authors']) - 1) }} others.
+                                and {{ (count($book['authors']) - 1) }} other(s).
                             @endif
                         </small>
                     </p>
@@ -166,19 +166,19 @@
         <!--end::Title-->
     </div>
 
-    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto">
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto" style="gap: 2.5rem">
         @foreach ($hotBooks as $book)
-            <div class="card card-block me-11 my-card" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', 1) }}';"> 
-                <img class="card-img-top" src="https://m.media-amazon.com/images/I/71ROjSv2ttL._AC_UY327_FMwebp_QL65_.jpg" alt="Book Cover" 
+            <div class="card card-block my-card cursor-pointer shadow" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
+                <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
                     style="width: 100%; height: 225px; object-fit: cover;">
                 <div class="card-body p-2">
                     <p class="card-text text-truncate">
-                        <a href="#" class="text-gray-800 mb-1">{{ $book->title }}</a>
+                        <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                         <br />
                         <small class="text-muted">
                             {{ $book['authors'][0]->name }}
                             @if(count($book['authors']) > 1)
-                                and {{ (count($book['authors']) - 1) }} others.
+                                and {{ (count($book['authors']) - 1) }} other(s).
                             @endif
                         </small>
                     </p>
