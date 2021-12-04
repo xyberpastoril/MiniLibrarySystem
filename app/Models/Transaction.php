@@ -54,15 +54,18 @@ class Transaction extends Model
                 'transactions.date_from',
                 'transactions.date_to',
                 'transactions.copies',
-                'transactions.penalty',
                 'transactions.date_accepted',
                 'transactions.date_returned',
                 'transactions.status',
                 DB::raw('transactions.created_at as date_requested'),
                 DB::raw('books.id as book_id'),
+                DB::raw('penalties.id as penalty_id'),
+                'penalties.amount',
+                DB::raw('penalties.status as penalty_status'),
                 'books.isbn')
             ->leftJoin('books', 'transactions.book_id', '=', 'books.id')
             ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+            ->leftJoin('penalties', 'transactions.id', '=', 'penalties.transaction_id')
             ->orderBy('transactions.created_at', 'desc');
 
         if($search)
