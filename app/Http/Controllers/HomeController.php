@@ -30,4 +30,20 @@ class HomeController extends Controller
             "hotBooks" => \App\Models\Book::getHotBooks()
         ]);
     }
+
+    public function searchBooks(Request $request)
+    {
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+            return view('admin.dashboard');
+
+        $genre = explode(',', $request->post('genres'));
+        return view('member.search_results', [
+            "book_results" => \App\Models\Book::search(
+                $request->post('search'),
+                (count($genre) == 1 && $genre[0] != '') || count($genre) > 1
+                    ? $genre
+                    : null,
+                $request->post('status')),
+        ]);
+    }
 }

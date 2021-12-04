@@ -90,13 +90,15 @@ class Book extends Model
             ->distinct('books.title')
             ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'books.cover_url','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
-            ->rightJoin('books', 'sub.id', '=', 'books.id');
+            ->rightJoin('books', 'sub.id', '=', 'books.id')
+            ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
+            ->leftJoin('authors', 'books.id', '=', 'authors.book_id');
 
         if($search)
         {
             $obj->where(function ($query) use ($search) {
                 $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
-                    ->orWhere('authors.name', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
+                    ->orWhere('books.description', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
             });
 
         }
@@ -139,8 +141,25 @@ class Book extends Model
             }
         }
 
+        // // Append other parameters to auto-generated page urls
+        // if($search) $obj->appends(['search' => $search]);
+        // if($genre)
+        // {
+        //     $gc = "";
+        //     for($i = 0; $i < count($genre); $i++)
+        //     {
+        //         $gc .= $genre[$i];
+        //         if($i < count($genre) - 1)
+        //         {
+        //             $gc .= ", ";
+        //         }
+        //     }
+        //     $obj->appends(['genre' => $gc]);
+        // }
+        // if($status) $obj->appends(['status' => $status]);
+
         // Append other parameters to auto-generated page urls
-        if($search) $obj->appends(['search' => $search]);
+        if($search) $obj->search = $search;
         if($genre)
         {
             $gc = "";
@@ -152,9 +171,9 @@ class Book extends Model
                     $gc .= ", ";
                 }
             }
-            $obj->appends(['genre' => $gc]);
+            $obj->genres = $gc;
         }
-        if($status) $obj->appends(['status' => $status]);
+        if($status) $obj->status = $status;
 
         return $obj;
     }
