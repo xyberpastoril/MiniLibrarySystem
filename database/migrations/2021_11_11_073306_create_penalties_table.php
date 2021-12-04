@@ -19,6 +19,10 @@ class CreatePenaltiesTable extends Migration
             $table->integer('transaction_id');
             $table->date('penalty_date');
             $table->integer('amount');
+            $table->enum('status', [
+                'unpaid',
+                'paid',
+            ]);
             $table->timestamps();
         });
     }

@@ -8,78 +8,17 @@ use Illuminate\Http\Request;
 class PenaltyController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Updates the entry with 'paid' status.
+     * 
+     * @param \App\Models\Penalty $penalty
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function pay(Penalty $penalty)
     {
-        //
-    }
+        // TODO: Send email for test receipt.
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Penalty  $penalty
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penalty $penalty)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Penalty  $penalty
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Penalty $penalty)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penalty  $penalty
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Penalty $penalty)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Penalty  $penalty
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Penalty $penalty)
-    {
-        //
+        $penalty->status = 'paid';
+        $penalty->save();
+        return 1;
     }
 }

@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/transactions/history',[App\Http\Controllers\TransactionController::class,'history'])->name('transactions.history');
     Route::get('/result/transactions/search/', [App\Http\Controllers\TransactionController::class, 'search']);
 
+    Route::post('/penalty/pay/{penalty}', [App\Http\Controllers\PenaltyController::class, 'pay'])->name('penalty.pay');
+
     Route::get('/account/overview',[App\Http\Controllers\AccountController::class,'overview'])->name('account.overview');
     Route::get('/account/settings',[App\Http\Controllers\AccountController::class,'settings'])->name('account.settings');
     Route::post('/account/updateEmail', [App\Http\Controllers\AccountController::class, 'updateEmail'])->name('account.updateEmail');
