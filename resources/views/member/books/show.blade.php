@@ -37,7 +37,7 @@
 
             <div class="card-toolbar p-5">
                 <button id="borrow_modal_button" class="btn btn-primary"  
-                    @if($book->copies_left < 1) 
+                    @if($book->copies_left < 1 || Auth::user()->getRoleNames()[0] == "Unverified Member") 
                         disabled 
                     @else
                         data-bs-toggle="modal" 
