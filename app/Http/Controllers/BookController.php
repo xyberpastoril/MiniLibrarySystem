@@ -89,6 +89,11 @@ class BookController extends Controller
             ->where('status', '!=', 'returned')->count();
 
         $book->copies_left = $book->copies_owned - $used_books;
+        if($book->copies_left < 1) {
+            $book->next_available = \App\Models\Transaction::where('book_id', '=', $book->id)
+                ->where('status', '!=', 'returned')
+                ->orderBy('date_to', 'ASC')->first();
+        }
 
         if(count($book->genres) > 0) $book['genres'] = Genre::getBookGenres($book->id)[0]->genres;
         else $book['genres'] = "";

@@ -41,8 +41,8 @@ f.click(function(e){
                 copies_left.html(copies_left.html() - 1)
                 if(copies_left.html() < 1) {
                     b.attr('disabled', 'disabled')
-                    copies_left.removeClass("badge-success")
-                    copies_left.addClass("badge-danger")
+                    // copies_left.removeClass("badge-success")
+                    // copies_left.addClass("badge-danger")
                 }
                 
             }
