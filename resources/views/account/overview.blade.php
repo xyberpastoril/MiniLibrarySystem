@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -19,11 +19,6 @@
     <!-- Item -->
     <li class="breadcrumb-item text-muted">
         <a href="#" class="text-muted text-hover-primary">Account</a>
-    </li>
-
-    <!-- Dash -->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-200 w-5px h-2px"></span>
     </li>
 
     <!-- Item -->
@@ -45,7 +40,7 @@
                 <!-- Pic -->
                 <div class="me-7 mb-4">
                     <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                        <img src="{{ asset("media/avatars/150-15.jpg") }}" alt="image">
+                        <img src="@if(Auth::user()->cover_url == null) {{ asset("media/avatars/blank.png") }} @else {{ asset("media/avatars/" . Auth::user()->cover_url . "") }} @endif" alt="image">
                         <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle h-15px w-15px"></div>
                     </div>
                 </div>
@@ -93,7 +88,7 @@
                                             <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black"/>
                                         </svg>
                                     </span>
-                                    
+
                                 </a>
 
                                 <!-- Email -->
@@ -156,7 +151,7 @@
                         <path d="M3.62499 16H10.625V10H3.62499L2.225 12.1001C1.925 12.6001 1.925 13.3 2.225 13.8L3.62499 16Z" fill="black"/>
                     </svg>
                 </span>
-                
+
                 <h3 class="fw-bolder m-0 text-gray-800">Alerts</h3>
             </div>
 
@@ -184,11 +179,11 @@
         <!-- Card body -->
         <div class="card-body">
             <div class="tab-content">
-            
+
                 <!-- Tab panel | Today -->
                 <div id="kt_activity_today" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_activity_today_tab">
                     <div class="timeline">
-                        
+
                         <!-- Timeline item -->
                         <div class="timeline-item">
 
@@ -208,14 +203,14 @@
                                     </span>
                                 </div>
                             </div>
-                            
+
                             <!-- Timeline content -->
                             <div class="timeline-content mt-n1">
 
                                 <!-- Timeline heading -->
                                 <div class="pe-3 mb-5">
                                     <!-- Title -->
-                                    <div class="fs-5 fw-bold mb-2">New order 
+                                    <div class="fs-5 fw-bold mb-2">New order
                                     <a href="#" class="text-primary fw-bolder me-1">#67890</a>is placed for Workshow Planning &amp; Budget Estimation</div>
 
                                     <!-- Description -->
@@ -226,37 +221,37 @@
                                         <!-- User -->
                                         <a href="#" class="text-primary fw-bolder me-1">Jimmy Bold</a>
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
                 <!-- Tab panel | Week -->
                 <div id="kt_activity_week" class="card-body p-0 tab-pane fade show" role="tabpanel" aria-labelledby="kt_activity_week_tab">
                     <div class="timeline">
                     </div>
                 </div>
-                
+
                 <!-- Tab panel | Month -->
                 <div id="kt_activity_month" class="card-body p-0 tab-pane fade show" role="tabpanel" aria-labelledby="kt_activity_month_tab">
                     <div class="timeline">
                     </div>
                 </div>
-                
+
                 <!-- Tab panel | 2021 -->
                 <div id="kt_activity_year" class="card-body p-0 tab-pane fade show" role="tabpanel" aria-labelledby="kt_activity_year_tab">
                     <div class="timeline">
                     </div>
                 </div>
-                
+
             </div>
         </div>
-        
+
     </div>
     <!--end::Timeline-->
 

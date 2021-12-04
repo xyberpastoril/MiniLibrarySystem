@@ -11,6 +11,8 @@
 <!-- Global Stylesheets Bundle(used by all pages) -->
 <link href="{{ asset("plugins/global/plugins.bundle.css") }}" rel="stylesheet" type="text/css">
 <link href="{{ asset("css/style.bundle.css") }}" rel="stylesheet" type="text/css">
+<link href="{{ asset("css/my.style.css") }}" rel="stylesheet" type="text/css">
 
 <!-- Page Icon -->
+
 <link rel="shortcut icon" href="{{ asset("media/logos/icon.ico") }}">

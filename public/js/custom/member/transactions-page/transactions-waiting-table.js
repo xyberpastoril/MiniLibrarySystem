@@ -6,17 +6,17 @@ var KTTransactionsList = (function() {
         r,
         o = document.getElementById("kt_table_transactions"),
     c = () => {
-        o.querySelectorAll('[data-kt-transactions-table-filter="delete_row"]').forEach((t => {
+        o.querySelectorAll('[data-kt-transactions-table-filter="cancel_row"]').forEach((t => {
             t.addEventListener("click", (function(t) {
                 t.preventDefault();
                 const n = t.target.closest("tr"),
                     r = n.querySelectorAll("td")[1].querySelectorAll("p")[0].innerText;
                 Swal.fire({
-                    text: "Are you sure you want to delete transaction number " + r + "?",
+                    text: "Are you sure you want to cancel transaction number " + r + "?",
                     icon: "warning",
                     showCancelButton: !0,
                     buttonsStyling: !1,
-                    confirmButtonText: "Yes, delete!",
+                    confirmButtonText: "Yes, decline!",
                     cancelButtonText: "No, cancel",
                     customClass: {
                         confirmButton: "btn fw-bold btn-danger",
@@ -24,7 +24,7 @@ var KTTransactionsList = (function() {
                     }
                 }).then((function(t) {
                     t.value ? Swal.fire({
-                        text: "You have deleted transaction number " + r + "!.",
+                        text: "You have cancelled transaction number " + r + "!.",
                         icon: "success",
                         buttonsStyling: !1,
                         confirmButtonText: "Ok, got it!",
@@ -43,7 +43,7 @@ var KTTransactionsList = (function() {
                     })).then((function() {
                         a()
                     })) : "cancel" === t.dismiss && Swal.fire({
-                        text: "Transaction number " + r + " was not deleted.",
+                        text: "Transaction number " + r + " was not cancelled.",
                         icon: "error",
                         buttonsStyling: !1,
                         confirmButtonText: "Ok, got it!",
@@ -65,7 +65,7 @@ var KTTransactionsList = (function() {
             '[data-kt-transactions-table-select="selected_count"]'
         ));
         const s = document.querySelector(
-            '[data-kt-transactions-table-select="delete_selected"]'
+            '[data-kt-transactions-table-select="cancel_selected"]'
         );
         c.forEach((e) => {
                 e.addEventListener("click", function() {
@@ -76,11 +76,11 @@ var KTTransactionsList = (function() {
             }),
             s.addEventListener("click", function() {
                 Swal.fire({
-                    text: "Are you sure you want to delete selected transactions?",
+                    text: "Are you sure you want to cancel selected transactions?",
                     icon: "warning",
                     showCancelButton: !0,
                     buttonsStyling: !1,
-                    confirmButtonText: "Yes, delete!",
+                    confirmButtonText: "Yes, decline!",
                     cancelButtonText: "No, cancel",
                     customClass: {
                         confirmButton: "btn fw-bold btn-danger",
@@ -88,7 +88,7 @@ var KTTransactionsList = (function() {
                     },
                 }).then(function(t) {
                     t.value ? Swal.fire({
-                        text: "You have delete all selected transactions!.",
+                        text: "You have cancelled all selected transactions!.",
                         icon: "danger",
                         buttonsStyling: !1,
                         confirmButtonText: "Ok, got it!",
@@ -98,7 +98,6 @@ var KTTransactionsList = (function() {
                     })
                     .then(function() {
                         c.forEach((t) => {
-                            t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
                             if(t.checked && t.value > 0){
                                 $.ajax({
                                     url:"/transactions/" + t.value + "/cancel",
@@ -108,6 +107,7 @@ var KTTransactionsList = (function() {
                                     }
                                 })
                             }
+                            t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
                         });
                         o.querySelectorAll('[type="checkbox"]')[0].checked = !1;
                     })
@@ -115,7 +115,7 @@ var KTTransactionsList = (function() {
                         a(), l();
                     }) : "cancel" === t.dismiss &&
                     Swal.fire({
-                        text: "Selected transactions was not deleted.",
+                        text: "Selected transactions was not cancelled.",
                         icon: "error",
                         buttonsStyling: !1,
                         confirmButtonText: "Ok, got it!",
@@ -141,19 +141,20 @@ var KTTransactionsList = (function() {
     return {
         init: function() {
             o && (e = $(o).DataTable({
-                    aLengthMenu: [5, 10, 25, 50, 100],
-                    order: [
-                        [7, "desc"]
-                    ],
+                aLengthMenu: [5, 10, 25, 50, 100],
+                searchDelay: 500,
+                order: [
+                    [3, "desc"]
+                ],
 
-                    columnDefs: [{
-                        targets: 0,
-                        orderable: false,
-                    }, ],
-                })).on("draw", function() {
-                    l(), c(), a();
-                }),
-                l(), c();
+                columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                }, ],
+            })).on("draw", function() {
+                l(), c(), a();
+            }),
+            l(), c();
         },
     };
 })();

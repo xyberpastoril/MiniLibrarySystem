@@ -34,7 +34,7 @@
                 <h1 class="d-flex flex-column text-dark fw-bolder fs-3 mb-0">@yield("title")</h1>
 
                 <!-- Breadcrumb -->
-                <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                <ul class="breadcrumb fw-bold fs-7 pt-1">
                     @yield("breadcrumb")
                 </ul>
 

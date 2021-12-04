@@ -13,10 +13,17 @@ class TransactionController extends Controller
      */
     public function waiting_for_approval()
     {
-        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
-            return view("admin.transactions.waiting_for_approval");
-        return view("member.transactions.waiting_for_approval");
+        $t = \App\Models\Transaction::search(null, "waiting", \Illuminate\Support\Facades\Auth::user());
 
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
+        {
+            return view("admin.transactions.waiting_for_approval", [
+                "allTransactions" => $t,
+            ]);
+        }
+        return view("member.transactions.waiting_for_approval", [
+            "allTransactions" => $t,
+        ]);
     }
 
     /**
@@ -24,9 +31,17 @@ class TransactionController extends Controller
      */
     public function in_progress()
     {
+        $t = \App\Models\Transaction::search(null, "in_progress", \Illuminate\Support\Facades\Auth::user());
+
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
-            return view("admin.transactions.in_progress");
-        return view("member.transactions.in_progress");
+        {
+            return view("admin.transactions.in_progress", [
+                "allTransactions" => $t,
+            ]);
+        }
+        return view("member.transactions.in_progress", [
+            "allTransactions" => $t,
+        ]);
     }
 
     /**
@@ -34,13 +49,52 @@ class TransactionController extends Controller
      */
     public function history()
     {
+        $t = \App\Models\Transaction::search(null, "history", \Illuminate\Support\Facades\Auth::user());
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
-            return view("admin.transactions.history");
-        return view("member.transactions.history");
+        {
+            return view("admin.transactions.history", [
+                "allTransactions" => $t,
+            ]);
+        }
+        return view("member.transactions.history", [
+            "allTransactions" => $t,
+        ]);
     }
 
+    /** Create */
+
+    public function request(Request $request)
+    {
+        // TODO: Include Penalty Rate/Day
+        return \App\Models\Transaction::request($request);
+    }
+
+    /** Delete */
+    public function cancel(Request $request, \App\Models\Transaction $transaction)
+    {
+        return \App\Models\Transaction::cancel($transaction);
+    }
+
+    /** Update */
+    public function approve(\App\Models\Transaction $transaction)
+    {
+        return \App\Models\Transaction::approve($transaction);
+    }
+
+    public function claim(Request $request, \App\Models\Transaction $transaction)
+    {
+        return \App\Models\Transaction::claim($transaction);
+    }
+
+    public function return(Request $request, \App\Models\Transaction $transaction)
+    {
+        // TODO: Compute Final Penalty
+        return \App\Models\Transaction::return($transaction);
+    }
+
+
     /** JSON */
-    public function search(Request $request)
+    public static function search(Request $request)
     {
         return \App\Models\Transaction::search(
             $request->get('search'),

@@ -30,15 +30,18 @@ class Transaction extends Model
     public static function search($search, $status, $user)
     {
         $obj = self::select(
-                DB::raw('users.id as user_id'), 
-                'users.first_name', 
-                'users.last_name', 
+                DB::raw('users.id as user_id'),
+                'users.first_name',
+                'users.last_name',
                 'transactions.id',
                 'transactions.date_from',
                 'transactions.date_to',
-                'transactions.returned_date',
-                DB::raw('transactions.created_at as request_date'),
-                'transactions.updated_at',
+                'transactions.copies',
+                'transactions.penalty',
+                'transactions.date_accepted',
+                'transactions.date_returned',
+                'transactions.status',
+                DB::raw('transactions.created_at as date_requested'),
                 DB::raw('books.id as book_id'),
                 'books.isbn')
             ->leftJoin('books', 'transactions.book_id', '=', 'books.id')
@@ -64,17 +67,21 @@ class Transaction extends Model
                         ->orWhere('transactions.status', '=', 'claimed');
                 });
                 break;
+            case "history":
+                $obj->where('transactions.status', '=', 'returned');
+                break;
         }
 
         if($user->getRoleNames()[0] == "Member") {
             $obj->where('users.id', '=', $user->id);
         }
 
-        $obj = $obj->paginate(10);
+        // $obj = $obj->paginate(10);
+        $obj = $obj->get();
 
         // Append other parameters to auto-generated page urls
-        if($search) $obj->appends(['search' => $search]);
-        if($status) $obj->appends(['status' => $status]);
+        // if($search) $obj->appends(['search' => $search]);
+        // if($status) $obj->appends(['status' => $status]);
 
         return $obj;
     }
@@ -93,5 +100,49 @@ class Transaction extends Model
             ->orWhere('transactions.status', '=', 'claimed')
             ->orWhere('transactions.status', '=', 'pending')
             ->groupBy('books.id', 'books.title');
+    }
+
+    public static function request($request)
+    {
+        return self::create([
+            'book_id' => $request->book_id,
+            'user_id' => \Illuminate\Support\Facades\Auth::user()->id,
+            'date_from' => $request->date_from,
+            'date_to' => $request->date_to,
+            'copies' => $request->copies,
+            'status' => 'pending'
+        ]);
+    }
+
+    public static function cancel($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->delete();
+    }
+
+    public static function approve($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->update([
+                'status' => 'unclaimed',
+                'date_accepted' => \Carbon\Carbon::now()->format('Y-m-d')
+            ]);
+    }
+
+    public static function claim($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->update([
+                'status' => 'claimed',
+            ]);
+    }
+
+    public static function return($transaction)
+    {
+        return self::where('id', '=', $transaction->id)
+            ->update([
+                'status' => 'returned',
+                'date_returned' => \Carbon\Carbon::now()->format('Y-m-d')
+            ]);
     }
 }

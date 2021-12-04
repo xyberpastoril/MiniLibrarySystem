@@ -21,11 +21,6 @@
         <a href="#" class="text-muted text-hover-primary">Account</a>
     </li>
 
-    <!-- Dash -->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-200 w-5px h-2px"></span>
-    </li>
-
     <!-- Item -->
     <li class="breadcrumb-item text-dark">Settings</li>
 
@@ -36,13 +31,14 @@
 @section("content")
 
     <div class="d-flex flex-column flex-lg-row">
-        <!--begin::Aside-->
+        <!-- Aside -->
         <div class="flex-column flex-md-row-auto w-100 w-lg-250px w-xxl-275px">
-            <!--begin::Nav-->
             <div class="card mb-6 mb-xl-9" data-kt-sticky="true" data-kt-sticky-name="account-settings" data-kt-sticky-offset="{default: false, lg: 300}" data-kt-sticky-width="{lg: '250px', xxl: '275px'}" data-kt-sticky-left="auto" data-kt-sticky-top="40px" data-kt-sticky-zindex="95">
-                <!--begin::Card body-->
+
+                <!-- Card body -->
                 <div class="card-body py-10 px-6">
-                    <!--begin::Menu-->
+
+                    <!-- Menu -->
                     <ul id="kt_account_settings" class="nav nav-flush menu menu-column menu-rounded menu-title-gray-600 menu-bullet-gray-300 menu-state-bg menu-state-bullet-primary fw-bold fs-6 mb-2">
                         <li class="menu-item px-3 pt-0 pb-1">
                             <a href="#kt_account_settings_signin_method" data-kt-scroll-toggle="true" class="menu-link px-3 nav-link active">
@@ -69,18 +65,16 @@
                             </a>
                         </li> --}}
                     </ul>
-                    <!--end::Menu-->
-                </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Nav-->
-        </div>
-        <!--end::Aside-->
 
-        <!--begin::Layout-->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Layout -->
         <div class="flex-md-row-fluid ms-lg-12">
 
-            <!--begin::Sign-in Method-->
+            <!-- Sign-in Method -->
             <div class="card mb-5 mb-xl-10" id="kt_account_settings_signin_method" data-kt-scroll-offset="{default: 100, md: 125}">
                 <!--begin::Card header-->
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
@@ -219,20 +213,21 @@
                 </div>
                 <!--end::Content-->
             </div>
-            <!--end::Sign-in Method-->
 
-            <!--begin::Basic info-->
+            <!-- Basic info -->
             <div class="card mb-5 mb-xl-10" id="kt_account_settings_info" data-kt-scroll-offset="{default: 100, md: 125}">
-                <!--begin::Card header-->
+
+                <!-- Card header -->
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_basic_info" aria-expanded="true" aria-controls="kt_account_basic_info">
-                    <!--begin::Card title-->
+
+                    <!-- Card title -->
                     <div class="card-title m-0">
                         <h3 class="fw-bolder m-0">Basic Info</h3>
                     </div>
-                    <!--end::Card title-->
+
                 </div>
-                <!--begin::Card header-->
-                <!--begin::Content-->
+
+                <!-- Content -->
                 <div id="kt_account_basic_info" class="collapse show">
                     <!--begin::Form-->
                     <form id="kt_account_basic_info_form" class="form" method="POST" action="{{ route('account.updateBasicInfo') }}" enctype="multipart/form-data">
@@ -258,10 +253,7 @@
 
                             <!--begin::Input group-->
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <!--begin::Image input-->
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ asset("media/avatars/blank.png") }})">
@@ -274,26 +266,23 @@
                                             <!--begin::Inputs-->
                                             <input id="avatar" type="file" name="avatar" accept=".png, .jpg, .jpeg">
                                             <input type="hidden" name="avatar_remove">
-                                            <!--end::Inputs-->
                                         </label>
-                                        <!--end::Label-->
-                                        <!--begin::Cancel-->
+
+                                        <!-- Cancel -->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
                                             <i class="bi bi-x fs-2"></i>
                                         </span>
-                                        <!--end::Cancel-->
-                                        <!--begin::Remove-->
+
+                                        <!-- Remove -->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
                                             <i class="bi bi-x fs-2"></i>
                                         </span>
-                                        <!--end::Remove-->
+
                                     </div>
-                                    <!--end::Image input-->
-                                    <!--begin::Hint-->
+
+                                    <!-- Hint -->
                                     <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                                    <!--end::Hint-->
                                 </div>
-                                <!--end::Col-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
@@ -303,48 +292,38 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
-                                    <!--begin::Row-->
                                     <div class="row">
-                                        <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
                                             <input id="fname" type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{ Auth::user()->first_name }}">
                                         </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
                                             <input id="lname" type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{ Auth::user()->last_name }}">
                                         </div>
-                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Row-->
                                 </div>
                                 <!--end::Col-->
                             </div> --}}
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
                                     <span>Address</span>
                                 </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input id="address" type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ Auth::user()->address }}">
                                 </div>
-                                <!--end::Col-->
                             </div>
-                            <!--end::Input group-->
+
                         </div>
-                        <!--end::Card body-->
-                        <!--begin::Actions-->
+
+                        <!-- Actions -->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
                             <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
                             <button type="submit" class="btn btn-primary" id="kt_account_basic_info_submit">Save Changes</button>
                         </div>
-                        <!--end::Actions-->
+
                     </form>
-                    <!--end::Form-->
+
                 </div>
                 <!--end::Content-->
             </div>

@@ -1,12 +1,13 @@
 "use strict";
-var KTBooksList = function() {
+var KTbooksList = function() {
 	var e, t, n, r, o = document.getElementById("kt_table_books"),
 		c = () => {
 			o.querySelectorAll('[data-kt-books-table-filter="delete_row"]').forEach((t => {
 				t.addEventListener("click", (function(t) {
 					t.preventDefault();
 					const n = t.target.closest("tr"),
-						r = n.querySelectorAll("td")[1].querySelectorAll("a")[1].innerText;
+						r = n.querySelectorAll("td")[1].querySelectorAll("a")[0].innerText,
+                        z = n.querySelectorAll("td")[0].querySelectorAll("input")[0].value;
 					Swal.fire({
 						text: "Are you sure you want to delete " + r + "?",
 						icon: "warning",
@@ -28,11 +29,18 @@ var KTBooksList = function() {
 								confirmButton: "btn fw-bold btn-primary"
 							}
 						}).then((function() {
+                            $.ajax({
+                                url:"books/"+z,
+                                type:'DELETE',
+                                data:{
+                                    _token: $("input[name=_token]").val()
+                                }
+                            })
 							e.row($(n)).remove().draw()
 						})).then((function() {
 							a()
 						})) : "cancel" === t.dismiss && Swal.fire({
-							text: customerName + " was not deleted.",
+							text: r + " was not deleted.",
 							icon: "error",
 							buttonsStyling: !1,
 							confirmButtonText: "Ok, got it!",
@@ -46,8 +54,8 @@ var KTBooksList = function() {
 		},
 		l = () => {
 			const c = o.querySelectorAll('[type="checkbox"]');
-			t = document.querySelector('[data-kt-book-table-toolbar="base"]'), n = document.querySelector('[data-kt-book-table-toolbar="selected"]'), r = document.querySelector('[data-kt-book-table-select="selected_count"]');
-			const s = document.querySelector('[data-kt-book-table-select="delete_selected"]');
+			t = document.querySelector('[data-kt-books-table-toolbar="base"]'), n = document.querySelector('[data-kt-books-table-toolbar="selected"]'), r = document.querySelector('[data-kt-books-table-select="selected_count"]');
+			const s = document.querySelector('[data-kt-books-table-select="delete_selected"]');
 			c.forEach((e => {
 				e.addEventListener("click", (function() {
 					setTimeout((function() {
@@ -78,12 +86,22 @@ var KTBooksList = function() {
 					}).then((function() {
 						c.forEach((t => {
 							t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
+                            if(t.checked && t.value > 0)
+                            {
+                                $.ajax({
+                                    url:"books/"+t.value,
+                                    type:'DELETE',
+                                    data:{
+                                        _token: $("input[name=_token]").val()
+                                    }
+                                })
+                            }
 						}));
 						o.querySelectorAll('[type="checkbox"]')[0].checked = !1
 					})).then((function() {
 						a(), l()
 					})) : "cancel" === t.dismiss && Swal.fire({
-						text: "Selected users was not deleted.",
+						text: "Selected books was not deleted.",
 						icon: "error",
 						buttonsStyling: !1,
 						confirmButtonText: "Ok, got it!",
@@ -104,33 +122,28 @@ var KTBooksList = function() {
 	};
 	return {
 		init: function() {
-			o && (o.querySelectorAll("tbody tr").forEach((e => {
-				const t = e.querySelectorAll("td");
-				const l = moment(t[2].innerHTML, "DD MMM YYYY").format();
-				t[2].setAttribute("data-order", l)
-			})), (e = $(o).DataTable({
-				info: !1,
-				order: [],
-				pageLength: 10,
-				lengthChange: !1,
-				columnDefs: [{
-					orderable: !1,
-					targets: 0
-				}, {
-					orderable: !1,
-					targets: 8
-				}]
+			o && (e = $(o).DataTable({
+				aLengthMenu: [5, 10, 25, 50, 100],
+				searchDelay: 500,
+				order: [[1, "asc"]],
+
+				columnDefs: [
+					{
+						targets: 0,
+						orderable: false,
+					},
+				],
 			})).on("draw", (function() {
 				l(), c(), a()
-			})), l(), document.querySelector('[data-kt-book-table-filter="search"]').addEventListener("keyup", (function(t) {
+			})), l(), document.querySelector('[data-kt-books-table-filter="search"]').addEventListener("keyup", (function(t) {
 				e.search(t.target.value).draw()
-			})), document.querySelector('[data-kt-book-table-filter="reset"]').addEventListener("click", (function() {
-				document.querySelector('[data-kt-book-table-filter="form"]').querySelectorAll("select").forEach((e => {
+			})), document.querySelector('[data-kt-books-table-filter="reset"]').addEventListener("click", (function() {
+				document.querySelector('[data-kt-books-table-filter="form"]').querySelectorAll("select").forEach((e => {
 					$(e).val("").trigger("change")
 				})), e.search("").draw()
 			})), c(), (() => {
-				const t = document.querySelector('[data-kt-book-table-filter="form"]'),
-					n = t.querySelector('[data-kt-book-table-filter="filter"]'),
+				const t = document.querySelector('[data-kt-books-table-filter="form"]'),
+					n = t.querySelector('[data-kt-books-table-filter="filter"]'),
 					r = t.querySelectorAll("select");
 				n.addEventListener("click", (function() {
 					var t = "";
@@ -138,10 +151,10 @@ var KTBooksList = function() {
 						e.value && "" !== e.value && (0 !== n && (t += " "), t += e.value)
 					})), e.search(t).draw()
 				}))
-			})())
+			})()
 		}
 	}
 }();
 KTUtil.onDOMContentLoaded((function() {
-	KTBooksList.init()
+	KTbooksList.init()
 }));

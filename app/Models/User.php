@@ -24,6 +24,9 @@ class User extends Authenticatable
         'last_name',
         'username',
         'email',
+        'gender',
+        'address',
+        'cover_url',
         'password',
         'gender',
         'cover_url',
@@ -84,17 +87,20 @@ class User extends Authenticatable
                 'users.id',
                 'users.first_name',
                 'users.last_name',
+                'users.cover_url',
                 'users.email',
+                'users.gender',
+                'users.address',
                 DB::raw('users.created_at as joined_date'),
                 'model_has_roles.role_id',
-                'roles.name',   
+                'roles.name',
             )
             ->join('model_has_roles', 'users.id', '=' ,'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->orderBy('users.last_name', 'ASC')
             ->orderBy('users.first_name', 'ASC');
-        
-        if($search) 
+
+        if($search)
         {
             $obj->where(function ($query) use ($search) {
                 $query->where('first_name', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
@@ -113,11 +119,12 @@ class User extends Authenticatable
                 break;
         }
 
-        $obj = $obj->paginate(10);
+        // $obj = $obj->paginate(10);
+        $obj = $obj->get();
 
         // Append other parameters to auto-generated page urls
-        if($search) $obj->appends(['search' => $search]);
-        if($role) $obj->appends(['role' => $role]);
+        // if($search) $obj->appends(['search' => $search]);
+        // if($role) $obj->appends(['role' => $role]);
 
         return $obj;
     }
@@ -147,10 +154,63 @@ class User extends Authenticatable
         {
             // Generate random number to minimize potential duplicates
             $username = $this->username . rand(100,999);
-        } 
+        }
         while($this::where('username', '=', $username)->count());
 
         $this->username = $username;
         $this->save();
     }
+
+    /**
+     * Creates or updates a user instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user or NULL (for create)
+     * @return \App\Models\User
+     */
+    public static function createOrUpdateUser($request, $user = NULL)
+    {
+        // Create User
+        if(!isset($user))
+        {
+            $obj = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'address' => $request->address,
+                'cover_url' => $request->cover_url
+            ]);
+
+        }
+        else
+        {
+            $obj = User::where('id', '=', $user->id)
+                ->update([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'gender' => $request->gender,
+                    'address' => $request->address,
+                    'cover_url' => $request->cover_url
+                ]);
+        }
+
+        return $obj;
+    }
+
+    /**
+     * Deletes a user instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user or NULL (for create)
+     * @return bool|null
+     */
+    public static function deleteUser($user)
+    {
+        return $user->delete();
+    }
+
 }

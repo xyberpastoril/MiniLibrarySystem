@@ -79,7 +79,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <div class="menu-item">
                     <a class="menu-link
                         @if(Route::currentRouteName() == 'users.index' ||
-                            Route::currentRouteName() == 'users.show') 
+                            Route::currentRouteName() == 'users.edit') 
                             active 
                         @endif" 
                         href="{{ route('users.index') }}"> <!-- users-page.html route('admin.users') -->
@@ -213,7 +213,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <!--begin::Hover Content-->
                 <div class="me-5">
                     <div class="symbol symbol-40px cursor-pointer" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-overflow="true">
-                        <img alt="Logo" src="@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/" . Auth::user()->cover_url) }}@endif">
+                        <img alt="Logo" src="@if(Auth::user()->cover_url == null) {{ asset("media/avatars/blank.png") }} @else {{ asset("media/avatars/" . Auth::user()->cover_url . "") }} @endif">
                     </div>
 
                     <!--begin:: Hover Menu-->
@@ -225,7 +225,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
 
                                 <!-- Avatar -->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="@if(Auth::user()->cover_url == null){{ asset("media/avatars/blank.png") }}@else{{ asset("media/avatars/" . Auth::user()->cover_url) }}@endif">
+                                    <img alt="Logo" src="@if(Auth::user()->cover_url == null) {{ asset("media/avatars/blank.png") }} @else {{ asset("media/avatars/" . Auth::user()->cover_url . "") }} @endif">
                                 </div>
 
                                 <!-- Username -->
@@ -288,7 +288,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <!--begin::Info-->
                         <div class="me-2">
                             <!--begin::Username-->
-                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">{{ Auth::user()->first_name . " " . Auth::user()->last_name }}</a>
+                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-0">{{ Auth::user()->username }}</a>
                             <!--end::Username-->
                             <!--begin::Description-->
                             <span class="text-gray-400 fw-bold d-block fs-8">{{ Auth::user()->getRoleNames()[0] }}</span>

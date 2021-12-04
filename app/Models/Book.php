@@ -10,6 +10,21 @@ class Book extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'page_count',
+        'isbn',
+        'published_date',
+        'copies_owned',
+        'cover_url'
+    ];
+
     public function genres()
     {
         return $this->hasMany(Genre::class);
@@ -26,7 +41,7 @@ class Book extends Model
     }
 
     /** FUNCTIONS */
-    
+
     public static function getNewArrivals()
     {
         $newArrivals = self::limit(5)->latest()->get();
@@ -58,36 +73,32 @@ class Book extends Model
     {
         // select distinct books.title, books.copies_owned, sub.copies_used, books.copies_owned - sub.copies_used as copies_left
         // from (
-        //     select books.id, books.title, count(transactions.id) as copies_used
+        //     select books.id, books.title, books.published_date, books.isbn, books.created_at, books.copies_owned, count(transactions.id) as copies_used
         //     from transactions
         //     join books on transactions.book_id = books.id
         //     where transactions.status = 'unclaimed' or transactions.status = 'claimed' or transactions.status = 'pending'
         //     group by books.title
         // ) sub
         // right join books on sub.id = books.id
-        // left join genres on books.id = genres.book_id
-        // left join authors on books.id = authors.book_id
 
         // where (books.title LIKE "%%" or authors.name LIKE "%%") and genres.name LIKE "%%"
         //      and (copies_used != copies_owned or copies_used IS NULL)
 
         $sub = Transaction::bookSearchSub();
-        
+
         $obj = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
             ->distinct('books.title')
-            ->select('books.id' , 'books.title', 'books.copies_owned', 'sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
+            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'books.cover_url','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
             ->mergeBindings( $sub->getQuery() )
-            ->rightJoin('books', 'sub.id', '=', 'books.id')
-            ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
-            ->leftJoin('authors', 'books.id', '=', 'authors.book_id');
-        
+            ->rightJoin('books', 'sub.id', '=', 'books.id');
+
         if($search)
         {
             $obj->where(function ($query) use ($search) {
                 $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
                     ->orWhere('authors.name', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
             });
-            
+
         }
 
         if($genre)
@@ -107,13 +118,20 @@ class Book extends Model
                     ->orWhereRaw('copies_used IS NULL');
             });
         }
-        $obj = $obj->paginate(10);
+
+        $obj = $obj->get();
 
         // Add authors to json & set NULL cells to 0
         for($i = 0; $i < count($obj); $i++)
         {
             $obj[$i]->authors = Author::getBookAuthors($obj[$i]->id);
-            $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id);
+
+            $g = Genre::getBookGenres($obj[$i]->id);
+            if(isset($g[0]->genres))
+                $obj[$i]->genres = Genre::getBookGenres($obj[$i]->id)[0]->genres;
+            else
+                $obj[$i]->genres = "none";
+
             if($obj[$i]->copies_used == NULL)
             {
                 $obj[$i]->copies_used = 0;
@@ -123,7 +141,7 @@ class Book extends Model
 
         // Append other parameters to auto-generated page urls
         if($search) $obj->appends(['search' => $search]);
-        if($genre) 
+        if($genre)
         {
             $gc = "";
             for($i = 0; $i < count($genre); $i++)
@@ -137,7 +155,113 @@ class Book extends Model
             $obj->appends(['genre' => $gc]);
         }
         if($status) $obj->appends(['status' => $status]);
-            
+
         return $obj;
     }
+
+    /**
+     * Creates or updates a book instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book or NULL (for create)
+     * @return \App\Models\Book
+     */
+    public static function createOrUpdateBook($request, $book = NULL)
+    {
+        // Create Book
+        if(!isset($book))
+        {
+            $obj = Book::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'page_count' => $request->page_count,
+                'isbn' => $request->isbn,
+                'published_date' => $request->published_date,
+                'copies_owned' => $request->copies_owned,
+                'cover_url' => $request->cover_url
+            ]);
+
+        }
+        else
+        {
+            $obj = Book::where('id', '=', $book->id)
+                ->update([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'page_count' => $request->page_count,
+                    'isbn' => $request->isbn,
+                    'published_date' => $request->published_date,
+                    'copies_owned' => $request->copies_owned,
+                    'cover_url' => $request->cover_url
+                ]);
+        }
+
+        return $obj;
+    }
+
+    /**
+     * Updates the book authors by deleting and creating updated ones.
+     *
+     * @param $authorsRaw
+     * @param \App\Models\Book $book
+     */
+    public static function updateAuthors($authorsRaw, $book)
+    {
+        // Maybe someone can do a better implementation of this.
+
+        $book->authors()->delete();
+
+        // Add authors
+        $authors = explode(',', $authorsRaw);
+        if((count($authors) == 1 && $authors[0] != '') || count($authors) > 1)
+        {
+            foreach($authors as $a)
+            {
+                $book->authors()->create([
+                    'name' => $a
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Updates the book authors by deleting and creating updated ones.
+     *
+     * @param $genresRaw
+     * @param \App\Models\Book $book
+     */
+    public static function updateGenres($genresRaw, $book)
+    {
+        // Maybe someone can do a better implementation of this.
+
+        $book->genres()->delete();
+
+        // Add genres
+        $genres = explode(',', $genresRaw);
+        if((count($genres) == 1 && $genres[0] != '') || count($genres) > 1)
+        {
+            foreach($genres as $g)
+            {
+                $book->genres()->create([
+                    'name' => $g
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Deletes a book instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Book $book or NULL (for create)
+     * @return bool|null
+     */
+    public static function deleteBook($book)
+    {
+        $book->authors()->delete();
+        $book->genres()->delete();
+        return $book->delete();
+    }
+
+    
 }

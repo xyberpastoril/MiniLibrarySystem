@@ -16,7 +16,7 @@ var KTTransactionsList = (function() {
                     icon: "warning",
                     showCancelButton: !0,
                     buttonsStyling: !1,
-                    confirmButtonText: "Yes, delete!",
+                    confirmButtonText: "Yes, decline!",
                     cancelButtonText: "No, cancel",
                     customClass: {
                         confirmButton: "btn fw-bold btn-danger",
@@ -80,7 +80,7 @@ var KTTransactionsList = (function() {
                     icon: "warning",
                     showCancelButton: !0,
                     buttonsStyling: !1,
-                    confirmButtonText: "Yes, delete!",
+                    confirmButtonText: "Yes, decline!",
                     cancelButtonText: "No, cancel",
                     customClass: {
                         confirmButton: "btn fw-bold btn-danger",
@@ -88,7 +88,7 @@ var KTTransactionsList = (function() {
                     },
                 }).then(function(t) {
                     t.value ? Swal.fire({
-                        text: "You have delete all selected transactions!.",
+                        text: "You have deleted all selected transactions!.",
                         icon: "danger",
                         buttonsStyling: !1,
                         confirmButtonText: "Ok, got it!",
@@ -98,7 +98,6 @@ var KTTransactionsList = (function() {
                     })
                     .then(function() {
                         c.forEach((t) => {
-                            t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
                             if(t.checked && t.value > 0){
                                 $.ajax({
                                     url:"/transactions/" + t.value + "/cancel",
@@ -108,6 +107,7 @@ var KTTransactionsList = (function() {
                                     }
                                 })
                             }
+                            t.checked && e.row($(t.closest("tbody tr"))).remove().draw()
                         });
                         o.querySelectorAll('[type="checkbox"]')[0].checked = !1;
                     })
@@ -141,19 +141,20 @@ var KTTransactionsList = (function() {
     return {
         init: function() {
             o && (e = $(o).DataTable({
-                    aLengthMenu: [5, 10, 25, 50, 100],
-                    order: [
-                        [7, "desc"]
-                    ],
+                aLengthMenu: [5, 10, 25, 50, 100],
+                searchDelay: 500,
+                order: [
+                    [6, "desc"]
+                ],
 
-                    columnDefs: [{
-                        targets: 0,
-                        orderable: false,
-                    }, ],
-                })).on("draw", function() {
-                    l(), c(), a();
-                }),
-                l(), c();
+                columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                }, ],
+            })).on("draw", function() {
+                l(), c(), a();
+            }),
+            l(), c();
         },
     };
 })();
