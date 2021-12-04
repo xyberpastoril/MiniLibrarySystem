@@ -10,6 +10,23 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'book_id',
+        'user_id',
+        'date_from',
+        'date_to',
+        'date_accepted',
+        'date_returned',
+        'copies',
+        'penalty',
+        'status',
+    ];
+
     public function book()
     {
         return $this->hasOne(Book::class);
