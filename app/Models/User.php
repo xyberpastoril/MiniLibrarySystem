@@ -117,6 +117,8 @@ class User extends Authenticatable
             case 'member':
                 $obj->where('roles.name', '=', 'Member');
                 break;
+            case 'not_librarian':
+                $obj->where('roles.name', '!=', 'Librarian');
         }
 
         // $obj = $obj->paginate(10);

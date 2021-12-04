@@ -89,7 +89,7 @@ class Transaction extends Model
                 break;
         }
 
-        if($user->getRoleNames()[0] == "Member") {
+        if($user->getRoleNames()[0] != "Librarian") {
             $obj->where('users.id', '=', $user->id);
         }
 

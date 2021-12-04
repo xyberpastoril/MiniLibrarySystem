@@ -27,7 +27,7 @@ class UserController extends Controller
     public function index()
     {
         return view("admin.users.index", [
-            "allUsers" => \App\Models\User::search(null, 'member'),
+            "allUsers" => \App\Models\User::search(null, 'not_librarian'),
         ]);
     }
 
@@ -161,5 +161,12 @@ class UserController extends Controller
                 $request->get('role')
             );
         return redirect()->route('home');
+    }
+
+    public function verify(User $user)
+    {
+        $user->roles()->detach();
+        $user->assignRole([2]);
+        return 1;
     }
 }
