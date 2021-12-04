@@ -297,7 +297,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row mb-6">
+                            {{-- <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
                                 <!--end::Label-->
@@ -319,7 +319,7 @@
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Col-->
-                            </div>
+                            </div> --}}
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row mb-6">
@@ -330,7 +330,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input id="address" type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="">
+                                    <input id="address" type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address" value="{{ Auth::user()->address }}">
                                 </div>
                                 <!--end::Col-->
                             </div>

@@ -88,7 +88,8 @@ class AccountController extends Controller
 
         \App\Models\User::where('id', '=', $user->id)
             ->update([
-                'cover_url' => !$request->avatar_remove ? $user->id : null
+                'cover_url' => !$request->avatar_remove ? $user->id : null,
+                'address' => $request->address,
             ]);
 
         if(isset($request->avatar))

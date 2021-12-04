@@ -65,6 +65,26 @@
                     </span>
                 @enderror
             </div>
+
+            <!-- Gender -->
+            <div class="fv-row mb-7">
+                <label class="form-label fw-bolder text-dark fs-6 required">
+                    Gender
+                </label>
+                <select name="gender" class="form-control form-control-lg form-control-solid @error('gender') is-invalid @enderror" required>
+                    <option>Select Gender</option>
+                    <option value="Male" @if (old('gender') == 'Male') selected="selected" @endif>Male</option>
+                    <option value="Female" @if (old('gender') == 'Female') selected="selected" @endif>Female</option>
+                    <option value="LGBT" @if (old('gender') == 'LGBT') selected="selected" @endif>LGBT</option>
+                    <option value="Rather not say" @if (old('gender') == 'Rather not say') selected="selected" @endif>Rather not say</option>
+                </select>
+                @error('gender')
+                    <div class="fv-plugins-message-container invalid-feedback">
+                        <div data-field="gender">{{ $message }}</div>
+                    </div>
+                @enderror
+            </div>
+
             <div class="mb-10 fv-row" data-kt-password-meter="true">
                 <div class="mb-1">
                     <label class="form-label fw-bolder text-dark fs-6 required">
