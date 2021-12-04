@@ -87,14 +87,20 @@
                     <div class="fs-5 fw-bolder mt-2">Available Copies : </div>
                     <p class="fs-6">
                         @if($book->copies_left > 0)
-                            <span class="badge badge-success">{{ $book->copies_left }}</span>
+                            <span id="copies_left" class="badge badge-success">{{ $book->copies_left }}</span>
                         @else
-                            <span class="badge badge-danger">{{ $book->copies_left }}</span>
+                            <span id="copies_left" class="badge badge-danger">{{ $book->copies_left }}</span>
                         @endif
                     </p>
 
                     <div class="fs-5 fw-bolder mt-2">Genre(s) : </div>
-                    <p class="fs-6">{{ $book->genres }}</p>
+                    <p class="fs-6">
+                        @if($book->genres)
+                            {{ $book->genres }}
+                        @else
+                            <span class="text-muted">none</span>
+                        @endif
+                    </p>
 
                     <div class="fs-5 fw-bolder mt-2">Published Date : </div>
                     <p class="fs-6">{{ $book->published_date }}</p>
