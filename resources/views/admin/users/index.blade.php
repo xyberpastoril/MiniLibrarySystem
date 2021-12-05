@@ -256,8 +256,13 @@
                             
                             <!-- Status-->
                             <td>
-                                @if($user->unpaid_penalties)
-                                    <div class="badge badge-light-danger fw-bolder">Has Pending Penalties</div>
+                                @if($user->unpaid_penalties || $user->overdue_returns)
+                                    @if($user->unpaid_penalties)
+                                        <div class="badge badge-light-danger fw-bolder">Has Pending Penalties</div>
+                                    @endif
+                                    @if($user->overdue_returns)
+                                        <div class="badge badge-light-warning fw-bolder">Has Overdue Returns</div>
+                                    @endif
                                 @elseif($user->role_id == "3")
                                     <div class="badge badge-light-warning fw-bolder">Has Pending Verification</div>
                                 @else

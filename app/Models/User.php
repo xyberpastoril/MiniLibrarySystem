@@ -140,7 +140,28 @@ class User extends Authenticatable
         // I don't know but this allows the query below to execute.
         DB::statement("SET SQL_MODE=''");
 
-        $results = DB::select('select distinct users.id as user_id, users.first_name, users.last_name, users.email, users.created_at as joined_date, users.cover_url, roles.id as role_id, roles.name as role_name, sub.unpaid_penalties, t.in_progress_transactions from ( select transactions.user_id, sum(penalties.amount) as unpaid_penalties from `penalties` inner join `transactions` on `transactions`.`id` = `penalties`.`transaction_id` where `penalties`.`status` = "unpaid" group by `transactions`.`user_id`) as sub right join `users` on `sub`.`user_id` = `users`.`id` left join (select `transactions`.`user_id`, count(transactions.id) as in_progress_transactions from `transactions` where `transactions`.`status` != "returned" group by `transactions`.`user_id`) as `t` on `t`.`user_id` = `users`.`id` inner join `model_has_roles` on `model_has_roles`.`model_id` = `users`.`id` inner join `roles` on `model_has_roles`.`role_id` = `roles`.`id` where roles.id != 1');
+        $results = DB::select('
+            select users.id as user_id, users.first_name, users.last_name, users.email, users.created_at as joined_date, users.cover_url, roles.id as role_id, roles.name as role_name, sub.unpaid_penalties, t.in_progress_transactions, l.overdue_returns
+            from ( 
+                select transactions.user_id, sum(penalties.amount) as unpaid_penalties
+                from `penalties` 
+                inner join `transactions` on `transactions`.`id` = `penalties`.`transaction_id` 
+                where `penalties`.`status` = "unpaid" 
+                group by `transactions`.`user_id`) as sub 
+            right join `users` on `sub`.`user_id` = `users`.`id` 
+            left join (
+                select `transactions`.`user_id`, count(transactions.id) as in_progress_transactions 
+                from `transactions` 
+                where `transactions`.`status` != "returned" 
+                group by `transactions`.`user_id`) as `t` on `t`.`user_id` = `users`.`id` 
+            left join (
+                select transactions.user_id, count(transactions.id) as overdue_returns
+                from transactions
+                where CURRENT_DATE() > transactions.date_to and transactions.status != "returned"
+                group by transactions.user_id) as `l` on `l`.`user_id` = `users`.`id`
+            inner join `model_has_roles` on `model_has_roles`.`model_id` = `users`.`id` 
+            inner join `roles` on `model_has_roles`.`role_id` = `roles`.`id` 
+            where roles.id != 1');
         
         return $results;
     }
