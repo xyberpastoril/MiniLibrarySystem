@@ -95,6 +95,18 @@ class BookController extends Controller
                 ->orderBy('date_to', 'ASC')->first();
         }
 
+        $book->hasPenalties = \App\Models\Penalty::where('transactions.user_id', '=', \Illuminate\Support\Facades\Auth::user()->id)
+            ->rightJoin('transactions', 'transactions.id', '=', 'penalties.transaction_id')
+            ->where('penalties.status', '=', 'unpaid')->count() 
+                ? 1 
+                : 0;
+
+        // select * from transactions where CURRENT_DATE() > date_to and user_id = 3 and status != 'returned'
+        $book->hasLateReturns = \App\Models\Transaction::whereRaw('CURRENT_DATE() > date_to')
+            ->where('user_id', \Illuminate\Support\Facades\Auth::user()->id)
+            ->where('status', '!=', 'returned')
+            ->count();
+
         if(count($book->genres) > 0) $book['genres'] = Genre::getBookGenres($book->id)[0]->genres;
         else $book['genres'] = "";
 
