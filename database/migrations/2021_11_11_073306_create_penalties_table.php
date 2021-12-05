@@ -15,9 +15,7 @@ class CreatePenaltiesTable extends Migration
     {
         Schema::create('penalties', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
             $table->integer('transaction_id');
-            $table->date('penalty_date');
             $table->integer('amount');
             $table->enum('status', [
                 'unpaid',

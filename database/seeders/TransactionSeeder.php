@@ -17,11 +17,11 @@ class TransactionSeeder extends Seeder
             'book_id' => 1,
             'user_id' => 2,
             'date_from' => '2021-11-20',
-            'date_to' => '2021-12-11',
-            'date_accepted' => '2021-12-12',
+            'date_to' => '2021-12-04',
+            'date_accepted' => '2021-12-01',
             'copies' => 1,
             'penalty' => 100,
-            'status' => 'unclaimed',
+            'status' => 'claimed',
         ]);
 
         \App\Models\Transaction::create([
@@ -59,7 +59,7 @@ class TransactionSeeder extends Seeder
         \App\Models\Transaction::create([
             'book_id' => 2,
             'user_id' => 2,
-            'date_from' => '2021-11-20',
+            'date_from' => '2021-12-05',
             'date_to' => '2021-12-11',
             'copies' => 1,
             'status' => 'pending',
@@ -68,12 +68,11 @@ class TransactionSeeder extends Seeder
             'book_id' => 7,
             'user_id' => 2,
             'date_from' => '2021-11-20',
-            'date_to' => '2021-12-11',
+            'date_to' => '2021-12-04',
             'date_accepted' => '2021-11-16',
-            'date_returned' => '2021-12-12',
             'copies' => 1,
             'penalty' => 100,
-            'status' => 'returned',
+            'status' => 'claimed',
         ]);
         //
     }

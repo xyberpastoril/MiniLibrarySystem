@@ -9,6 +9,18 @@ class Penalty extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'user_id',
+        'transaction_id',
+        'amount',
+        'status'
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class);
