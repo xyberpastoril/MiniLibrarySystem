@@ -59,73 +59,61 @@
 <!--end::Row-->
 @endrole
 
-<!--begin::Form-->
-<!--form tag has been temporarily been removed-->
-    <!--begin::Card-->
+<form action="{{ route('home.search') }}" method="POST" class="form">
+@csrf
+
+    <!-- Search Card -->
     <div class="card mb-7">
-        <!--begin::Card body-->
         <div class="card-body">
-            <!--begin::Compact form-->
+
+            <!-- Compact form -->
             <div class="d-flex align-items-center">
-                <!--begin::Input group-->
                 <div class="position-relative w-md-400px me-md-2">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                     <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"/>
                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                         </svg>
                     </span>
-                    <!--end::Svg Icon-->
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" id='_search_textBox'>
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" required>
                 </div>
-                <!--end::Input group-->
-                <!--begin:Action-->
+
+                <!-- Action -->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary me-5" id=_search_btn>Search</button>
-                    <a id="_advanced_search" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form" clicked='0' >Advanced Search</a>
+                    <button type="submit" class="btn btn-primary me-5" id='_search_btn'>Search</button>
+                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form" clicked='0'>Advanced Search</a>
                 </div>
-                <!--end:Action-->
             </div>
-            <!--end::Compact form-->
-            <!--begin::Advance form-->
+
+            <!-- Advance form -->
             <div class="collapse" id="kt_advanced_search_form">
-                <!--begin::Separator-->
                 <div class="separator separator-dashed mt-9 mb-6"></div>
-                <!--end::Separator-->
-                <!--begin::Row-->
+
                 <div class="row g-8 mb-8">
-                    <!--begin::Col-->
+                    <!--Genres-->
                     <div class="col-xxl-7">
                         <label class="fs-6 form-label fw-bolder text-dark">Genres</label>
-                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, supernatural, scifi)" id='_genre_textBox'>
+                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, fiction)">
                     </div>
-                    <!--end::Col-->
-                    <!--begin::Col-->
+
+                    <!-- Status-->
                     <div class="col-xxl-5">
-                        <!--begin::Row-->
                         <div class="row g-8">
-                            <!--begin::Col-->
                             <div class="col-lg-6">
                                 <label class="fs-6 form-label fw-bolder text-dark">Status</label>
                                 <div class="form-check form-switch form-check-custom form-check-solid mt-1">
-                                    <input name="status" class="form-check-input" type="checkbox" id="_checkBox" checked="checked">
-                                    <label class="form-check-label" for="flexSwitchChecked">Available</label>
+                                    <input class="form-check-input" type="checkbox" name="status" value="available" id="status_checkbox" checked="checked">
+                                    <label class="form-check-label" for="status_checkbox">Available</label>
                                 </div>
                             </div>
-                            <!--end::Col-->
                         </div>
-                        <!--end::Row-->
                     </div>
-                    <!--end::Col-->
                 </div>
             </div>
-            <!--end::Advance form-->
-        </div>
-        <!--end::Card body-->
-    </div>
-    <!--end::Card-->
 
+        </div>
+    </div>
+</form>
 <!--end::Form-->
 
 <div class="tab-content d-block" id='_tab_main'>
@@ -137,7 +125,7 @@
         <!--end::Title-->
     </div>
 
-    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto" style="gap: 2.5rem">
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto px-5" style="gap: 2rem">
         @foreach ($newArrivals as $book)
             <div class="card card-block my-card cursor-pointer shadow" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
                 <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
@@ -166,7 +154,7 @@
         <!--end::Title-->
     </div>
 
-    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto" style="gap: 2.5rem">
+    <div class="scroll py-8 d-flex flex-row flex-nowrap align-items-center w-100 position-relative h-auto px-5" style="gap: 2rem">
         @foreach ($hotBooks as $book)
             <div class="card card-block my-card cursor-pointer shadow" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
                 <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
@@ -272,5 +260,5 @@
 <!-- -->
 
 @section("custom_js")
-<script src="{{ asset('js/search_results.js') }}"></script>
+    <script src="{{ asset('js/custom/member/homepage/homepage.js') }}"></script>
 @endsection

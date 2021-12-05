@@ -24,6 +24,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/search', [App\Http\Controllers\HomeController::class, 'searchBooks'])->name('home.search');
 
     // Route group for Admin Pages
     Route::group([], function(){
@@ -35,7 +36,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/books/destroyWithRedirect/{book}',[App\Http\Controllers\BookController::class,'destroyWithRedirect'])
         ->name('books.destroyWithRedirect');
     Route::resource('/books', App\Http\Controllers\BookController::class);
-    Route::get('/result/books/search/', [App\Http\Controllers\BookController::class, 'search']);
+    Route::get('/result/books/search/', [App\Http\Controllers\HomeController::class, 'search']);
 
     // Users
     Route::delete('/users/destroyWithRedirect/{user}',[App\Http\Controllers\UserController::class,'destroyWithRedirect'])
@@ -76,7 +77,7 @@ Route::middleware(['auth'])->group(function(){
         ->name('account.overview');
     Route::get('/account/settings',[App\Http\Controllers\AccountController::class,'settings'])
         ->name('account.settings');
-  
+
     Route::post('/account/updateEmail', [App\Http\Controllers\AccountController::class, 'updateEmail'])
         ->name('account.updateEmail');
     Route::post('/account/updatePassword', [App\Http\Controllers\AccountController::class, 'updatePassword'])
