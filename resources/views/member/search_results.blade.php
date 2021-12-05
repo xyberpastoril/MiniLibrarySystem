@@ -107,8 +107,6 @@
                             <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                             <br />
                             <small class="text-muted">
-                                {{-- TO do : Gets error displaying authors --}}
-
                                 {{ $book->authors[0]->name }}
                                 @if(count($book->authors) > 1)
                                     and {{ (count($book->authors) - 1) }} other(s).
