@@ -223,7 +223,7 @@
                             <!-- Checkbox -->
                             <td>
                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="{{ $user->id }}">
+                                    <input class="form-check-input" type="checkbox" value="{{ $user->user_id }}">
                                 </div>
                             </td>
                             
@@ -239,25 +239,30 @@
                                 
                                 <!-- User details -->
                                 <div class="d-flex flex-column">
-                                    <a href="{{ route("users.edit", $user->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name}} {{ $user->last_name}}</a>
+                                    <a href="{{ route("users.edit", $user->user_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name}} {{ $user->last_name}}</a>
                                     <span>{{ $user->email}}</span>
                                 </div>
                                 
                             </td>
 
                             <!-- User ID -->
-                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->user_id }}</td>
                             
                             <!-- In-Progress Transactions -->
-                            <td>4</td>
+                            <td>{{ $user->in_progress_transactions ? $user->in_progress_transactions : 0 }}</td>
 
                             <!-- Unpaid Penalties -->
-                            <td>400</td>
+                            <td>₱ {{ $user->unpaid_penalties ? $user->unpaid_penalties : 0 }}</td>
                             
                             <!-- Status-->
                             <td>
-                                <div class="badge badge-light-success fw-bolder">Eligible To Borrow</div>
-                                {{-- <div class="badge badge-light-danger fw-bolder">Has Pending Penalties</div> --}}
+                                @if($user->unpaid_penalties)
+                                    <div class="badge badge-light-danger fw-bolder">Has Pending Penalties</div>
+                                @elseif($user->role_id == "3")
+                                    <div class="badge badge-light-warning fw-bolder">Has Pending Verification</div>
+                                @else
+                                    <div class="badge badge-light-success fw-bolder">Eligible To Borrow</div>
+                                @endif
                             </td>
                             
                             <!-- Joined Date -->
@@ -266,7 +271,7 @@
                             <!-- Action -->
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-icon btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                                    <a href="{{ route('users.edit', $user->user_id) }}" class="btn btn-icon btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                                         <span class="svg-icon svg-icon-1 position-absolute">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
@@ -275,8 +280,8 @@
                                             </svg>
                                         </span>
                                     </a>
-                                    @if ($user->getRoleNames()[0] == "Unverified Member")
-                                        <a href="#" data-id="{{ $user->id }}" class="verify-btn btn btn-icon btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Verify User">
+                                    @if ($user->role_id == "3")
+                                        <a href="#" data-id="{{ $user->user_id }}" class="verify-btn btn btn-icon btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Verify User">
                                             <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr084.svg-->
                                             <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.5" d="M12.8956 13.4982L10.7949 11.2651C10.2697 10.7068 9.38251 10.7068 8.85731 11.2651C8.37559 11.7772 8.37559 12.5757 8.85731 13.0878L12.7499 17.2257C13.1448 17.6455 13.8118 17.6455 14.2066 17.2257L21.1427 9.85252C21.6244 9.34044 21.6244 8.54191 21.1427 8.02984C20.6175 7.47154 19.7303 7.47154 19.2051 8.02984L14.061 13.4982C13.7451 13.834 13.2115 13.834 12.8956 13.4982Z" fill="black"/>
