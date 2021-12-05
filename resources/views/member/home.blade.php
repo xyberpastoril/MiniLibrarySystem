@@ -60,7 +60,7 @@
 @endrole
 
 <!--begin::Form-->
-<form action="{{ route('home.search') }}" method="POST" class="form">
+<!--<form class="form">-->
 @csrf
 
     <!-- Search Card -->
@@ -81,8 +81,8 @@
 
                 <!-- Action -->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary me-5" >Search</button>
-                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>
+                    <button type="submit" class="btn btn-primary me-5" id='_search_btn'>Search</button>
+                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form" clicked='0'>Advanced Search</a>
                 </div>
             </div>
 
@@ -114,7 +114,7 @@
 
         </div>
     </div>
-</form>
+<!--</form>-->
 <!--end::Form-->
 
 <div class="tab-content d-block" id='_tab_main'>
