@@ -94,26 +94,23 @@
 <!--end::Toolbar-->
 
 <div class="tab-content">
-    <div class="row g-6 g-xl-9 px-5" style="gap: 2rem">
+    <div class="row ps-5" style="gap: 2rem">
 
         @foreach ($book_results as $book)
-
-            <div class="col-md-2 col-xxl-2">
-                <div class="card card-block min-w-175px my-card cursor-pointer shadow" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
-                    <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="{{ $book->title }}"
-                        style="width: 100%; height: 225px; object-fit: cover;">
-                    <div class="card-body p-2">
-                        <p class="card-text text-truncate">
-                            <span class="text-gray-800 mb-1">{{ $book->title }}</span>
-                            <br />
-                            <small class="text-muted">
-                                {{ $book->authors[0]->name }}
-                                @if(count($book->authors) > 1)
-                                    and {{ (count($book->authors) - 1) }} other(s).
-                                @endif
-                            </small>
-                        </p>
-                    </div>
+            <div class="card card-block w-175px my-card cursor-pointer shadow p-0" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
+                <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="{{ $book->title }}"
+                    style="width: 100%; height: 225px; object-fit: cover;">
+                <div class="card-body p-2">
+                    <p class="card-text text-truncate">
+                        <span class="text-gray-800 mb-1">{{ $book->title }}</span>
+                        <br />
+                        <small class="text-muted">
+                            {{ $book->authors[0]->name }}
+                            @if(count($book->authors) > 1)
+                                and {{ (count($book->authors) - 1) }} other(s).
+                            @endif
+                        </small>
+                    </p>
                 </div>
             </div>
         @endforeach
