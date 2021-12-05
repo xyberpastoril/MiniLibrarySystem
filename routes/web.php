@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/books/destroyWithRedirect/{book}',[App\Http\Controllers\BookController::class,'destroyWithRedirect'])
         ->name('books.destroyWithRedirect');
     Route::resource('/books', App\Http\Controllers\BookController::class);
-    Route::get('/result/books/search/', [App\Http\Controllers\BookController::class, 'search']);
+    Route::get('/result/books/search/', [App\Http\Controllers\HomeController::class, 'search']);
 
     // Users
     Route::delete('/users/destroyWithRedirect/{user}',[App\Http\Controllers\UserController::class,'destroyWithRedirect'])

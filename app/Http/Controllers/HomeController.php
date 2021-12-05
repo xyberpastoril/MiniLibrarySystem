@@ -46,4 +46,16 @@ class HomeController extends Controller
                 $request->post('status')),
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $genre = explode(',', $request->genres);
+
+        return \App\Models\Book::search(
+            $request->search,
+            (count($genre) == 1 && $genre[0] != '') || count($genre) > 1
+                ? $genre
+                : null,
+            $request->status);
+    }
 }
