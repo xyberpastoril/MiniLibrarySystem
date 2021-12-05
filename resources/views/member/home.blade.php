@@ -76,7 +76,7 @@
                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                         </svg>
                     </span>
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books">
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" required>
                 </div>
 
                 <!-- Action -->
@@ -94,7 +94,7 @@
                     <!--Genres-->
                     <div class="col-xxl-7">
                         <label class="fs-6 form-label fw-bolder text-dark">Genres</label>
-                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(add book genre)">
+                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(ex. action, fiction)">
                     </div>
 
                     <!-- Status-->
@@ -103,8 +103,8 @@
                             <div class="col-lg-6">
                                 <label class="fs-6 form-label fw-bolder text-dark">Status</label>
                                 <div class="form-check form-switch form-check-custom form-check-solid mt-1">
-                                    <input class="form-check-input" type="checkbox" name="status" value id="flexSwitchChecked" checked="checked">
-                                    <label class="form-check-label" for="flexSwitchChecked">Available</label>
+                                    <input class="form-check-input" type="checkbox" name="status" value="available" id="status_checkbox" checked="checked">
+                                    <label class="form-check-label" for="status_checkbox">Available</label>
                                 </div>
                             </div>
                         </div>

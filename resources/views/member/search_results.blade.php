@@ -42,7 +42,7 @@
                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                         </svg>
                     </span>
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="{{ $book_results->search }}" placeholder="Search books">
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="{{ $book_results->search }}" placeholder="Search books" required>
                 </div>
 
                 <!-- Action -->
@@ -60,7 +60,7 @@
                     <!--Genres-->
                     <div class="col-xxl-7">
                         <label class="fs-6 form-label fw-bolder text-dark">Genres</label>
-                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(add book genre)">
+                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="{{ $book_results->genres }}" placeholder="(ex. action, fiction)">
                     </div>
 
                     <!-- Status-->
@@ -69,8 +69,8 @@
                             <div class="col-lg-6">
                                 <label class="fs-6 form-label fw-bolder text-dark">Status</label>
                                 <div class="form-check form-switch form-check-custom form-check-solid mt-1">
-                                    <input class="form-check-input" type="checkbox" name="status" value id="flexSwitchChecked" checked="checked">
-                                    <label class="form-check-label" for="flexSwitchChecked">Available</label>
+                                    <input class="form-check-input" type="checkbox" name="status" value id="status_checkbox" @if ($book_results->status == 'available') checked="checked" @endif>
+                                    <label class="form-check-label" for="status_checkbox">Available</label>
                                 </div>
                             </div>
                         </div>
@@ -99,19 +99,20 @@
         @foreach ($book_results as $book)
 
             <div class="col-md-2 col-xxl-2">
-                <div class="card card-block min-w-175px my-card cursor-pointer shadow">
+                <div class="card card-block min-w-175px my-card cursor-pointer shadow" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
                     <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="{{ $book->title }}"
                         style="width: 100%; height: 225px; object-fit: cover;">
                     <div class="card-body p-2">
                         <p class="card-text text-truncate">
-                            <span class="text-gray-800 text-hover-primary mb-1">{{ $book->title }}</span>
+                            <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                             <br />
                             <small class="text-muted">
                                 {{-- TO do : Gets error displaying authors --}}
-                                {{-- {{ $book['authors'][0]->name }}
-                                @if(count($book['authors']) > 1)
-                                    and {{ (count($book['authors']) - 1) }} other(s).
-                                @endif --}}
+
+                                {{ $book->authors[0]->name }}
+                                @if(count($book->authors) > 1)
+                                    and {{ (count($book->authors) - 1) }} other(s).
+                                @endif
                             </small>
                         </p>
                     </div>

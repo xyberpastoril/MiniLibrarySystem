@@ -113,7 +113,7 @@ class Book extends Model
         }
 
         // Search only books that are available for transaction (borrow)
-        if($status)
+        if($status == 'available')
         {
             $obj->where(function ($query) {
                 $query->whereRaw('copies_used != copies_owned')
@@ -141,23 +141,6 @@ class Book extends Model
             }
         }
 
-        // // Append other parameters to auto-generated page urls
-        // if($search) $obj->appends(['search' => $search]);
-        // if($genre)
-        // {
-        //     $gc = "";
-        //     for($i = 0; $i < count($genre); $i++)
-        //     {
-        //         $gc .= $genre[$i];
-        //         if($i < count($genre) - 1)
-        //         {
-        //             $gc .= ", ";
-        //         }
-        //     }
-        //     $obj->appends(['genre' => $gc]);
-        // }
-        // if($status) $obj->appends(['status' => $status]);
-
         // Append other parameters to auto-generated page urls
         if($search) $obj->search = $search;
         if($genre)
@@ -172,8 +155,8 @@ class Book extends Model
                 }
             }
             $obj->genres = $gc;
-        }
-        if($status) $obj->status = $status;
+        }else $obj->genres = "";
+        $obj->status = $status;
 
         return $obj;
     }
