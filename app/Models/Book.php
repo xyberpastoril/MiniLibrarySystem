@@ -71,17 +71,17 @@ class Book extends Model
 
     public static function search($search, $genre, $status)
     {
-        // select distinct books.title, books.copies_owned, sub.copies_used, books.copies_owned - sub.copies_used as copies_left
-        // from (
-        //     select books.id, books.title, books.published_date, books.isbn, books.created_at, books.copies_owned, count(transactions.id) as copies_used
-        //     from transactions
-        //     join books on transactions.book_id = books.id
-        //     where transactions.status = 'unclaimed' or transactions.status = 'claimed' or transactions.status = 'pending'
-        //     group by books.title
-        // ) sub
-        // right join books on sub.id = books.id
-
-        // where (books.title LIKE "%%" or authors.name LIKE "%%") and genres.name LIKE "%%"
+        // select distinct `books`.`id`, `books`.`title`, `books`.`published_date`, `books`.`isbn`, `books`.`created_at`, `books`.`copies_owned`, `books`.`cover_url`, `sub`.`copies_used`, books.copies_owned - sub.copies_used as copies_left 
+        // from ( 
+        //     select `books`.`id`, `books`.`title`, count(transactions.id) as copies_used 
+        //     from `transactions` 
+        //     inner join `books` on `transactions`.`book_id` = `books`.`id` 
+        //     where `transactions`.`status` != 'returned'
+        //     group by `books`.`id`) as sub 
+        // right join `books` on `sub`.`id` = `books`.`id` 
+        // left join `genres` on `books`.`id` = `genres`.`book_id` 
+        // left join `authors` on `books`.`id` = `authors`.`book_id`
+        // where ((genres.name LIKE '%epic%' AND (books.title LIKE '%edge%' OR books.description LIKE '%edge%')) or (genres.name LIKE '%fantasy%' AND (books.title LIKE '%edge%' OR books.description LIKE '%edge%')))
         //      and (copies_used != copies_owned or copies_used IS NULL)
 
         $sub = Transaction::bookSearchSub();
@@ -94,22 +94,39 @@ class Book extends Model
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
             ->leftJoin('authors', 'books.id', '=', 'authors.book_id');
 
-        if($search)
-        {
-            $obj->where(function ($query) use ($search) {
-                $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%' )
-                    ->orWhere('books.description', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
-            });
-
-        }
-
         if($genre)
         {
-            for($i = 0; $i < count($genre); $i++)
-            {
-                if($i == 0) $obj->where('genres.name', 'LIKE', '%'. $genre[$i] .'%');
-                else $obj->where('genres.name', 'LIKE', '%'. $genre[$i] .'%');
-            }
+            $obj->where(function($query) use ($genre, $search){
+                for($i = 0; $i < count($genre); $i++)
+                {
+                    if($i == 0) {
+                        $query->where(function($query) use ($genre, $search, $i) {
+                            $query->where('genres.name', 'LIKE', '%' . $genre[$i] . '%')
+                                ->where(function($query) use ($search) {
+                                    $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%')
+                                        ->orWhere('books.description', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
+                                });
+                        });
+                    }
+                    else {
+                        $query->orwhere(function($query) use ($genre, $search, $i) {
+                            $query->where('genres.name', 'LIKE', '%' . $genre[$i] . '%')
+                            ->where(function($query) use ($search) {
+                                $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%')
+                                    ->orWhere('books.description', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
+                            });
+                        });
+                        
+                    }
+                }
+            });
+        }
+        else if(!$genre)
+        {
+            $obj->where(function($query) use ($search) {
+                $query->where('books.title', 'LIKE', '%' . ($search ? $search : NULL) . '%')
+                    ->orWhere('books.description', 'LIKE', '%' . ($search ? $search : NULL) . '%' );
+            });
         }
 
         // Search only books that are available for transaction (borrow)
@@ -120,7 +137,6 @@ class Book extends Model
                     ->orWhereRaw('copies_used IS NULL');
             });
         }
-
         $obj = $obj->get();
 
         // Add authors to json & set NULL cells to 0
@@ -140,40 +156,6 @@ class Book extends Model
                 $obj[$i]->copies_left = $obj[$i]->copies_owned;
             }
         }
-
-        // // Append other parameters to auto-generated page urls
-        // if($search) $obj->appends(['search' => $search]);
-        // if($genre)
-        // {
-        //     $gc = "";
-        //     for($i = 0; $i < count($genre); $i++)
-        //     {
-        //         $gc .= $genre[$i];
-        //         if($i < count($genre) - 1)
-        //         {
-        //             $gc .= ", ";
-        //         }
-        //     }
-        //     $obj->appends(['genre' => $gc]);
-        // }
-        // if($status) $obj->appends(['status' => $status]);
-
-        // Append other parameters to auto-generated page urls
-        if($search) $obj->search = $search;
-        if($genre)
-        {
-            $gc = "";
-            for($i = 0; $i < count($genre); $i++)
-            {
-                $gc .= $genre[$i];
-                if($i < count($genre) - 1)
-                {
-                    $gc .= ", ";
-                }
-            }
-            $obj->genres = $gc;
-        }
-        if($status) $obj->status = $status;
 
         return $obj;
     }
