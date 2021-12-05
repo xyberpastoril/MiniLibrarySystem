@@ -59,8 +59,7 @@
 <!--end::Row-->
 @endrole
 
-<!--begin::Form-->
-<!--<form class="form">-->
+<form action="{{ route('home.search') }}" method="POST" class="form">
 @csrf
 
     <!-- Search Card -->
@@ -114,7 +113,7 @@
 
         </div>
     </div>
-<!--</form>-->
+</form>
 <!--end::Form-->
 
 <div class="tab-content d-block" id='_tab_main'>
