@@ -87,7 +87,7 @@
 <div class="d-flex flex-wrap flex-stack pb-7">
     <!--begin::Title-->
     <div class="d-flex flex-wrap align-items-center my-1">
-        <h2 class="fw-bold me-5 my-1">57 Books Found</h2>
+        <h2 class="fw-bold me-5 my-1">{{ count($book_results) }} Books Found</h2>
     </div>
     <!--end::Title-->
 </div>
