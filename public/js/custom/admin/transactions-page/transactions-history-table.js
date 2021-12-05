@@ -153,7 +153,9 @@ var KTTransactionsList = (function() {
                 })).on("draw", function() {
                     l(), c(), a();
                 }),
-                l(), c();
+                l(), c(), document.querySelector('[data-kt-transactions-table-filter="search"]').addEventListener("keyup", (function(t) {
+				e.search(t.target.value).draw()
+			}));
         },
     };
 })();
@@ -165,7 +167,7 @@ $("[data-kt-transactions-table-filter='pay_row']").click(function(e){
     e.preventDefault();
     console.log("Penalty ID: " + this.getAttribute('penalty-id'))
     console.log("Transaction ID: " + this.getAttribute('transaction-id'))
-    
+
     var penalty_id = this.getAttribute('penalty-id')
     var transaction_id = this.getAttribute('transaction-id')
     var btn = this

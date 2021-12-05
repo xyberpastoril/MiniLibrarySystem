@@ -154,7 +154,9 @@ var KTTransactionsList = (function() {
             })).on("draw", function() {
                 l(), c(), a();
             }),
-            l(), c();
+            l(), c(), document.querySelector('[data-kt-transactions-table-filter="search"]').addEventListener("keyup", (function(t) {
+				e.search(t.target.value).draw()
+			}));
         },
     };
 })();

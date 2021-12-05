@@ -122,7 +122,9 @@ var KTTransactionsList = (function() {
                 })).on("draw", function() {
                     c(), d();
                 }),
-                c(), d();
+                c(), d(), document.querySelector('[data-kt-transactions-table-filter="search"]').addEventListener("keyup", (function(t) {
+                    e.search(t.target.value).draw()
+                }));
         },
     };
 })();
