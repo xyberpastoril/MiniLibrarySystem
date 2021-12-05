@@ -60,7 +60,7 @@
 @endrole
 
 <!--begin::Form-->
-<form action="{{ route('home.search') }}" method="POST" class="form">
+<!--<form class="form">-->
 @csrf
 
     <!-- Search Card -->
@@ -76,13 +76,13 @@
                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                         </svg>
                     </span>
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books">
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search books" id='_search_textBox'>
                 </div>
 
                 <!-- Action -->
                 <div class="d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary me-5" >Search</button>
-                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>
+                    <button type="submit" class="btn btn-primary me-5" id='_search_btn'>Search</button>
+                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form" clicked='0'>Advanced Search</a>
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
                     <!--Genres-->
                     <div class="col-xxl-7">
                         <label class="fs-6 form-label fw-bolder text-dark">Genres</label>
-                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(add book genre)">
+                        <input type="text" class="form-control form-control form-control-solid" name="genres" value="" placeholder="(add book genre)" id='_genre_textBox'>
                     </div>
 
                     <!-- Status-->
@@ -114,7 +114,7 @@
 
         </div>
     </div>
-</form>
+<!--</form>-->
 <!--end::Form-->
 
 <div class="tab-content d-block" id='_tab_main'>
@@ -262,4 +262,5 @@
 
 @section("custom_js")
     <script src="{{ asset('js/custom/member/homepage/homepage.js') }}"></script>
+    <script src="{{ asset('js/search_results.js') }}"></script>
 @endsection
