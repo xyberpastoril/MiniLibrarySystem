@@ -26,7 +26,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <div class="menu-item">
                     <a class="menu-link
                         @if(Route::currentRouteName() == 'home' ||
-                            Route::currentRouteName() == 'books.show' ||
+                            (Route::currentRouteName() == 'books.show' && Auth::user()->hasRole('Member') ) ||
                             Route::currentRouteName() == 'home.search')
                         active
                         @endif "

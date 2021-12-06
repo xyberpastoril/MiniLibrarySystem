@@ -23,8 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
-            return view('admin.dashboard');
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return view('admin.dashboard', [
+                "hotBooks" => \App\Models\Book::getHotBooks()
+            ]);
+        }
         return view('member.home', [
             "newArrivals" => \App\Models\Book::getNewArrivals(),
             "hotBooks" => \App\Models\Book::getHotBooks()
