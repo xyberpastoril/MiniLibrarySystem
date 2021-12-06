@@ -3,7 +3,11 @@
 <!-- Member > Books -->
 
 @section('title')
-    Search Results
+    @if($isPOST)
+        Search Results
+    @else
+        Books
+    @endif
 @endsection
 
 <!-- -->
@@ -16,8 +20,15 @@
     </li>
 
     <!-- Item -->
+    <li class="breadcrumb-item text-muted">
+        <a href="{{ route('home.search') }}" class="text-muted">Books</a>
+    </li>
+
+    @if($isPOST)
+    <!-- Item -->
     <li class="breadcrumb-item text-dark">Search Results
     </li>
+    @endif
 
 @endsection
 
@@ -42,7 +53,7 @@
                             <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
                         </svg>
                     </span>
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="{{ $book_results->search }}" placeholder="Search books" required>
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="{{ isset($book_results->search) ? $book_results->search : null }}" placeholder="Search books" required>
                 </div>
 
                 <!-- Action -->

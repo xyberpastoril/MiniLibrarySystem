@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // return \App\Models\Book::getNewArrivals();
+
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
             return view('admin.dashboard', [
                 "hotBooks" => \App\Models\Book::getHotBooks()
@@ -39,14 +41,15 @@ class HomeController extends Controller
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian'))
             return view('admin.dashboard');
 
-        $genre = explode(',', $request->post('genres'));
+        $genre = explode(',', $request->genres);
         return view('member.search_results', [
             "book_results" => \App\Models\Book::search(
-                $request->post('search'),
+                $request->search,
                 (count($genre) == 1 && $genre[0] != '') || count($genre) > 1
                     ? $genre
                     : null,
-                $request->post('status')),
+                $request->status),
+            "isPOST" => $request->isMethod('post')
         ]);
     }
 

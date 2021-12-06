@@ -25,9 +25,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                 <!-- Dashboard -->
                 <div class="menu-item">
                     <a class="menu-link
-                        @if(Route::currentRouteName() == 'home' ||
-                            (Route::currentRouteName() == 'books.show' && Auth::user()->hasRole('Member') ) ||
-                            Route::currentRouteName() == 'home.search')
+                        @if(Route::currentRouteName() == 'home' )
                         active
                         @endif "
                     href="{{ route('home') }}">
@@ -52,15 +50,15 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                     </a>
                 </div>
 
-                @role('Librarian')
                 <div class="menu-item">
                     <a class="menu-link
                         @if(Route::currentRouteName() == 'books.index' ||
                             Route::currentRouteName() == 'books.edit' ||
-                            Route::currentRouteName() == 'books.show')
+                            Route::currentRouteName() == 'books.show' ||
+                            Route::currentRouteName() == 'home.search')
                             active
                         @endif"
-                    href="{{ route('books.index') }}">
+                    href="@role('Librarian') {{ route('books.index') }} @endrole @role('Member') {{ route('home.search') }} @endrole @role('Unverified Member') {{ route('home.search') }} @endrole">
                         <span class="menu-icon">
                             <!-- Svg Icon | path: ../../assets/media/icons/duotune/files/fil012.svg-->
                             <span class="svg-icon svg-icon-5">
@@ -73,7 +71,6 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <span class="menu-title">Books</span>
                     </a>
                 </div>
-                @endrole
 
                 <!-- Users -->
                 @role('Librarian')

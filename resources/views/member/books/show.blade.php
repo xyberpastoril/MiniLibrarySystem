@@ -20,6 +20,11 @@
     </li>
 
     <!-- Item -->
+    <li class="breadcrumb-item text-muted">
+        <a href="{{ route('home.search') }}" class="text-muted">Books</a>
+    </li>
+
+    <!-- Item -->
     <li class="breadcrumb-item text-dark">Book Details
     </li>
 
