@@ -44,9 +44,25 @@ class Book extends Model
 
     public static function getNewArrivals()
     {
-        $newArrivals = self::limit(5)->latest()->get();
+        // $newArrivals = self::limit(5)->latest()->get();
+        // for($i = 0; $i < 5; $i++)
+        //     $newArrivals[$i]['authors'] = $newArrivals[$i]->authors()->get();
+
+        $sub = Transaction::bookSearchSub();
+
+        $newArrivals = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
+            ->distinct('books.title')
+            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'books.cover_url','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left") )
+            ->mergeBindings( $sub->getQuery() )
+            ->rightJoin('books', 'sub.id', '=', 'books.id')
+            ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
+            ->leftJoin('authors', 'books.id', '=', 'authors.book_id')
+            ->latest()
+            ->limit(5)
+            ->get();
+
         for($i = 0; $i < 5; $i++)
-            $newArrivals[$i]['authors'] = $newArrivals[$i]->authors()->get();
+            $newArrivals[$i]->authors = Author::getBookAuthors($newArrivals[$i]->id);
 
         return $newArrivals;
     }
@@ -57,14 +73,34 @@ class Book extends Model
     public static function getHotBooks()
     {
         // Subject to change
-        $hotBooks = self::selectRaw('books.id, books.title, books.cover_url, COUNT(transactions.id) as total')
+        // $hotBooks = self::selectRaw('books.id, books.title, books.cover_url, COUNT(transactions.id) as total')
+        //     ->leftJoin('transactions', 'books.id', '=', 'transactions.book_id')
+        //     ->groupBy('books.id', 'books.title', 'books.cover_url')
+        //     ->orderBy('total', 'desc')
+        //     ->limit(5)
+        //     ->get();
+
+        $sub = Transaction::bookSearchSub();
+        $sub2 = self::selectRaw('books.id, books.title, books.cover_url, COUNT(transactions.id) as total')
             ->leftJoin('transactions', 'books.id', '=', 'transactions.book_id')
-            ->groupBy('books.id', 'books.title', 'books.cover_url')
-            ->orderBy('total', 'desc')
+            ->groupBy('books.id', 'books.title', 'books.cover_url');
+
+        $hotBooks = DB::table( DB::raw("( ". $sub->toSql() .") as sub" ) )
+            ->distinct('books.title')
+            ->select('books.id', 'books.title', 'books.published_date', 'books.isbn','books.created_at', 'books.copies_owned', 'books.cover_url','sub.copies_used', DB::raw("books.copies_owned - sub.copies_used as copies_left"), 'sub2.total' )
+            ->mergeBindings( $sub->getQuery() )
+            ->rightJoin('books', 'sub.id', '=', 'books.id')
+            ->leftJoinSub( $sub2, 'sub2', function($join){
+                $join->on('sub2.id', '=', 'books.id');
+            } )
+            ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
+            ->leftJoin('authors', 'books.id', '=', 'authors.book_id')
+            ->orderBy('copies_left', 'desc')
             ->limit(5)
             ->get();
+
         for($i = 0; $i < 5; $i++)
-            $hotBooks[$i]['authors'] = $hotBooks[$i]->authors()->get();
+            $hotBooks[$i]->authors = Author::getBookAuthors($hotBooks[$i]->id);
 
         return $hotBooks;
     }
