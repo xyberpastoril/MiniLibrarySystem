@@ -6,7 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
     calendar.render();
 });
 
-$("#borrow_modal_date_range_picker").daterangepicker();
+var today = new Date().toISOString().slice(0, 10);
+$("#borrow_modal_date_range_picker").daterangepicker({
+    minDate: today,
+    locale: {
+      format: 'YYYY-MM-DD'
+    },
+});
 
 var b = $("#borrow_modal_button")
 var f = $("#transaction_request_submit")
@@ -25,7 +31,7 @@ f.click(function(e){
         },
         success: function(data, status, xhr) {
             console.log(data)
-            if(data.success) 
+            if(data.success)
             {
                 swal.fire({
                     text: "Successfully requested book. Please wait until your request is approved, then you may claim the book at the library.",
@@ -44,9 +50,9 @@ f.click(function(e){
                     // copies_left.removeClass("badge-success")
                     // copies_left.addClass("badge-danger")
                 }
-                
+
             }
-            else if(data.error == "date_from_before_today") 
+            else if(data.error == "date_from_before_today")
             {
                 swal.fire({
                     text: "Please set 'Date From' from today onwards.",
