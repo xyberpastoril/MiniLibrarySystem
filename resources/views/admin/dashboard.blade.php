@@ -82,9 +82,9 @@
                                     {{ $book->title }}
                                 </a>
                                 <span class="text-gray-600 fw-bold d-block pt-1 fs-8">
-                                    {{ $book['authors'][0]->name }}
-                                    @if(count($book['authors']) > 1)
-                                        and {{ (count($book['authors']) - 1) }} other(s).
+                                    {{ $book->authors[0]->name }}
+                                    @if(count($book->authors) > 1)
+                                        and {{ (count($book->authors) - 1) }} other(s).
                                     @endif
                                     <br>
                                     Borrowed {{ $book->total }} time(s)
