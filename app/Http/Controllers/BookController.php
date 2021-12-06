@@ -44,6 +44,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:books,title',
             'authors' => 'required|string|max:100',
@@ -85,6 +89,10 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         $used_books = \App\Models\Transaction::where('book_id', '=', $book->id)
             ->where('status', '!=', 'returned')->count();
 
@@ -123,6 +131,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         if(count($book->genres) > 0) $book['genres'] = Genre::getBookGenres($book->id)[0]->genres;
         else $book['genres'] = "";
 
@@ -138,6 +150,10 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:books,title,'.$book->id,
             'authors' => 'required|string|max:100',
@@ -197,6 +213,10 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         if ($book->cover_url)
             unlink('media/books/'.$book->cover_url);
         return Book::deleteBook($book);
@@ -213,6 +233,10 @@ class BookController extends Controller
      */
     public function destroyWithRedirect(Book $book)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+        
         if ($book->cover_url)
             unlink('media/books/'.$book->cover_url);
 

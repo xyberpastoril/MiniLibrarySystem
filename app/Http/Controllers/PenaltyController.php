@@ -16,6 +16,9 @@ class PenaltyController extends Controller
     public function pay(Penalty $penalty)
     {
         // TODO: Send email for test receipt.
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
 
         $penalty->status = 'paid';
         $penalty->save();

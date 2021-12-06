@@ -73,6 +73,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         return view("admin.users.edit", compact('user'));
     }
 
@@ -85,6 +89,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -129,6 +137,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+
         if ($user->cover_url)
             unlink('media/avatars/'.$user->cover_url);
         return User::deleteUser($user);
@@ -144,6 +156,10 @@ class UserController extends Controller
      */
     public function destroyWithRedirect(User $user)
     {
+        if(!\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
+            return redirect()->to('/');
+        }
+        
         if ($user->cover_url)
             unlink('media/avatars/'.$user->cover_url);
 
