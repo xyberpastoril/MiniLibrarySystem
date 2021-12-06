@@ -36,7 +36,7 @@
     <!--begin::Card header-->
     <div class="card-header border-0 pt-6">
         <div class="card-title">
-        
+
             <!--begin::Search-->
             <div class="d-flex align-items-center position-relative my-1">
                 <!-- Svg Icon | path: ../../assets/media/icons/duotune/general/gen021.svg-->
@@ -112,13 +112,13 @@
 
                         <!-- Transaction Number -->
                         <td>
-                            <p>{{ substr($transaction->date_from, 0, -5) . ($transaction->id > 1000 
+                            <p>{{ substr($transaction->date_from, 0, -5) . (($transaction->id > 1000
                                 ? $transaction->id
-                                : $transaction->id > 100
+                                : ($transaction->id > 100
                                     ? '0' . $transaction->id
-                                    : $transaction->id > 10
+                                    : ($transaction->id > 10
                                         ? '00' . $transaction->id
-                                        : '000' . $transaction->id) }}</p>
+                                        : ('000' . $transaction->id))))) }}</p>
                         </td>
 
                         <!-- Book ID -->
