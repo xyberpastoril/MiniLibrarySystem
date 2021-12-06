@@ -190,7 +190,13 @@
 
                         <!-- transactions Number -->
                         <td>
-                            <p>{{ $transaction->id }}</p>
+                            <p>{{ substr($transaction->date_from, 0, -5) . ($transaction->id > 1000 
+                                    ? $transaction->id
+                                    : $transaction->id > 100
+                                        ? '0' . $transaction->id
+                                        : $transaction->id > 10
+                                            ? '00' . $transaction->id
+                                            : '000' . $transaction->id) }}</p>
                         </td>
 
                         <!-- Book ID / ISBN -->
