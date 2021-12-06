@@ -100,8 +100,8 @@
             <div class="card card-block w-175px my-card cursor-pointer shadow p-0" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
                 <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="{{ $book->title }}"
                     style="width: 100%; height: 225px; object-fit: cover;">
-                <div class="card-body p-2">
-                    <p class="card-text text-truncate">
+                <div class="card-body p-2 pb-0">
+                    <p class="card-text text-truncate mb-1">
                         <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                         <br />
                         <small class="text-muted">
@@ -111,6 +111,10 @@
                             @endif
                         </small>
                     </p>
+                    <p class="badge 
+                    @if(isset($book->copies_left) && $book->copies_left < 1) badge-danger
+                        @else badge-success
+                        @endif m-0 mb-3">{{ isset($book->copies_left) ? $book->copies_left : $book->copies_owned }} copies available</p>
                 </div>
             </div>
         @endforeach
