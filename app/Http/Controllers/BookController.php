@@ -153,6 +153,14 @@ class BookController extends Controller
         if ($validator->fails())
             return redirect()->back()->withErrors($validator)->withInput();
 
+        $obj = \App\Models\Transaction::bookSearchSub()
+            ->where('books.id', '=', $book->id)
+            ->first();
+
+
+        if(isset($obj->copies_used) && $request->copies_owned < $obj->copies_used)
+            return redirect()->back()->withErrors(['copies_owned' => 'Total copies less than currently used.'])->withInput();
+
         // Unlink existing image if changing or removing image.
         if((isset($request->cover_url) && $book->cover_url) || $request->cover_remove)
         {
