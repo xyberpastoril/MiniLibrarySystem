@@ -116,9 +116,7 @@ class Transaction extends Model
 
         return self::select('books.id', 'books.title', DB::raw('count(transactions.id) as copies_used') )
             ->join('books', 'transactions.book_id', '=', 'books.id')
-            ->where('transactions.status', '=', 'unclaimed')
-            ->orWhere('transactions.status', '=', 'claimed')
-            ->orWhere('transactions.status', '=', 'pending')
+            ->where('transactions.status', '!=', 'returned')
             ->groupBy('books.id', 'books.title');
     }
 
