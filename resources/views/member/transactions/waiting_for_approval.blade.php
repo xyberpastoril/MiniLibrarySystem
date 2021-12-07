@@ -80,11 +80,11 @@
                         </div>
                     </th>
                     <th class="w-75px">Transaction Number</th>
-                    <th>Book ID / ISBN</th>
+                    <th>Book Title & ISBN</th>
                     <th>Request Date</th>
                     <th>From</th>
                     <th>To</th>
-                    <th>Copies</th>
+                    {{-- <th>Copies</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -117,12 +117,15 @@
 
                         <!-- Book ID / ISBN -->
                         <td>
-                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->book_id }}</a>
+                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
+                                {{ $transaction->book_title }}<br>
+                                <small class="text-gray-800 text-hover-primary">({{ $transaction->book_isbn }})</small> 
+                            </a>
                         </td>
 
                         <!-- Request Date -->
                         <td>
-                            <div class="badge badge-light fw-bolder">{{ $transaction->date_requested }}</div>
+                            <div class="badge badge-light fw-bolder" >{{ $transaction->date_requested }}</div>
                         </td>
 
                         <!-- From -->
@@ -136,7 +139,7 @@
                         </td>
 
                         <!-- Copies -->
-                        <td>{{ $transaction->copies }}</td>
+                        {{-- <td>{{ $transaction->copies }}</td> --}}
 
                         <!-- Actions -->
                         <td>

@@ -58,7 +58,9 @@ class Transaction extends Model
                 'transactions.date_returned',
                 'transactions.status',
                 DB::raw('transactions.created_at as date_requested'),
+                DB::raw('books.title as book_title'),
                 DB::raw('books.id as book_id'),
+                DB::raw('books.isbn as book_isbn'),
                 DB::raw('penalties.id as penalty_id'),
                 'penalties.amount',
                 DB::raw('penalties.status as penalty_status'),
@@ -102,6 +104,12 @@ class Transaction extends Model
         // Append other parameters to auto-generated page urls
         // if($search) $obj->appends(['search' => $search]);
         // if($status) $obj->appends(['status' => $status]);
+
+        for($i = 0; $i < count($obj); $i++)
+        {
+            $obj[$i]->date_requested_raw = $obj[$i]->date_requested;
+            $obj[$i]->date_requested = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $obj[$i]->date_requested)->diffForHumans();
+        }
 
         return $obj;
     }

@@ -62,13 +62,13 @@
             <thead>
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="w-75px">Transaction Number</th>
-                    <th>Book ID</th>
-                    <th>User ID</th>
+                    <th>Book Name & ISBN</th>
+                    <th>User Name</th>
                     <th>Date Accepted</th>
                     <th>From</th>
                     <th>To</th>
-                    <th>Copies</th>
-                    <th>Penalty</th>
+                    {{-- <th>Copies</th> --}}
+                    {{-- <th>Penalty</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -95,12 +95,15 @@
 
                         <!-- Book ID / ISBN -->
                         <td>
-                            <a href="{{ route('books.edit', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->book_id }}</a>
+                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
+                                {{ $transaction->book_title }}<br>
+                                <small class="text-gray-800 text-hover-primary">({{ $transaction->book_isbn }})</small> 
+                            </a>
                         </td>
 
                         <!-- User ID -->
                         <td>
-                            <a href="{{ route('users.edit', $transaction->user_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->user_id }}</a>
+                            <a href="{{ route('users.edit', $transaction->user_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->first_name . " " . $transaction->last_name }}</a>
                         </td>
 
                         <!-- Accepted Date -->
@@ -119,10 +122,10 @@
                         </td>
 
                         <!-- Copies -->
-                        <td>{{ $transaction->copies }}</td>
+                        {{-- <td>{{ $transaction->copies }}</td> --}}
 
                         <!-- Penalty -->
-                        <td>{{ $transaction->penalty }}</td>
+                        {{-- <td>{{ $transaction->penalty }}</td> --}}
 
                         <!-- Actions -->
                         <td>

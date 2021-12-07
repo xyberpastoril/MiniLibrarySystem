@@ -155,12 +155,12 @@
                         </div>
                     </th> --}}
                     <th class="w-75px">Transaction Number</th>
-                    <th>Book ID</th>
+                    <th>Book Title</th>
                     <th>Accepted Date</th>
                     <th>From</th>
                     <th>To</th>
                     <th>Returned Date</th>
-                    <th>Copies</th>
+                    {{-- <th>Copies</th> --}}
                     <th>Penalty Issued</th>
                     <th>Status</th>
                 </tr>
@@ -194,7 +194,10 @@
 
                         <!-- Book ID -->
                         <td>
-                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->book_id }}</a>
+                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
+                                {{ $transaction->book_title }}<br>
+                                <small class="text-gray-800 text-hover-primary">({{ $transaction->book_isbn }})</small> 
+                            </a>
                         </td>
 
                         <!-- Accepted Date -->
@@ -218,7 +221,7 @@
                         </td>
 
                         <!-- Copies -->
-                        <td>{{ $transaction->copies }}</td>
+                        {{-- <td>{{ $transaction->copies }}</td> --}}
 
                         <!-- Penalty Issued -->
                         <td>₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</td>
