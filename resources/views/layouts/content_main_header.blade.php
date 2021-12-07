@@ -41,7 +41,7 @@
             </div>
             <!--end::Page title-->
 
-            <!--begin::Notifications-->
+            {{-- <!--begin::Notifications-->
             <div class="d-flex align-items-center me-4">
 
                 <!-- Bell Icon Wrapper-->
@@ -186,7 +186,7 @@
                  <!--end::Notification Popover-->
 
             </div>
-            <!--end::Notifications-->
+            <!--end::Notifications--> --}}
 
         </div>
     </div>
