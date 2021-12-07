@@ -97,8 +97,8 @@
                         <td>
                             <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
                                 {{ $transaction->book_title }}<br>
-                                <small class="text-gray-800 text-hover-primary">({{ $transaction->book_isbn }})</small> 
                             </a>
+                            <small class="text-muted">({{ $transaction->book_isbn }})</small> 
                         </td>
 
                         <!-- User ID -->
