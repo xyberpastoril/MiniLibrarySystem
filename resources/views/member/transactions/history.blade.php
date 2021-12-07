@@ -156,7 +156,7 @@
                     </th> --}}
                     <th class="w-75px">Transaction Number</th>
                     <th>Book Title</th>
-                    <th>Accepted Date</th>
+                    {{-- <th>Accepted Date</th> --}}
                     <th>From</th>
                     <th>To</th>
                     <th>Returned Date</th>
@@ -201,9 +201,9 @@
                         </td>
 
                         <!-- Accepted Date -->
-                        <td>
+                        {{-- <td>
                             <div class="badge badge-light fw-bolder">{{ $transaction->date_accepted }}</div>
-                        </td>
+                        </td> --}}
 
                         <!-- From -->
                         <td>

@@ -165,7 +165,7 @@
                     <th class="w-75px">Transaction Number</th>
                     <th>Book Title & ISBN</th>
                     <th>User Name</th>
-                    <th>Date Accepted</th>
+                    {{-- <th>Date Accepted</th> --}}
                     <th>From</th>
                     <th>To</th>
                     <th>Date Returned</th>
@@ -213,9 +213,9 @@
                         </td>
 
                         <!-- Accepted Date -->
-                        <td>
+                        {{-- <td>
                             <div class="badge badge-light fw-bolder">{{ $transaction->date_accepted }}</div>
-                        </td>
+                        </td> --}}
 
                         <!-- From -->
                         <td>
@@ -236,7 +236,16 @@
                         {{-- <td>{{ $transaction->copies }}</td> --}}
 
                         <!-- Penalty Issued -->
-                        <td>₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</td>
+                        <td>
+                            
+                            @if($transaction->amount > 0 && $transaction->penalty_status == 'paid')
+                                <div class="badge badge-success fw-bolder">₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</div>
+                            @elseif ($transaction->amount > 0 && $transaction->penalty_status == 'unpaid')
+                                <div class="badge badge-danger fw-bolder">₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</div>
+                            @else
+                                <div class="badge badge-success fw-bolder">₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</div>
+                            @endif
+                        </td>
 
                         <td>
                             @if($transaction->amount > 0 && $transaction->penalty_status == 'unpaid')
