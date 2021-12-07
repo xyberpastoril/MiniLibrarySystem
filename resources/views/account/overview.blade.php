@@ -123,21 +123,21 @@
             <!-- Navs -->
             <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
                 <!-- Nav item -->
-                <li class="nav-item mt-2">
+                {{-- <li class="nav-item mt-2">
                     <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Alerts</a>
-                </li>
+                </li> --}}
 
                 <!-- Nav item -->
-                <li class="nav-item mt-2">
+                {{-- <li class="nav-item mt-2">
                     <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Logs</a>
-                </li>
+                </li> --}}
             </ul>
 
         </div>
     </div>
     <!--end::Header-->
 
-    <!--begin::Timeline-->
+    {{-- <!--begin::Timeline-->
     <div class="card mt-5 mt-xxl-8">
 
         <!-- Card head -->
@@ -255,7 +255,7 @@
         </div>
 
     </div>
-    <!--end::Timeline-->
+    <!--end::Timeline--> --}}
 
 @endsection
 
