@@ -191,6 +191,9 @@ class Book extends Model
                 $obj[$i]->copies_used = 0;
                 $obj[$i]->copies_left = $obj[$i]->copies_owned;
             }
+
+            $obj[$i]->created_at_raw = $obj[$i]->created_at;
+            $obj[$i]->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $obj[$i]->created_at)->diffForHumans();
         }
 
         // Append other parameters to auto-generated page urls
