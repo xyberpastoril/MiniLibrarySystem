@@ -163,6 +163,12 @@ class User extends Authenticatable
             inner join `roles` on `model_has_roles`.`role_id` = `roles`.`id` 
             where roles.id != 1');
         
+        for($i = 0; $i < count($results); $i++)
+        {
+            $results[$i]->joined_date_raw = $results[$i]->joined_date;
+            $results[$i]->joined_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $results[$i]->joined_date)->diffForHumans();
+        }
+
         return $results;
     }
 
