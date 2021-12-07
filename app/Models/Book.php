@@ -61,8 +61,11 @@ class Book extends Model
             ->limit(5)
             ->get();
 
-        for($i = 0; $i < 5; $i++)
+        for($i = 0; $i < 5; $i++) {
             $newArrivals[$i]->authors = Author::getBookAuthors($newArrivals[$i]->id);
+            $newArrivals[$i]->created_at_raw = $newArrivals[$i]->created_at;
+            $newArrivals[$i]->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $newArrivals[$i]->created_at)->diffForHumans();
+        }
 
         return $newArrivals;
     }

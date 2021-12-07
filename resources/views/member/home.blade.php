@@ -141,8 +141,8 @@
                             @endif
                         </small>
                     </p>
-                    <span class="badge badge-square px-2 badge-warning ms-4">
-                        Added last {{ substr($book->created_at, 0, -8) }}
+                    <span class="badge badge-square px-2 badge-warning ms-8">
+                        Added {{ substr($book->created_at, 0, -8) }} ago
                     </span>
                     {{-- <p class="badge
                     @if(isset($book->copies_left) && $book->copies_left < 1) badge-danger
