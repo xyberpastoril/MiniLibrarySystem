@@ -95,7 +95,7 @@ class Book extends Model
             } )
             ->leftJoin('genres', 'books.id', '=', 'genres.book_id')
             ->leftJoin('authors', 'books.id', '=', 'authors.book_id')
-            ->orderBy('copies_left', 'desc')
+            ->orderBy('total', 'desc')
             ->limit(5)
             ->get();
 

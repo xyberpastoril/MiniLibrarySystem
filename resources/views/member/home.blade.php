@@ -130,7 +130,7 @@
             <div class="card card-block my-card cursor-pointer shadow" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
                 <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
                     style="width: 100%; height: 225px; object-fit: cover;">
-                <div class="card-body p-2 pb-0">
+                <div class="card-body p-2">
                     <p class="card-text text-truncate mb-1">
                         <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                         <br />
@@ -141,10 +141,13 @@
                             @endif
                         </small>
                     </p>
-                    <p class="badge 
+                    <span class="badge badge-square px-2 badge-warning ms-4">
+                        Added last {{ substr($book->created_at, 0, -8) }}
+                    </span>
+                    {{-- <p class="badge
                     @if(isset($book->copies_left) && $book->copies_left < 1) badge-danger
                     @else badge-success
-                    @endif m-0 mb-3">{{ isset($book->copies_left) ? $book->copies_left : $book->copies_owned }} copies available</p>
+                    @endif m-0 mb-3">{{ isset($book->copies_left) ? $book->copies_left : $book->copies_owned }} copies available</p> --}}
                 </div>
             </div>
         @endforeach
@@ -163,7 +166,7 @@
             <div class="card card-block my-card cursor-pointer shadow" style="width: 14rem;flex: 0 0 auto;" onclick="window.location.href = '{{ route('books.show', $book->id) }}';">
                 <img class="card-img-top" src="@if($book->cover_url == null){{ asset("media/books/blank.jpg") }}@else{{ asset("media/books/$book->cover_url") }}@endif" alt="Book Cover"
                     style="width: 100%; height: 225px; object-fit: cover;">
-                <div class="card-body p-2 pb-0">
+                <div class="card-body p-2">
                     <p class="card-text text-truncate mb-1">
                         <span class="text-gray-800 mb-1">{{ $book->title }}</span>
                         <br />
@@ -174,11 +177,11 @@
                             @endif
                         </small>
                     </p>
-                    <p class="badge 
-                    @if(isset($book->copies_left) && $book->copies_left < 1) badge-danger
-                    @else badge-success
-                    @endif m-0 mb-3">{{ isset($book->copies_left) ? $book->copies_left : $book->copies_owned }} copies available</p>
+                    <span class="badge badge-square px-2 badge-primary ms-9">
+                        {{ $book->total }} times borrowed
+                    </span>
                 </div>
+
             </div>
         @endforeach
     </div>

@@ -122,10 +122,11 @@
                             @endif
                         </small>
                     </p>
-                    <p class="badge 
+                </div>
+                <div class="position-absolute top-0 start-100 translate-middle badge badge-square px-2
                     @if(isset($book->copies_left) && $book->copies_left < 1) badge-danger
-                        @else badge-success
-                        @endif m-0 mb-3">{{ isset($book->copies_left) ? $book->copies_left : $book->copies_owned }} copies available</p>
+                    @else badge-success
+                    @endif">{{ isset($book->copies_left) ? $book->copies_left : $book->copies_owned }} left
                 </div>
             </div>
         @endforeach
