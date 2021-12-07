@@ -32,8 +32,10 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        var rr = r.split("-");
+                        rr = new Number(rr[1]);
                         $.ajax({
-                            url:"/transactions/" + r + "/cancel",
+                            url:"/transactions/" + rr.valueOf() + "/cancel",
                             type:'DELETE',
                             data:{
                                 _token: $("input[name=_token]").val()
@@ -99,8 +101,10 @@ var KTTransactionsList = (function() {
                     .then(function() {
                         c.forEach((t) => {
                             if(t.checked && t.value > 0){
+                                var rr = t.value.split("-");
+                                rr = new Number(rr[1]);
                                 $.ajax({
-                                    url:"/transactions/" + t.value + "/cancel",
+                                    url:"/transactions/" + rr.valueOf() + "/cancel",
                                     type:'DELETE',
                                     data:{
                                         _token: $("input[name=_token]").val()

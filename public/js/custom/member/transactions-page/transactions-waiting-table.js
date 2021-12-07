@@ -32,8 +32,10 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        var rr = r.split("-");
+                        rr = new Number(rr[1]);
                         $.ajax({
-                            url:"/transactions/" + r + "/cancel",
+                            url:"/transactions/" + rr.valueOf() + "/cancel",
                             type:'DELETE',
                             data:{
                                 _token: $("input[name=_token]").val()
