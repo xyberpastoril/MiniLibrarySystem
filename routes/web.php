@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/search', [App\Http\Controllers\HomeController::class, 'searchBooks'])->name('home.search');
     Route::get('/search', [App\Http\Controllers\HomeController::class, 'searchBooks'])->name('home.search');
 
+    Route::get('/result/transactions/monthly', [App\Http\Controllers\HomeController::class, 'getTransactionsByMonth'])
+        ->name('home.getTransactionsByMonth');
+
     // Route group for Admin Pages
     Route::group([], function(){
 

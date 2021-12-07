@@ -25,6 +25,8 @@
 
 @section("content")
 
+@csrf
+
 <!-- Welcome -->
 <div class="row g-5 g-xxl-10">
     <div class="col-xxl-8 mb-5 mb-xxl-10">

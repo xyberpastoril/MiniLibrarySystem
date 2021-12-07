@@ -23,8 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // return \App\Models\Book::getNewArrivals();
-
         if(\Illuminate\Support\Facades\Auth::user()->hasRole('Librarian')){
             return view('admin.dashboard', [
                 "hotBooks" => \App\Models\Book::getHotBooks()
@@ -63,5 +61,10 @@ class HomeController extends Controller
                 ? $genre
                 : null,
             $request->status);
+    }
+
+    public function getTransactionsByMonth()
+    {
+        return \App\Models\Transaction::countByMonth();
     }
 }

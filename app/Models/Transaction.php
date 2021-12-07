@@ -171,4 +171,17 @@ class Transaction extends Model
                 'date_returned' => \Carbon\Carbon::now()->format('Y-m-d')
             ]);
     }
+
+    public static function countByMonth()
+    {
+        // SELECT DATE_FORMAT(date_from , '%M %Y') AS Month, COUNT(transactions.id) as no_transactions FROM transactions GROUP BY MONTH(date_from) DESC LIMIT 12
+        DB::statement("SET SQL_MODE=''");
+
+        return self::select(
+            DB::raw('DATE_FORMAT(date_from, "%M %Y") as month'),
+            DB::raw('COUNT(transactions.id) as no_transactions'))
+            ->groupBy(DB::raw('MONTH(date_from)'))
+            ->limit(12)
+            ->get();
+    }
 }
