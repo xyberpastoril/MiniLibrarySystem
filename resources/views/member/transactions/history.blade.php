@@ -30,6 +30,19 @@
     <!--begin::Card header-->
     <div class="card-header border-0 pt-6">
         <div class="card-title">
+
+            <!--begin::Search-->
+            <div class="d-flex align-items-center position-relative my-1">
+                <!-- Svg Icon | path: ../../assets/media/icons/duotune/general/gen021.svg-->
+                <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"/>
+                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"/>
+                    </svg>
+                </span>
+                <input type="text" data-kt-transactions-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search transaction">
+            </div>
+            <!--end::Search-->
         </div>
 
         <!--begin::Card toolbar-->
@@ -142,12 +155,12 @@
                         </div>
                     </th> --}}
                     <th class="w-75px">Transaction Number</th>
-                    <th>Book ID</th>
-                    <th>Accepted Date</th>
+                    <th>Book Title</th>
+                    {{-- <th>Accepted Date</th> --}}
                     <th>From</th>
                     <th>To</th>
                     <th>Returned Date</th>
-                    <th>Copies</th>
+                    {{-- <th>Copies</th> --}}
                     <th>Penalty Issued</th>
                     <th>Status</th>
                 </tr>
@@ -170,18 +183,27 @@
 
                         <!-- Transaction Number -->
                         <td>
-                            <p>{{ $transaction->id }}</p>
+                            <p>{{ substr($transaction->date_from, 0, -5) . (($transaction->id > 1000
+                                ? $transaction->id
+                                : ($transaction->id > 100
+                                    ? '0' . $transaction->id
+                                    : ($transaction->id > 10
+                                        ? '00' . $transaction->id
+                                        : ('000' . $transaction->id))))) }}</p>
                         </td>
 
                         <!-- Book ID -->
                         <td>
-                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $transaction->book_id }}</a>
+                            <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
+                                {{ $transaction->book_title }}<br>
+                            </a>
+                            <small class="text-muted">({{ $transaction->book_isbn }})</small> 
                         </td>
 
                         <!-- Accepted Date -->
-                        <td>
+                        {{-- <td>
                             <div class="badge badge-light fw-bolder">{{ $transaction->date_accepted }}</div>
-                        </td>
+                        </td> --}}
 
                         <!-- From -->
                         <td>
@@ -199,7 +221,7 @@
                         </td>
 
                         <!-- Copies -->
-                        <td>{{ $transaction->copies }}</td>
+                        {{-- <td>{{ $transaction->copies }}</td> --}}
 
                         <!-- Penalty Issued -->
                         <td>₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</td>

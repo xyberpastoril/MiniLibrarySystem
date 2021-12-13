@@ -20,6 +20,11 @@
     </li>
 
     <!-- Item -->
+    <li class="breadcrumb-item text-muted">
+        <a href="{{ route('home.search') }}" class="text-muted">Books</a>
+    </li>
+
+    <!-- Item -->
     <li class="breadcrumb-item text-dark">Book Details
     </li>
 
@@ -46,7 +51,7 @@
                     </h3>
                 </div>
                 <button id="borrow_modal_button" class="btn btn-primary"
-                    @if($book->copies_left < 1 || Auth::user()->getRoleNames()[0] == "Unverified Member")
+                    @if($book->copies_left < 1 || Auth::user()->getRoleNames()[0] == "Unverified Member" || $book->hasPenalties || $book->hasLateReturns)
                         disabled
                     @else
                         data-bs-toggle="modal"
@@ -82,6 +87,38 @@
             </div>
             <!--end::Row-->
             @endrole
+
+            @if($book->hasPenalties)
+            <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+                <!--begin::Svg Icon | path: assets/media/icons/duotune/finance/fin008.svg-->
+                <span class="svg-icon svg-icon-2hx svg-icon-danger me-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path opacity="0.3" d="M3.20001 5.91897L16.9 3.01895C17.4 2.91895 18 3.219 18.1 3.819L19.2 9.01895L3.20001 5.91897Z" fill="black"/>
+                    <path opacity="0.3" d="M13 13.9189C13 12.2189 14.3 10.9189 16 10.9189H21C21.6 10.9189 22 11.3189 22 11.9189V15.9189C22 16.5189 21.6 16.9189 21 16.9189H16C14.3 16.9189 13 15.6189 13 13.9189ZM16 12.4189C15.2 12.4189 14.5 13.1189 14.5 13.9189C14.5 14.7189 15.2 15.4189 16 15.4189C16.8 15.4189 17.5 14.7189 17.5 13.9189C17.5 13.1189 16.8 12.4189 16 12.4189Z" fill="black"/>
+                    <path d="M13 13.9189C13 12.2189 14.3 10.9189 16 10.9189H21V7.91895C21 6.81895 20.1 5.91895 19 5.91895H3C2.4 5.91895 2 6.31895 2 6.91895V20.9189C2 21.5189 2.4 21.9189 3 21.9189H19C20.1 21.9189 21 21.0189 21 19.9189V16.9189H16C14.3 16.9189 13 15.6189 13 13.9189Z" fill="black"/>
+                    </svg></span>
+                    <!--end::Svg Icon-->
+                <div class="d-flex flex-column">
+                    <h4 class="mb-1 text-danger">You currently have pending penalties incurred in your account.</h4>
+                    <span>To be able to borrow again, settle first your remaining penalties in the library.</span>
+                </div>
+            </div>
+            @endif
+
+            @if($book->hasLateReturns)
+            <div class="alert alert-warning d-flex align-items-center p-5 mb-10">
+                <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen044.svg-->
+                <span class="svg-icon svg-icon-2hx svg-icon-warning me-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"/>
+                    <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black"/>
+                    <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black"/>
+                    </svg></span>
+                    <!--end::Svg Icon-->
+                <div class="d-flex flex-column">
+                    <h4 class="mb-1 text-warning">You currently have books overdue for return.</h4>
+                    <span>Return your books overdue for return and settle its penalties to be able to borrow again.</span>
+                </div>
+            </div>
+            @endif
 
             <div class=" d-flex flex-column flex-lg-row">
                 <!--begin::Aside-->

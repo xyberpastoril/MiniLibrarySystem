@@ -34,8 +34,10 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        var rr = r.split("-");
+                        rr = new Number(rr[1]);
                         $.ajax({
-                            url:"/transactions/" + r + "/return",
+                            url:"/transactions/" + rr.valueOf() + "/return",
                             type:'PUT',
                             data:{
                                 _token: $("input[name=_token]").val()
@@ -84,8 +86,10 @@ var KTTransactionsList = (function() {
                             confirmButton: "btn fw-bold btn-primary"
                         }
                     }).then((function() {
+                        var rr = r.split("-");
+                        rr = new Number(rr[1]);
                         $.ajax({
-                            url:"/transactions/" + r + "/claim",
+                            url:"/transactions/" + rr.valueOf() + "/claim",
                             type:'PUT',
                             data:{
                                 _token: $("input[name=_token]").val()
@@ -122,7 +126,9 @@ var KTTransactionsList = (function() {
                 })).on("draw", function() {
                     c(), d();
                 }),
-                c(), d();
+                c(), d(), document.querySelector('[data-kt-transactions-table-filter="search"]').addEventListener("keyup", (function(t) {
+                    e.search(t.target.value).draw()
+                }));
         },
     };
 })();

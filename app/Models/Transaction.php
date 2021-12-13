@@ -58,7 +58,9 @@ class Transaction extends Model
                 'transactions.date_returned',
                 'transactions.status',
                 DB::raw('transactions.created_at as date_requested'),
+                DB::raw('books.title as book_title'),
                 DB::raw('books.id as book_id'),
+                DB::raw('books.isbn as book_isbn'),
                 DB::raw('penalties.id as penalty_id'),
                 'penalties.amount',
                 DB::raw('penalties.status as penalty_status'),
@@ -103,6 +105,12 @@ class Transaction extends Model
         // if($search) $obj->appends(['search' => $search]);
         // if($status) $obj->appends(['status' => $status]);
 
+        for($i = 0; $i < count($obj); $i++)
+        {
+            $obj[$i]->date_requested_raw = $obj[$i]->date_requested;
+            $obj[$i]->date_requested = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $obj[$i]->date_requested)->diffForHumans();
+        }
+
         return $obj;
     }
 
@@ -116,9 +124,7 @@ class Transaction extends Model
 
         return self::select('books.id', 'books.title', DB::raw('count(transactions.id) as copies_used') )
             ->join('books', 'transactions.book_id', '=', 'books.id')
-            ->where('transactions.status', '=', 'unclaimed')
-            ->orWhere('transactions.status', '=', 'claimed')
-            ->orWhere('transactions.status', '=', 'pending')
+            ->where('transactions.status', '!=', 'returned')
             ->groupBy('books.id', 'books.title');
     }
 
@@ -164,5 +170,18 @@ class Transaction extends Model
                 'status' => 'returned',
                 'date_returned' => \Carbon\Carbon::now()->format('Y-m-d')
             ]);
+    }
+
+    public static function countByMonth()
+    {
+        // SELECT DATE_FORMAT(date_from , '%M %Y') AS Month, COUNT(transactions.id) as no_transactions FROM transactions GROUP BY MONTH(date_from) DESC LIMIT 12
+        DB::statement("SET SQL_MODE=''");
+
+        return self::select(
+            DB::raw('DATE_FORMAT(date_from, "%M %Y") as month'),
+            DB::raw('COUNT(transactions.id) as no_transactions'))
+            ->groupBy(DB::raw('MONTH(date_from)'))
+            ->limit(12)
+            ->get();
     }
 }
