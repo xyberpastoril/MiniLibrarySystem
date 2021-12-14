@@ -144,9 +144,6 @@ var KTTransactionsList = (function() {
         init: function() {
             o && (e = $(o).DataTable({
                     aLengthMenu: [5, 10, 25, 50, 100],
-                    searchBuilder: {
-                        columns: [1,2,3,4,7,8,9]
-                    },
                     order: [
                         [6, "desc"]
                     ],

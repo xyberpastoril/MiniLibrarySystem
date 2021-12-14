@@ -49,7 +49,52 @@
         <div class="card-toolbar">
             <div class="d-flex justify-content-end" data-kt-transactions-table-toolbar="base">
 
-                <!-- Export -->
+                <!-- Filter -->
+                <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                    <!-- Svg Icon | path: ../../assets/media/icons/duotune/general/gen031.svg-->
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black"/>
+                        </svg>
+                    </span>Filter
+                </button>
+
+                <!-- Filter Dropdown-->
+                <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
+
+                    <!-- Header -->
+                    <div class="px-7 py-5">
+                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                    </div>
+
+                    <!-- Separator -->
+                    <div class="separator border-gray-200"></div>
+
+                    <!-- Content-->
+                    <div class="px-7 py-5" data-kt-transactions-table-filter="form">
+
+                        <!-- Status -->
+                        <div class="mb-10">
+                            <label class="form-label fs-6 fw-bold">Date Returned:</label>
+                            <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-transactions-table-filter="status" data-hide-search="true">
+                                <option></option>
+                                <option value="@php echo \Carbon\Carbon::now()->toDateString(); @endphp">Today</option>
+                                <option value="@php echo \Carbon\Carbon::now()->subWeek()->toDateString(); @endphp">From Past 7 days</option>
+                                <option value="@php echo \Carbon\Carbon::now()->subMonth()->toDateString(); @endphp">From Past 30 days</option>
+                            </select>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="d-flex justify-content-end">
+                            <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-transactions-table-filter="reset">Reset</button>
+                            <button type="submit" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-transactions-table-filter="filter">Apply</button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--end::Filter Dropdown-->
+                {{-- <!-- Export -->
                 <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_export_transactions">
                     <!-- Svg Icon | path: ../../assets/media/icons/duotune/arrows/arr078.svg-->
                     <span class="svg-icon svg-icon-2">
@@ -59,7 +104,7 @@
                             <path d="M18.75 8.25H17.75C17.1977 8.25 16.75 8.69772 16.75 9.25C16.75 9.80228 17.1977 10.25 17.75 10.25C18.3023 10.25 18.75 10.6977 18.75 11.25V18.25C18.75 18.8023 18.3023 19.25 17.75 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V11.25C4.75 10.6977 5.19771 10.25 5.75 10.25C6.30229 10.25 6.75 9.80228 6.75 9.25C6.75 8.69772 6.30229 8.25 5.75 8.25H4.75C3.64543 8.25 2.75 9.14543 2.75 10.25V19.25C2.75 20.3546 3.64543 21.25 4.75 21.25H18.75C19.8546 21.25 20.75 20.3546 20.75 19.25V10.25C20.75 9.14543 19.8546 8.25 18.75 8.25Z" fill="#C4C4C4"/>
                         </svg>
                     </span>Export
-                </button>
+                </button> --}}
 
             </div>
 
@@ -159,10 +204,9 @@
                     {{-- <th>Accepted Date</th> --}}
                     <th>From</th>
                     <th>To</th>
-                    <th>Returned Date</th>
+                    <th>Date Returned</th>
                     {{-- <th>Copies</th> --}}
                     <th>Penalty Issued</th>
-                    <th>Status</th>
                 </tr>
             </thead>
             <!--end::Table head-->
@@ -197,7 +241,7 @@
                             <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
                                 {{ $transaction->book_title }}<br>
                             </a>
-                            <small class="text-muted">({{ $transaction->book_isbn }})</small> 
+                            <small class="text-muted">({{ $transaction->book_isbn }})</small>
                         </td>
 
                         <!-- Accepted Date -->
@@ -225,16 +269,6 @@
 
                         <!-- Penalty Issued -->
                         <td>₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</td>
-
-                        <td>
-                            @if($transaction->penalty_status == 'unpaid')
-                                <div class="badge badge-danger fw-bolder">Unpaid</div>
-                            @elseif($transaction->penalty_status == 'paid')
-                                <div class="badge badge-success fw-bolder">Paid</div>
-                            @elseif($transaction->amount == null)
-                                <div class="badge badge-success fw-bolder">Cleared</div>
-                            @endif
-                        </td>
                     </tr>
                     <!--end::Table row | Book -->
 

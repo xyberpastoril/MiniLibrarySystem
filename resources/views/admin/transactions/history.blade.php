@@ -87,8 +87,8 @@
                             <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-transactions-table-filter="status" data-hide-search="true">
                                 <option></option>
                                 <option value="@php echo \Carbon\Carbon::now()->toDateString(); @endphp">Today</option>
-                                <option value="@php echo \Carbon\Carbon::now()->subWeek()->toDateString(); @endphp">This Week</option>
-                                <option value="@php echo \Carbon\Carbon::now()->subMonth()->toDateString(); @endphp">This Month</option>
+                                <option value="@php echo \Carbon\Carbon::now()->subWeek()->toDateString(); @endphp">From Past 7 days</option>
+                                <option value="@php echo \Carbon\Carbon::now()->subMonth()->toDateString(); @endphp">From Past 30 days</option>
                             </select>
                         </div>
 

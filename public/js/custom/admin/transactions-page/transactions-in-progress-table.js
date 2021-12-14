@@ -128,7 +128,45 @@ var KTTransactionsList = (function() {
                 }),
                 c(), d(), document.querySelector('[data-kt-transactions-table-filter="search"]').addEventListener("keyup", (function(t) {
                     e.search(t.target.value).draw()
-                }));
+                })), document.querySelector('[data-kt-transactions-table-filter="reset"]').addEventListener("click", (function() {
+				document.querySelector('[data-kt-transactions-table-filter="form"]').querySelectorAll("select").forEach((e => {
+					$(e).val("").trigger("change")
+				})), $.fn.dataTable.ext.search.pop(), e.search("").draw()
+			})),
+
+            (() => {
+				const t = document.querySelector('[data-kt-transactions-table-filter="form"]'),
+					n = t.querySelector('[data-kt-transactions-table-filter="filter"]'),
+					r = t.querySelectorAll("select");
+				n.addEventListener("click", (function() {
+					var t = "";
+					r.forEach(((e, n) => {
+						e.value && "" !== e.value && (0 !== n && (t += " "), t += e.value)
+					})),
+                    $.fn.dataTable.ext.search.pop()
+                    $.fn.dataTable.ext.search.push(
+                        function( settings, data, dataIndex ) {
+                            var today = new Date().toISOString().slice(0, 10);
+
+                            var min = new Date(t);
+                            var max = new Date(today);
+
+                            var date = new Date( data[3] );
+
+                            if (
+                                ( min === null && max === null ) ||
+                                ( min === null && date <= max ) ||
+                                ( min <= date   && max === null ) ||
+                                ( min <= date   && date <= max )
+                            ) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    )
+                    e.draw()
+				}))
+			})();;
         },
     };
 })();

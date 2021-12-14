@@ -107,7 +107,7 @@ class Transaction extends Model
 
         for($i = 0; $i < count($obj); $i++)
         {
-            $obj[$i]->date_requested_raw = $obj[$i]->date_requested;
+            $obj[$i]->date_requested_raw = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $obj[$i]->date_requested)->toDateString();
             $obj[$i]->date_requested = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $obj[$i]->date_requested)->diffForHumans();
 
             $obj[$i]->amount = NULL;
