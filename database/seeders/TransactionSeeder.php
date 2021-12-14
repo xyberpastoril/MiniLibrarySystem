@@ -16,31 +16,30 @@ class TransactionSeeder extends Seeder
         \App\Models\Transaction::create([
             'book_id' => 1,
             'user_id' => 2,
-            'date_from' => '2021-11-20',
-            'date_to' => '2021-12-04',
-            'date_accepted' => '2021-12-01',
+            'date_from' => '2021-12-15',
+            'date_to' => '2021-12-22',
             'copies' => 1,
             'penalty' => 100,
-            'status' => 'claimed',
+            'status' => 'pending',
         ]);
 
         \App\Models\Transaction::create([
             'book_id' => 4,
             'user_id' => 2,
-            'date_from' => '2021-11-17',
-            'date_to' => '2021-11-19',
-            'date_accepted' => '2021-11-16',
+            'date_from' => '2021-12-14',
+            'date_to' => '2021-12-20',
+            'date_accepted' => '2021-11-14',
             'copies' => 1,
             'penalty' => 100,
-            'status' => 'claimed',
+            'status' => 'unclaimed',
         ]);
 
         \App\Models\Transaction::create([
             'book_id' => 3,
             'user_id' => 3,
-            'date_from' => '2021-11-14',
-            'date_to' => '2021-11-21',
-            'date_accepted' => '2021-11-16',
+            'date_from' => '2021-12-14',
+            'date_to' => '2021-12-21',
+            'date_accepted' => '2021-12-14',
             'copies' => 2,
             'penalty' => 100,
             'status' => 'claimed',
@@ -52,7 +51,7 @@ class TransactionSeeder extends Seeder
             'date_from' => '2021-11-19',
             'date_to' => '2021-11-26',
             'date_accepted' => '2021-11-16',
-            'copies' => 2,
+            'copies' => 1,
             'penalty' => 100,
             'status' => 'claimed',
         ]);
@@ -60,19 +59,21 @@ class TransactionSeeder extends Seeder
             'book_id' => 2,
             'user_id' => 2,
             'date_from' => '2021-12-05',
-            'date_to' => '2021-12-11',
+            'date_to' => '2021-12-15',
+            'date_accepted' => '2021-12-04',
             'copies' => 1,
-            'status' => 'pending',
+            'status' => 'claimed',
         ]);
         \App\Models\Transaction::create([
             'book_id' => 7,
             'user_id' => 2,
-            'date_from' => '2021-11-20',
-            'date_to' => '2021-12-04',
-            'date_accepted' => '2021-11-16',
+            'date_from' => '2021-12-01',
+            'date_to' => '2021-12-07',
+            'date_accepted' => '2021-12-01',
+            'date_returned' => '2021-12-07',
             'copies' => 1,
             'penalty' => 100,
-            'status' => 'claimed',
+            'status' => 'returned',
         ]);
         //
     }
