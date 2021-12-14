@@ -264,7 +264,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                         <div class="separator my-2"></div>
 
                         <!-- Menu item | Dark Mode-->
-                        <div class="menu-item px-5">
+                        {{-- <div class="menu-item px-5">
                             <div class="menu-content px-5">
                                 <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
                                     <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle" data-kt-url="/good/dark/index.html">
@@ -272,7 +272,7 @@ data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '
                                     <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <!--end:: Hover Menu-->

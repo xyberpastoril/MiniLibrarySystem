@@ -28,8 +28,8 @@
 @csrf
 
 <!-- Welcome -->
-<div class="row g-5 g-xxl-10">
-    <div class="col-xxl-8 mb-5 mb-xxl-10">
+<div class="row g-5 g-xxl-12">
+    <div class="col-xxl-12 mb-5 mb-xxl-10">
         <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-250px card-xl-stretch mb-5 mb-xl-8 bg-gray-200 border-0" style="background-position: 100% 100%;background-size: 500px auto;background-image:url('{{ asset("media/misc/city.png") }}')">
             <div class="card-body d-flex flex-column justify-content-center ps-lg-15">
 
