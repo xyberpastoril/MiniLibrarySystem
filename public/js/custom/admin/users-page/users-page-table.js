@@ -123,6 +123,13 @@ var KTUsersList = function() {
 	return {
 		init: function() {
 			o && (e = $(o).DataTable({
+                // dom: 'B',
+                // buttons: [
+                //     {
+                //         extend: 'pdfHtml5',
+                //         download: 'open'
+                //     }
+                // ],
 				aLengthMenu: [5, 10, 25, 50, 100],
 				searchDelay: 500,
 				order: [[1, "asc"]],
