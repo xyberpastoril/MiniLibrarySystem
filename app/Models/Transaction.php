@@ -109,6 +109,24 @@ class Transaction extends Model
         {
             $obj[$i]->date_requested_raw = $obj[$i]->date_requested;
             $obj[$i]->date_requested = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $obj[$i]->date_requested)->diffForHumans();
+
+            $obj[$i]->amount = NULL;
+
+            $today = \Carbon\Carbon::now()->toDateString();
+            $today = date_create($today);
+            $date_to = date_create($obj[$i]->date_to);
+            if($today > $date_to)
+            {
+                $difference = date_diff($today, $date_to)->days;
+                $obj[$i]->amount = $difference * 10;
+
+            //     // Compute Penalty
+            //     $transaction->penalty()->create([
+            //         'transaction_id' => $transaction->id,
+            //         'amount' => $difference * 10,
+            //         'status' => 'unpaid'
+            //     ]);
+            }
         }
 
         return $obj;

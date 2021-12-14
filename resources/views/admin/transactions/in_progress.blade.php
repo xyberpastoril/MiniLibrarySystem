@@ -68,7 +68,7 @@
                     <th>From</th>
                     <th>To</th>
                     {{-- <th>Copies</th> --}}
-                    {{-- <th>Penalty</th> --}}
+                    <th>Penalty</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -98,7 +98,7 @@
                             <a href="{{ route('books.show', $transaction->book_id) }}" class="text-gray-800 text-hover-primary mb-1">
                                 {{ $transaction->book_title }}<br>
                             </a>
-                            <small class="text-muted">({{ $transaction->book_isbn }})</small> 
+                            <small class="text-muted">({{ $transaction->book_isbn }})</small>
                         </td>
 
                         <!-- User ID -->
@@ -126,6 +126,16 @@
 
                         <!-- Penalty -->
                         {{-- <td>{{ $transaction->penalty }}</td> --}}
+                        <td>
+
+                            @if($transaction->amount > 0 && $transaction->penalty_status == 'paid')
+                                <div class="badge badge-success fw-bolder">₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</div>
+                            @elseif ($transaction->amount > 0 && ($transaction->penalty_status == 'unpaid' || $transaction->penalty_status == NULL))
+                                <div class="badge badge-danger fw-bolder">₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</div>
+                            @else
+                                <div class="badge badge-success fw-bolder">₱ {{ ($transaction->amount ? $transaction->amount : 0) }}</div>
+                            @endif
+                        </td>
 
                         <!-- Actions -->
                         <td>

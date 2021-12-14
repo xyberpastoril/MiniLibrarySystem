@@ -83,7 +83,7 @@ class TransactionController extends Controller
         $request->date_to = date('Y-m-d', strtotime($date[1]));
 
         $today = \Carbon\Carbon::now()->toDateString();
-        
+
         // Check if date_from is before today
         if($today > $request->date_from) {
             return [
@@ -134,12 +134,12 @@ class TransactionController extends Controller
         if($today > $date_to)
         {
             $difference = date_diff($today, $date_to)->days;
-            
+
             // Compute Penalty
             $transaction->penalty()->create([
                 'transaction_id' => $transaction->id,
                 'amount' => $difference * 10,
-                'status' => 'unpaid'
+                'status' => 'paid'
             ]);
         }
 

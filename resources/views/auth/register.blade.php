@@ -71,7 +71,7 @@
                 <label class="form-label fw-bolder text-dark fs-6 required">
                     Gender
                 </label>
-                <select name="gender" class="form-control form-control-lg form-control-solid @error('gender') is-invalid @enderror" required>
+                <select name="gender" class="form-select form-select-lg form-select-solid @error('gender') is-invalid @enderror" required>
                     <option>Select Gender</option>
                     <option value="Male" @if (old('gender') == 'Male') selected="selected" @endif>Male</option>
                     <option value="Female" @if (old('gender') == 'Female') selected="selected" @endif>Female</option>
@@ -122,8 +122,8 @@
                     </span>
                 </label>
             </div>
-            <div class="text-center"> 
-                <button id="kt_sign_up_submit" class="btn btn-lg btn-primary" type="submit"> 
+            <div class="text-center">
+                <button id="kt_sign_up_submit" class="btn btn-lg btn-primary" type="submit">
                     <span class="indicator-label">
                         Submit
                     </span>
@@ -134,7 +134,7 @@
             </div>
         </form>
         <!-- Form -->
-        
+
     </div>
 </div>
 <!-- End Content -->

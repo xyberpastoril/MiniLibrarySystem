@@ -9,7 +9,7 @@
 <!-- -->
 
 @section('custom_css')
-    
+
 @endsection
 
 <!-- -->
@@ -64,7 +64,7 @@
 
                     <!-- Filter Dropdown-->
                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
-                        
+
                         <!-- Header -->
                         <div class="px-7 py-5">
                             <div class="fs-5 text-dark fw-bolder">Filter Options</div>
@@ -83,6 +83,8 @@
                                     <option></option>
                                     <option value="Eligible To Borrow">Eligible To Borrow</option>
                                     <option value="Has Pending Penalties">Has Pending Penalties</option>
+                                    <option value="Has Overdue Returns">Has Overdue Returns</option>
+                                    <option value="Has Pending Verification">Has Pending Verification</option>
                                 </select>
                             </div>
 
@@ -108,7 +110,7 @@
                             </svg>
                         </span>Export
                     </button>
-                    
+
                 </div>
 
                 <!-- Delete Selected -->
@@ -128,7 +130,7 @@
                             <div class="modal-header">
                                 <!-- Modal title -->
                                 <h2>Export Users</h2>
-                                
+
                                 <!-- Close -->
                                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
                                     <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr061.svg-->
@@ -168,7 +170,7 @@
                                         <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
                                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                                             <span class="indicator-label">Submit</span>
-                                            <span class="indicator-progress">Please wait... 
+                                            <span class="indicator-progress">Please wait...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
                                     </div>
@@ -217,7 +219,7 @@
                 <tbody class="text-gray-600 fw-bold">
 
                     @foreach ($allUsers as $user)
-                        
+
                         <!--begin::Table row | User-->
                         <tr class="text-start">
                             <!-- Checkbox -->
@@ -226,7 +228,7 @@
                                     <input class="form-check-input" type="checkbox" value="{{ $user->user_id }}">
                                 </div>
                             </td>
-                            
+
                             <!-- User -->
                             <td class="d-flex align-items-center">
                                 <!-- Avatar -->
@@ -236,24 +238,24 @@
                                         <img src="@if($user->cover_url == null) {{ asset("media/avatars/blank.png") }} @else {{ asset("media/avatars/$user->cover_url") }}  @endif" alt="{{ $user->first_name}} {{ $user->last_name}}" class="w-100">
                                     </div>
                                 </div>
-                                
+
                                 <!-- User details -->
                                 <div class="d-flex flex-column">
                                     <a href="{{ route("users.edit", $user->user_id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name}} {{ $user->last_name}}</a>
                                     <span>{{ $user->email}}</span>
                                 </div>
-                                
+
                             </td>
 
                             <!-- User ID -->
                             <td>{{ $user->user_id }}</td>
-                            
+
                             <!-- In-Progress Transactions -->
                             <td>{{ $user->in_progress_transactions ? $user->in_progress_transactions : 0 }}</td>
 
                             <!-- Unpaid Penalties -->
                             <td>₱ {{ $user->unpaid_penalties ? $user->unpaid_penalties : 0 }}</td>
-                            
+
                             <!-- Status-->
                             <td>
                                 @if($user->unpaid_penalties || $user->overdue_returns)
@@ -269,10 +271,10 @@
                                     <div class="badge badge-light-success fw-bolder">Eligible To Borrow</div>
                                 @endif
                             </td>
-                            
+
                             <!-- Joined Date -->
                             <td><div class="badge badge-light fw-bolder">{{ $user->joined_date }}</div></td>
-                            
+
                             <!-- Action -->
                             <td>
                                 <div class="btn-group">
